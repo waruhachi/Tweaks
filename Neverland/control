@@ -1,0 +1,9 @@
+Package: love.litten.neverland
+Name: Neverland
+Depends: mobilesubstrate
+Version: 0.9
+Architecture: iphoneos-arm
+Description: Prevent the now playing app from being closed
+Maintainer: alexandra
+Author: alexandra
+Section: unreleased

@@ -1,0 +1,12 @@
+Package: love.litten.rose
+Name: Rose 🌹
+Depends: mobilesubstrate, preferenceloader, ws.hbang.common (>= 1.14), firmware (>= 13.0)
+Version: 1.0.9
+Architecture: iphoneos-arm
+Description: Getting peeped by a rose doesn't feel that good, it's time to change that
+Maintainer: Litten
+Author: Litten
+Section: Tweaks
+Depiction: https://repo.litten.love/depictions/Rose/index.html
+SileoDepiction: https://repo.litten.love/depictions/Rose/index.json
+Icon: https://repo.litten.love/depictions/Rose/assets/icon.png

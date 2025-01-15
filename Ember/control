@@ -1,0 +1,9 @@
+Package: love.litten.ember
+Name: Ember
+Depends: mobilesubstrate, firmware (>= 13.0)
+Version: 0.9
+Architecture: iphoneos-arm
+Description: Enable do not disturb with the ringer switch
+Maintainer: alexandra
+Author: alexandra
+Section: unreleased

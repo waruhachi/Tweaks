@@ -1,0 +1,10 @@
+Package: love.litten.librose
+Name: libRose
+Depends: mobilesubstrate, firmware (>= 13.0)
+Version: 1.0
+Architecture: iphoneos-arm
+Description: 
+Maintainer: Litten <hiya@litten.love>
+Author: Litten <hiya@litten.love>
+Section: System
+Tag: role::developer

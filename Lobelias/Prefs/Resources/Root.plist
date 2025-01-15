@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+	
+		<dict>
+			<key>cellClass</key>
+			<string>DuoTwitterCell</string>
+			<key>firstLabel</key>
+			<string>🌸 Litten</string>
+			<key>firstAccount</key>
+			<string>schneelittchen</string>
+			<key>secondLabel</key>
+			<string>ɹǝɟıuuǝſ</string>
+			<key>secondAccount</key>
+			<string>J3nRa1n</string>
+			<key>height</key>
+			<real>57</real>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Here Is Everything You Need</string>
+		</dict>
+		<dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Background</string>
+ 			<key>detail</key>
+ 			<string>LIABackgroundSubPrefsListController</string>
+ 			<key>LIASub</key>
+ 			<string>backgroundSub</string>
+ 		</dict>
+		<dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Artwork</string>
+ 			<key>detail</key>
+ 			<string>LIAArtworkSubPrefsListController</string>
+ 			<key>LIASub</key>
+ 			<string>artworkSub</string>
+ 		</dict>
+		<dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Song Title</string>
+ 			<key>detail</key>
+ 			<string>LIASongTitleSubPrefsListController</string>
+ 			<key>LIASub</key>
+ 			<string>songTitleSub</string>
+ 		</dict>
+		<dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Artist, Album</string>
+ 			<key>detail</key>
+ 			<string>LIAArtistNameSubPrefsListController</string>
+ 			<key>LIASub</key>
+ 			<string>artistNameSub</string>
+ 		</dict>
+		<dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Rewind Button</string>
+ 			<key>detail</key>
+ 			<string>LIARewindButtonSubPrefsListController</string>
+ 			<key>LIASub</key>
+ 			<string>rewindButtonSub</string>
+ 		</dict>
+		<dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Skip Button</string>
+ 			<key>detail</key>
+ 			<string>LIASkipButtonSubPrefsListController</string>
+ 			<key>LIASub</key>
+ 			<string>skipButtonSub</string>
+ 		</dict>
+		<dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Others</string>
+ 			<key>detail</key>
+ 			<string>LIAOthersSubPrefsListController</string>
+ 			<key>LIASub</key>
+ 			<string>othersSub</string>
+ 		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Other Options</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Respring</string>
+			<key>action</key>
+			<string>respring</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Reset Preferences</string>
+			<key>action</key>
+			<string>resetPrompt</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Contributions</string>
+		</dict>
+		<dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Contributors</string>
+ 			<key>detail</key>
+ 			<string>LIAContributorsSubPrefsListController</string>
+ 			<key>LIASub</key>
+ 			<string>contributorsSub</string>
+ 		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>You Might Like:</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Lisa</string>
+			<key>subtitle</key>
+			<string>Customize your lockscreen experience</string>
+			<key>icon</key>
+			<string>Lisa.png</string>
+			<key>url</key>
+			<string>https://repo.litten.love/depictions/lsa/</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Avrora</string>
+			<key>subtitle</key>
+			<string>Make some of your app labels useful</string>
+			<key>icon</key>
+			<string>Avrora.png</string>
+			<key>url</key>
+			<string>https://repo.litten.love/depictions/ava/</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Lobelias By Litten, Designed By J3nRa1n</string>
+			<key>isStaticText</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Discord</string>
+			<key>subtitle</key>
+			<string>Chat with us 👾</string>
+			<key>url</key>
+			<string>https://discord.com/invite/fPHN8KG</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Source Code</string>
+			<key>subtitle</key>
+			<string>GitHub 💐</string>
+			<key>url</key>
+			<string>https://github.com/schneelittchen/Lobelias</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Donate To Litten</string>
+			<key>subtitle</key>
+			<string>Appreciated 💝</string>
+			<key>url</key>
+			<string>https://paypal.me/Litteeen</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>princess of daydreaming</string>
+			<key>isStaticText</key>
+			<true/>
+			<key>footerAlignment</key>
+			<real>1</real>
+		</dict>
+
+	</array>
+	<key>title</key>
+	<string>Lobelias</string>
+</dict>
+</plist>

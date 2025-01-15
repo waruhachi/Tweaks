@@ -1,0 +1,9 @@
+Package: love.litten.proudlock
+Name: ProudLock
+Depends: mobilesubstrate, firmware (>= 13.0)
+Version: 0.9
+Architecture: iphoneos-arm
+Description: Show the faceid lock when passcode is disabled (just for the appearance)
+Maintainer: alexandra
+Author: alexandra
+Section: unreleased
