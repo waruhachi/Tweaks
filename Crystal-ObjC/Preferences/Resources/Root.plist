@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>SingleContactCell</string>
+			<key>displayName</key>
+			<string>Alexandra</string>
+			<key>username</key>
+			<string>AlexandraAurora</string>
+			<key>height</key>
+			<integer>58</integer>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true />
+			<key>defaults</key>
+			<string>codes.aurora.crystal.preferences</string>
+			<key>key</key>
+			<string>Enabled</string>
+			<key>label</key>
+			<string>Enable Crystal</string>
+            <key>PostNotification</key>
+			<string>codes.aurora.crystal.preferences.reload</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Listening Mode</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Volume Threshold</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>0.3</real>
+			<key>defaults</key>
+			<string>codes.aurora.crystal.preferences</string>
+			<key>key</key>
+			<string>VolumeThreshold</string>
+			<key>min</key>
+			<real>0.1</real>
+			<key>max</key>
+			<real>0.9</real>
+			<key>showValue</key>
+			<true />
+			<key>isSegmented</key>
+			<true />
+			<key>segmentCount</key>
+			<real>8</real>
+			<key>PostNotification</key>
+			<string>codes.aurora.crystal.preferences.reload</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Below Threshold Mode</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>default</key>
+			<string>AVOutputDeviceBluetoothListeningModeAudioTransparency</string>
+			<key>defaults</key>
+			<string>codes.aurora.athena.preferences</string>
+			<key>key</key>
+			<string>BelowThresholdMode</string>
+			<key>validValues</key>
+			<array>
+				<string>AVOutputDeviceBluetoothListeningModeAudioTransparency</string>
+				<string>AVOutputDeviceBluetoothListeningModeNormal</string>
+				<string>AVOutputDeviceBluetoothListeningModeActiveNoiseCancellation</string>
+			</array>
+			<key>validTitles</key>
+			<array>
+				<string>Audio Transparency</string>
+				<string>Normal</string>
+				<string>Noise Cancellation</string>
+			</array>
+			<key>alignment</key>
+			<string>3</string>
+			<key>PostNotification</key>
+			<string>codes.aurora.athena.preferences.reload</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Above Threshold Mode</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>default</key>
+			<string>AVOutputDeviceBluetoothListeningModeActiveNoiseCancellation</string>
+			<key>defaults</key>
+			<string>codes.aurora.athena.preferences</string>
+			<key>key</key>
+			<string>AboveThresholdMode</string>
+			<key>validValues</key>
+			<array>
+				<string>AVOutputDeviceBluetoothListeningModeAudioTransparency</string>
+				<string>AVOutputDeviceBluetoothListeningModeNormal</string>
+				<string>AVOutputDeviceBluetoothListeningModeActiveNoiseCancellation</string>
+			</array>
+			<key>validTitles</key>
+			<array>
+				<string>Audio Transparency</string>
+				<string>Normal</string>
+				<string>Noise Cancellation</string>
+			</array>
+			<key>alignment</key>
+			<string>3</string>
+			<key>PostNotification</key>
+			<string>codes.aurora.athena.preferences.reload</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Tools</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Respring</string>
+			<key>action</key>
+			<string>respring</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Reset Preferences</string>
+			<key>action</key>
+			<string>promptToResetPreferences</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Thanks to you and everyone who has helped in any way.</string>
+			<key>isStaticText</key>
+			<true />
+		</dict>
+		<dict>
+ 			<key>cell</key>
+ 			<string>PSLinkCell</string>
+ 			<key>label</key>
+ 			<string>Credits</string>
+ 			<key>detail</key>
+ 			<string>CrystalCreditsListController</string>
+ 		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>LinkCell</string>
+			<key>label</key>
+			<string>My Tweaks</string>
+			<key>subtitle</key>
+			<string>Check out my other work.</string>
+			<key>url</key>
+			<string>https://akarii.cafe/user/AlexandraAurora</string>
+			<key>height</key>
+			<integer>54</integer>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>LinkCell</string>
+			<key>label</key>
+			<string>Source Code</string>
+			<key>subtitle</key>
+			<string>Find it on my GitHub.</string>
+			<key>url</key>
+			<string>https://github.com/AlexandraAurora/Crystal</string>
+			<key>height</key>
+			<integer>54</integer>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>LinkCell</string>
+			<key>label</key>
+			<string>Donate</string>
+			<key>subtitle</key>
+			<string>Let me know that you like what I do.</string>
+			<key>url</key>
+			<string>https://ko-fi.com/AlexandraAurora</string>
+			<key>height</key>
+			<integer>54</integer>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>Crystal</string>
+</dict>
+</plist>
