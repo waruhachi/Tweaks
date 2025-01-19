@@ -46,23 +46,30 @@ jobs:
         with:
           path: ./packages
 
-      - name: Extract Variables and Compute Hashes
-        id: metadata
+      - name: Generate Release Notes and Compute Hashes
+        id: generate-notes
         shell: bash
         run: |
-          for PROJECT in ./packages/*; do
-              if [ -d "$PROJECT" ]; then
-                  PROJECT_NAME=$(basename "$PROJECT")
-                  for FILE in "$PROJECT"/*.deb; do
+          RELEASE_BODY="## Build Summary\n\n"
+          for PROJECT_DIR in ./packages/*; do
+              if [ -d "$PROJECT_DIR" ]; then
+                  PROJECT_NAME=$(basename "$PROJECT_DIR")
+                  RELEASE_BODY+="### $PROJECT_NAME\n"
+                  for FILE in "$PROJECT_DIR"/*.deb; do
                       FILENAME=$(basename "$FILE")
                       ARCH=$(echo "$FILENAME" | sed -E 's/.*_iphoneos-(arm|arm64|arm64e)\.deb/\1/')
+                      MD5SUM=$(md5 -q "$FILE")
+                      SHA1=$(shasum -a 1 "$FILE" | awk '{ print $1 }')
+                      SHA256=$(shasum -a 256 "$FILE" | awk '{ print $1 }')
 
-                      echo "${PROJECT_NAME}_${ARCH}_MD5SUM=$(md5 -q "$FILE")" >> "$GITHUB_ENV"
-                      echo "${PROJECT_NAME}_${ARCH}_SHA1=$(shasum -a 1 "$FILE" | awk '{ print $1 }')" >> "$GITHUB_ENV"
-                      echo "${PROJECT_NAME}_${ARCH}_SHA256=$(shasum -a 256 "$FILE" | awk '{ print $1 }')" >> "$GITHUB_ENV"
+                      RELEASE_BODY+="$ARCH:\n"
+                      RELEASE_BODY+="  - MD5sum: $MD5SUM\n"
+                      RELEASE_BODY+="  - SHA1: $SHA1\n"
+                      RELEASE_BODY+="  - SHA256: $SHA256\n\n"
                   done
               fi
           done
+          echo "release_body=$RELEASE_BODY" >> "$GITHUB_ENV"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -71,27 +78,7 @@ jobs:
         with:
           tag_name: v1.0.0
           name: Release
-          body: |
-            ## Build Summary
-
-            ### Projects
-            {%- for PROJECT in projects %}
-            #### {{ PROJECT }}
-            iphoneos-arm:
-              MD5sum: ${{ env[PROJECT + "_ARM_MD5SUM"] }}
-              SHA1: ${{ env[PROJECT + "_ARM_SHA1"] }}
-              SHA256: ${{ env[PROJECT + "_ARM_SHA256"] }}
-
-            iphoneos-arm64:
-              MD5sum: ${{ env[PROJECT + "_ARM64_MD5SUM"] }}
-              SHA1: ${{ env[PROJECT + "_ARM64_SHA1"] }}
-              SHA256: ${{ env[PROJECT + "_ARM64_SHA256"] }}
-
-            iphoneos-arm64e:
-              MD5sum: ${{ env[PROJECT + "_ARM64E_MD5SUM"] }}
-              SHA1: ${{ env[PROJECT + "_ARM64E_SHA1"] }}
-              SHA256: ${{ env[PROJECT + "_ARM64E_SHA256"] }}
-            {%- endfor %}
+          body: ${{ env.release_body }}
           files: ./packages/**/*.deb
           draft: false
           prerelease: false
