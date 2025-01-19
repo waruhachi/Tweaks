@@ -36,15 +36,15 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
-                  echo "${{ matrix.project }}_MD5SUM_ARM=$(md5 -q packages/*_iphoneos-arm.deb)" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_MD5_ARM=$(md5 -q packages/*_iphoneos-arm.deb)" >> $GITHUB_ENV
                   echo "${{ matrix.project }}_SHA1_ARM=$(shasum -a 1 packages/*_iphoneos-arm.deb | awk '{ print $1 }')" >> $GITHUB_ENV
                   echo "${{ matrix.project }}_SHA256_ARM=$(shasum -a 256 packages/*_iphoneos-arm.deb | awk '{ print $1 }')" >> $GITHUB_ENV
 
-                  echo "${{ matrix.project }}_MD5SUM_ARM64=$(md5 -q packages/*_iphoneos-arm64.deb)" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_MD5_ARM64=$(md5 -q packages/*_iphoneos-arm64.deb)" >> $GITHUB_ENV
                   echo "${{ matrix.project }}_SHA1_ARM64=$(shasum -a 1 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')" >> $GITHUB_ENV
                   echo "${{ matrix.project }}_SHA256_ARM64=$(shasum -a 256 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')" >> $GITHUB_ENV
 
-                  echo "${{ matrix.project }}_MD5SUM_ARM64E=$(md5 -q packages/*_iphoneos-arm64e.deb)" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_MD5_ARM64E=$(md5 -q packages/*_iphoneos-arm64e.deb)" >> $GITHUB_ENV
                   echo "${{ matrix.project }}_SHA1_ARM64E=$(shasum -a 1 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')" >> $GITHUB_ENV
                   echo "${{ matrix.project }}_SHA256_ARM64E=$(shasum -a 256 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')" >> $GITHUB_ENV
 
@@ -59,22 +59,34 @@ jobs:
                   PROJECTS: 'Nita'
               run: |
                   for PROJECT in $PROJECTS; do
-                      echo "### $PROJECT" >> release_body.md
-                      echo "iphoneos-arm:" >> release_body.md
-                      echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM" >> release_body.md
-                      echo "  SHA1: ${!PROJECT}_SHA1_ARM" >> release_body.md
-                      echo "  SHA256: ${!PROJECT}_SHA256_ARM" >> release_body.md
-                      echo "" >> release_body.md
-                      echo "iphoneos-arm64:" >> release_body.md
-                      echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM64" >> release_body.md
-                      echo "  SHA1: ${!PROJECT}_SHA1_ARM64" >> release_body.md
-                      echo "  SHA256: ${!PROJECT}_SHA256_ARM64" >> release_body.md
-                      echo "" >> release_body.md
-                      echo "iphoneos-arm64e:" >> release_body.md
-                      echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM64E" >> release_body.md
-                      echo "  SHA1: ${!PROJECT}_SHA1_ARM64E" >> release_body.md
-                      echo "  SHA256: ${!PROJECT}_SHA256_ARM64E" >> release_body.md
-                      echo "" >> release_body.md
+                  MD5_ARM=$(eval echo "\$${PROJECT}_MD5_ARM")
+                  SHA1_ARM=$(eval echo "\$${PROJECT}_SHA1_ARM")
+                  SHA256_ARM=$(eval echo "\$${PROJECT}_SHA256_ARM")
+
+                  MD5_ARM64=$(eval echo "\$${PROJECT}_MD5_ARM64")
+                  SHA1_ARM64=$(eval echo "\$${PROJECT}_SHA1_ARM64")
+                  SHA256_ARM64=$(eval echo "\$${PROJECT}_SHA256_ARM64")
+
+                  MD5_ARM64E=$(eval echo "\$${PROJECT}_MD5_ARM64E")
+                  SHA1_ARM64E=$(eval echo "\$${PROJECT}_SHA1_ARM64E")
+                  SHA256_ARM64E=$(eval echo "\$${PROJECT}_SHA256_ARM64E")
+
+                  echo "### $PROJECT" >> release_body.md
+                  echo "iphoneos-arm:" >> release_body.md
+                  echo "  MD5: $MD5_ARM" >> release_body.md
+                  echo "  SHA1: $SHA1_ARM" >> release_body.md
+                  echo "  SHA256: $SHA256_ARM" >> release_body.md
+                  echo "" >> release_body.md
+                  echo "iphoneos-arm64:" >> release_body.md
+                  echo "  MD5: $MD5_ARM64" >> release_body.md
+                  echo "  SHA1: $SHA1_ARM64" >> release_body.md
+                  echo "  SHA256: $SHA256_ARM64" >> release_body.md
+                  echo "" >> release_body.md
+                  echo "iphoneos-arm64e:" >> release_body.md
+                  echo "  MD5: $MD5_ARM64E" >> release_body.md
+                  echo "  SHA1: $SHA1_ARM64E" >> release_body.md
+                  echo "  SHA256: $SHA256_ARM64E" >> release_body.md
+                  echo "" >> release_body.md
                   done
 
             - name: Create GitHub Release
