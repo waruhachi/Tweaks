@@ -7,26 +7,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  discover-projects:
-    runs-on: ubuntu-latest
-    outputs:
-      projects: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Discover Projects
-        id: set-matrix
-        run: |
-          projects=$(ls -d */ | sed 's#/##' | jq -R -s -c 'split("\n")[:-1]')
-          echo "matrix=${projects}" >> "$GITHUB_OUTPUT"
-
   build:
-    needs: discover-projects
     runs-on: macos-latest
     strategy:
       matrix:
-        project: ${{ fromJson(needs.discover-projects.outputs.projects) }}
-      fail-fast: false
+        project:
+          - Nita
     steps:
       - uses: actions/checkout@v4
 
@@ -40,59 +26,73 @@ jobs:
       - name: Build Package
         shell: bash
         working-directory: ${{ matrix.project }}
-        continue-on-error: true
         run: |
-          set -e
           make clean package FINALPACKAGE=1
           make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
           make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
 
-      - name: Save Successful Builds
-        id: record-success
-        if: success()
-        run: echo "${{ matrix.project }}" >> successful_projects.txt
-
-  aggregate-results:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Gather Successful Projects
-        id: gather
-        run: |
-          if [ -f successful_projects.txt ]; then
-            successful=$(cat successful_projects.txt | jq -R -s -c 'split("\n")[:-1]')
-            echo "successful_projects=${successful}" >> "$GITHUB_OUTPUT"
-          else
-            echo "successful_projects=[]" >> "$GITHUB_OUTPUT"
+      - name: Save Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.project }}-artifacts
+          path: ${{ matrix.project }}/packages/*.deb
 
   release:
-    needs: aggregate-results
-    runs-on: ubuntu-latest
+    needs: build
+    runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: ./packages
 
-      - name: Create Release Notes
-        id: release-notes
+      - name: Extract Variables and Compute Hashes
+        id: metadata
+        shell: bash
         run: |
-          successful_projects=${{ needs.aggregate-results.outputs.successful_projects }}
-          notes="Release includes the following successful projects:\n"
-          for project in $(echo "${successful_projects}" | jq -r '.[]'); do
-            notes="${notes}- ${project}\n"
+          for PROJECT in ./packages/*; do
+              if [ -d "$PROJECT" ]; then
+                  PROJECT_NAME=$(basename "$PROJECT")
+                  for FILE in "$PROJECT"/*.deb; do
+                      FILENAME=$(basename "$FILE")
+                      ARCH=$(echo "$FILENAME" | sed -E 's/.*_iphoneos-(arm|arm64|arm64e)\.deb/\1/')
+
+                      echo "${PROJECT_NAME}_${ARCH}_MD5SUM=$(md5 -q "$FILE")" >> "$GITHUB_ENV"
+                      echo "${PROJECT_NAME}_${ARCH}_SHA1=$(shasum -a 1 "$FILE" | awk '{ print $1 }')" >> "$GITHUB_ENV"
+                      echo "${PROJECT_NAME}_${ARCH}_SHA256=$(shasum -a 256 "$FILE" | awk '{ print $1 }')" >> "$GITHUB_ENV"
+                  done
+              fi
           done
-          echo "${notes}" > release_notes.txt
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: "release-$(date +'%Y%m%d%H%M%S')"
-          name: "Automated Release"
-          body_path: release_notes.txt
-          files: |
-            $(echo ${{ needs.aggregate-results.outputs.successful_projects }} | jq -r '.[]' | sed -e 's/^/.\/&\/packages\/*/')
+          tag_name: v1.0.0
+          name: Release
+          body: |
+            ## Build Summary
+
+            ### Projects
+            {%- for PROJECT in projects %}
+            #### {{ PROJECT }}
+            iphoneos-arm:
+              MD5sum: ${{ env[PROJECT + "_ARM_MD5SUM"] }}
+              SHA1: ${{ env[PROJECT + "_ARM_SHA1"] }}
+              SHA256: ${{ env[PROJECT + "_ARM_SHA256"] }}
+
+            iphoneos-arm64:
+              MD5sum: ${{ env[PROJECT + "_ARM64_MD5SUM"] }}
+              SHA1: ${{ env[PROJECT + "_ARM64_SHA1"] }}
+              SHA256: ${{ env[PROJECT + "_ARM64_SHA256"] }}
+
+            iphoneos-arm64e:
+              MD5sum: ${{ env[PROJECT + "_ARM64E_MD5SUM"] }}
+              SHA1: ${{ env[PROJECT + "_ARM64E_SHA1"] }}
+              SHA256: ${{ env[PROJECT + "_ARM64E_SHA256"] }}
+            {%- endfor %}
+          files: ./packages/**/*.deb
           draft: false
           prerelease: false
           make_latest: true
