@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Theos
-        uses: waruhachi/theos-action@v2.1.6
+        uses: waruhachi/theos-action@v2.1.7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -32,44 +32,63 @@ jobs:
           make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
 
       - name: Save Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.project }}-artifacts
           path: ${{ matrix.project }}/packages/*.deb
+
+      - name: Save Metadata
+        id: metadata
+        shell: bash
+        working-directory: ${{ matrix.project }}
+        run: |
+          echo "${{ matrix.project }}_MD5SUM_ARM=$(md5 -q packages/*_iphoneos-arm.deb)" >> $GITHUB_ENV
+          echo "${{ matrix.project }}_SHA1_ARM=$(shasum -a 1 packages/*_iphoneos-arm.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+          echo "${{ matrix.project }}_SHA256_ARM=$(shasum -a 256 packages/*_iphoneos-arm.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+
+          echo "${{ matrix.project }}_MD5SUM_ARM64=$(md5 -q packages/*_iphoneos-arm64.deb)" >> $GITHUB_ENV
+          echo "${{ matrix.project }}_SHA1_ARM64=$(shasum -a 1 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+          echo "${{ matrix.project }}_SHA256_ARM64=$(shasum -a 256 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+
+          echo "${{ matrix.project }}_MD5SUM_ARM64E=$(md5 -q packages/*_iphoneos-arm64e.deb)" >> $GITHUB_ENV
+          echo "${{ matrix.project }}_SHA1_ARM64E=$(shasum -a 1 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+          echo "${{ matrix.project }}_SHA256_ARM64E=$(shasum -a 256 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')" >> $GITHUB_ENV
 
   release:
     needs: build
     runs-on: macos-latest
     steps:
       - name: Download All Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: ./packages
+          pattern: *-artifacts
+          merge-multiple: true
 
-      - name: Generate Release Notes and Compute Hashes
-        id: generate-notes
+      - name: Generate Release Notes
+        id: release-notes
         shell: bash
         run: |
-          RELEASE_BODY="## Build Summary\n\n"
-          for PROJECT_DIR in ./packages/*; do
-              if [ -d "$PROJECT_DIR" ]; then
-                  PROJECT_NAME=$(basename "$PROJECT_DIR")
-                  RELEASE_BODY+="### $PROJECT_NAME\n"
-                  for FILE in "$PROJECT_DIR"/*.deb; do
-                      FILENAME=$(basename "$FILE")
-                      ARCH=$(echo "$FILENAME" | sed -E 's/.*_iphoneos-(arm|arm64|arm64e)\.deb/\1/')
-                      MD5SUM=$(md5 -q "$FILE")
-                      SHA1=$(shasum -a 1 "$FILE" | awk '{ print $1 }')
-                      SHA256=$(shasum -a 256 "$FILE" | awk '{ print $1 }')
-
-                      RELEASE_BODY+="$ARCH:\n"
-                      RELEASE_BODY+="  - MD5sum: $MD5SUM\n"
-                      RELEASE_BODY+="  - SHA1: $SHA1\n"
-                      RELEASE_BODY+="  - SHA256: $SHA256\n\n"
-                  done
-              fi
+          echo "## Build Summary" >> release_body.md
+          echo "" >> release_body.md
+          for PROJECT in Project1 Project2 Project3; do
+            echo "### $PROJECT" >> release_body.md
+            echo "iphoneos-arm:" >> release_body.md
+            echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM" >> release_body.md
+            echo "  SHA1: ${!PROJECT}_SHA1_ARM" >> release_body.md
+            echo "  SHA256: ${!PROJECT}_SHA256_ARM" >> release_body.md
+            echo "" >> release_body.md
+            echo "iphoneos-arm64:" >> release_body.md
+            echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM64" >> release_body.md
+            echo "  SHA1: ${!PROJECT}_SHA1_ARM64" >> release_body.md
+            echo "  SHA256: ${!PROJECT}_SHA256_ARM64" >> release_body.md
+            echo "" >> release_body.md
+            echo "iphoneos-arm64e:" >> release_body.md
+            echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM64E" >> release_body.md
+            echo "  SHA1: ${!PROJECT}_SHA1_ARM64E" >> release_body.md
+            echo "  SHA256: ${!PROJECT}_SHA256_ARM64E" >> release_body.md
+            echo "" >> release_body.md
           done
-          echo "release_body=$RELEASE_BODY" >> "$GITHUB_ENV"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -78,7 +97,7 @@ jobs:
         with:
           tag_name: v1.0.0
           name: Release
-          body: ${{ env.release_body }}
+          body_path: release_body.md
           files: ./packages/**/*.deb
           draft: false
           prerelease: false
