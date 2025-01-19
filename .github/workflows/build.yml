@@ -31,12 +31,6 @@ jobs:
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
 
-            - name: Save Build Artifacts
-              uses: actions/upload-artifact@v4
-              with:
-                  name: ${{ matrix.project }}-artifacts
-                  path: ${{ matrix.project }}/packages/*.deb
-
             - name: Save Metadata
               id: metadata
               shell: bash
@@ -58,11 +52,6 @@ jobs:
         needs: build
         runs-on: macos-latest
         steps:
-            - name: Download All Artifacts
-              uses: actions/download-artifact@v4
-              with:
-                  path: ./packages
-
             - name: Generate Release Notes
               id: release-notes
               shell: bash
@@ -93,7 +82,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  tag_name: v1.0.0
+                  tag_name: release
                   name: Release
                   body_path: release_body.md
                   files: ./packages/**/*.deb
