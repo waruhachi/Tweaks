@@ -1,102 +1,102 @@
 name: Build All Tweaks
 permissions:
-  contents: write
+    contents: write
 
 on:
-  push:
-  workflow_dispatch:
+    push:
+    workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        project:
-          - Nita
-    steps:
-      - uses: actions/checkout@v4
+    build:
+        runs-on: macos-latest
+        strategy:
+            matrix:
+                project:
+                    - Nita
+        steps:
+            - uses: actions/checkout@v4
 
-      - name: Set up Theos
-        uses: waruhachi/theos-action@v2.1.7
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          theos-src: "roothide/theos"
+            - name: Set up Theos
+              uses: waruhachi/theos-action@v2.1.8
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  theos-src: 'roothide/theos'
 
-      - name: Build Package
-        shell: bash
-        working-directory: ${{ matrix.project }}
-        run: |
-          make clean package FINALPACKAGE=1
-          make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-          make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
+            - name: Build Package
+              shell: bash
+              working-directory: ${{ matrix.project }}
+              run: |
+                  make clean package FINALPACKAGE=1
+                  make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+                  make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
 
-      - name: Save Build Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.project }}-artifacts
-          path: ${{ matrix.project }}/packages/*.deb
+            - name: Save Build Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ${{ matrix.project }}-artifacts
+                  path: ${{ matrix.project }}/packages/*.deb
 
-      - name: Save Metadata
-        id: metadata
-        shell: bash
-        working-directory: ${{ matrix.project }}
-        run: |
-          echo "${{ matrix.project }}_MD5SUM_ARM=$(md5 -q packages/*_iphoneos-arm.deb)" >> $GITHUB_ENV
-          echo "${{ matrix.project }}_SHA1_ARM=$(shasum -a 1 packages/*_iphoneos-arm.deb | awk '{ print $1 }')" >> $GITHUB_ENV
-          echo "${{ matrix.project }}_SHA256_ARM=$(shasum -a 256 packages/*_iphoneos-arm.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+            - name: Save Metadata
+              id: metadata
+              shell: bash
+              working-directory: ${{ matrix.project }}
+              run: |
+                  echo "${{ matrix.project }}_MD5SUM_ARM=$(md5 -q packages/*_iphoneos-arm.deb)" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_SHA1_ARM=$(shasum -a 1 packages/*_iphoneos-arm.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_SHA256_ARM=$(shasum -a 256 packages/*_iphoneos-arm.deb | awk '{ print $1 }')" >> $GITHUB_ENV
 
-          echo "${{ matrix.project }}_MD5SUM_ARM64=$(md5 -q packages/*_iphoneos-arm64.deb)" >> $GITHUB_ENV
-          echo "${{ matrix.project }}_SHA1_ARM64=$(shasum -a 1 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')" >> $GITHUB_ENV
-          echo "${{ matrix.project }}_SHA256_ARM64=$(shasum -a 256 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_MD5SUM_ARM64=$(md5 -q packages/*_iphoneos-arm64.deb)" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_SHA1_ARM64=$(shasum -a 1 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_SHA256_ARM64=$(shasum -a 256 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')" >> $GITHUB_ENV
 
-          echo "${{ matrix.project }}_MD5SUM_ARM64E=$(md5 -q packages/*_iphoneos-arm64e.deb)" >> $GITHUB_ENV
-          echo "${{ matrix.project }}_SHA1_ARM64E=$(shasum -a 1 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')" >> $GITHUB_ENV
-          echo "${{ matrix.project }}_SHA256_ARM64E=$(shasum -a 256 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_MD5SUM_ARM64E=$(md5 -q packages/*_iphoneos-arm64e.deb)" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_SHA1_ARM64E=$(shasum -a 1 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+                  echo "${{ matrix.project }}_SHA256_ARM64E=$(shasum -a 256 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')" >> $GITHUB_ENV
 
-  release:
-    needs: build
-    runs-on: macos-latest
-    steps:
-      - name: Download All Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ./packages
+    release:
+        needs: build
+        runs-on: macos-latest
+        steps:
+            - name: Download All Artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  path: ./packages
 
-      - name: Generate Release Notes
-        id: release-notes
-        shell: bash
-        run: |
-          echo "## Build Summary" >> release_body.md
-          echo "" >> release_body.md
-          for PROJECT in Nita; do
-            echo "### $PROJECT" >> release_body.md
-            echo "iphoneos-arm:" >> release_body.md
-            echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM" >> release_body.md
-            echo "  SHA1: ${!PROJECT}_SHA1_ARM" >> release_body.md
-            echo "  SHA256: ${!PROJECT}_SHA256_ARM" >> release_body.md
-            echo "" >> release_body.md
-            echo "iphoneos-arm64:" >> release_body.md
-            echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM64" >> release_body.md
-            echo "  SHA1: ${!PROJECT}_SHA1_ARM64" >> release_body.md
-            echo "  SHA256: ${!PROJECT}_SHA256_ARM64" >> release_body.md
-            echo "" >> release_body.md
-            echo "iphoneos-arm64e:" >> release_body.md
-            echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM64E" >> release_body.md
-            echo "  SHA1: ${!PROJECT}_SHA1_ARM64E" >> release_body.md
-            echo "  SHA256: ${!PROJECT}_SHA256_ARM64E" >> release_body.md
-            echo "" >> release_body.md
-          done
+            - name: Generate Release Notes
+              id: release-notes
+              shell: bash
+              run: |
+                  echo "## Build Summary" >> release_body.md
+                  echo "" >> release_body.md
+                  for PROJECT in Nita; do
+                    echo "### $PROJECT" >> release_body.md
+                    echo "iphoneos-arm:" >> release_body.md
+                    echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM" >> release_body.md
+                    echo "  SHA1: ${!PROJECT}_SHA1_ARM" >> release_body.md
+                    echo "  SHA256: ${!PROJECT}_SHA256_ARM" >> release_body.md
+                    echo "" >> release_body.md
+                    echo "iphoneos-arm64:" >> release_body.md
+                    echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM64" >> release_body.md
+                    echo "  SHA1: ${!PROJECT}_SHA1_ARM64" >> release_body.md
+                    echo "  SHA256: ${!PROJECT}_SHA256_ARM64" >> release_body.md
+                    echo "" >> release_body.md
+                    echo "iphoneos-arm64e:" >> release_body.md
+                    echo "  MD5sum: ${!PROJECT}_MD5SUM_ARM64E" >> release_body.md
+                    echo "  SHA1: ${!PROJECT}_SHA1_ARM64E" >> release_body.md
+                    echo "  SHA256: ${!PROJECT}_SHA256_ARM64E" >> release_body.md
+                    echo "" >> release_body.md
+                  done
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v1.0.0
-          name: Release
-          body_path: release_body.md
-          files: ./packages/**/*.deb
-          draft: false
-          prerelease: false
-          make_latest: true
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: v1.0.0
+                  name: Release
+                  body_path: release_body.md
+                  files: ./packages/**/*.deb
+                  draft: false
+                  prerelease: false
+                  make_latest: true
