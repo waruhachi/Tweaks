@@ -1,7 +1,5 @@
 #import "Nita.h"
 
-%group Nita
-
 %hook _UIStatusBarStringView
 
 - (void)setText:(id)arg1 { // set emoji
@@ -54,8 +52,8 @@
 %new
 - (void)getEmojis { // get emoji based on condition
 
-	WALockscreenWidgetViewController* weatherWidget = [[PDDokdo sharedInstance] weatherWidget];
-	WAForecastModel* currentModel = [weatherWidget currentForecastModel];
+	WALockscreenWidgetViewController* widget = [[PDDokdo sharedInstance] widget];
+	WAForecastModel* currentModel = [widget currentForecastModel];
 	WACurrentForecast* currentCond = [currentModel currentConditions];
 	NSInteger currentCode = [currentCond conditionCode];
 	int hour = [[NSCalendar currentCalendar] component:NSCalendarUnitHour fromDate:[NSDate date]];
@@ -176,10 +174,7 @@
 
 %end
 
-%end
-
 %ctor {
-
 	preferences = [[HBPreferences alloc] initWithIdentifier:@"love.litten.nitapreferences"];
 
   	[preferences registerBool:&enabled default:nil forKey:@"Enabled"];
@@ -197,6 +192,5 @@
 	// miscellaneous
 	[preferences registerBool:&hideBreadcrumbsSwitch default:YES forKey:@"hideBreadcrumbs"];
 
-	%init(Nita);
-
+	%init();
 }
