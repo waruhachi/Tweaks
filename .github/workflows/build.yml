@@ -28,7 +28,7 @@ jobs:
             - name: Clean release files
               shell: bash
               run: |
-                  rm release_body.md
+                  [ -f release_body.md ] && rm release_body.md || touch release_body.md
 
     tweaks:
         needs: release
