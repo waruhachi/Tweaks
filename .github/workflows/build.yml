@@ -50,6 +50,13 @@ jobs:
 
                   echo "${{ matrix.project }}" > $GITHUB_WORKSPACE/metadata_${{ matrix.project }}.txt
                   echo "$MD5_ARM,$SHA1_ARM,$SHA256_ARM,$MD5_ARM64,$SHA1_ARM64,$SHA256_ARM64,$MD5_ARM64E,$SHA1_ARM64E,$SHA256_ARM64E" >> $GITHUB_WORKSPACE/metadata_${{ matrix.project }}.txt
+
+            - name: Verify Metadata File
+              shell: bash
+              run: |
+                  echo "Checking metadata file for ${{ matrix.project }}"
+                  cat $GITHUB_WORKSPACE/metadata_${{ matrix.project }}.txt
+                  ls -l $GITHUB_WORKSPACE
     release:
         needs: build
         runs-on: macos-latest
@@ -57,6 +64,7 @@ jobs:
             - name: Check Metadata Files
               shell: bash
               run: |
+                  echo "Listing all metadata files in the workspace:"
                   ls $GITHUB_WORKSPACE/metadata_*.txt
 
             - name: Generate Release Notes
