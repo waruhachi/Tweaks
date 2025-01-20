@@ -17,7 +17,7 @@ jobs:
             - uses: actions/checkout@v4
 
             - name: Set up Theos
-              uses: waruhachi/theos-action@v2.1.9
+              uses: waruhachi/theos-action@v2.2.0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
@@ -48,8 +48,8 @@ jobs:
                   SHA1_ARM64E=$(shasum -a 1 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')
                   SHA256_ARM64E=$(shasum -a 256 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')
 
-                  echo "${{ matrix.project }}" > metadata.txt
-                  echo "$MD5_ARM,$SHA1_ARM,$SHA256_ARM,$MD5_ARM64,$SHA1_ARM64,$SHA256_ARM64,$MD5_ARM64E,$SHA1_ARM64E,$SHA256_ARM64E" >> metadata.txt
+                  echo "${{ matrix.project }}" > $GITHUB_WORKSPACE/metadata_${{ matrix.project }}.txt
+                  echo "$MD5_ARM,$SHA1_ARM,$SHA256_ARM,$MD5_ARM64,$SHA1_ARM64,$SHA256_ARM64,$MD5_ARM64E,$SHA1_ARM64E,$SHA256_ARM64E" >> $GITHUB_WORKSPACE/metadata_${{ matrix.project }}.txt
     release:
         needs: build
         runs-on: macos-latest
@@ -60,7 +60,7 @@ jobs:
               env:
                   PROJECTS: 'Nita'
               run: |
-                  for FILE in ./metadata/*.txt; do
+                  for FILE in $GITHUB_WORKSPACE/metadata_*.txt; do
                     PROJECT=$(head -n 1 "$FILE")
                     METADATA=$(tail -n 1 "$FILE")
                     MD5_ARM=$(echo "$METADATA" | cut -d',' -f1)
