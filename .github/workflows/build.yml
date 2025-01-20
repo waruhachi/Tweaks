@@ -57,7 +57,15 @@ jobs:
               run: |
                   mkdir -p ~/theos
                   tar -xzf theos.tar.gz -C ~
-                  ls -la ~/
+
+            - name: Install dependencies
+              shell: bash
+              run: |
+                  brew list xz >/dev/null 2>&1 || brew install xz
+                  brew list make >/dev/null 2>&1 || brew install make
+                  brew list ldid >/dev/null 2>&1 || brew install ldid
+                  echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH
+                  echo PATH=\"$(brew --prefix make)/libexec/gnubin:\$PATH\" >> ~/.bash_profile
 
             - name: Build Package
               shell: bash
