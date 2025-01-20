@@ -54,6 +54,11 @@ jobs:
         needs: build
         runs-on: macos-latest
         steps:
+            - name: Check Metadata Files
+              shell: bash
+              run: |
+                  ls $GITHUB_WORKSPACE/metadata_*.txt
+
             - name: Generate Release Notes
               id: release-notes
               shell: bash
