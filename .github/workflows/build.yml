@@ -33,6 +33,7 @@ jobs:
                   fi
 
     build:
+        needs: cleanup
         runs-on: macos-latest
         strategy:
             matrix:
