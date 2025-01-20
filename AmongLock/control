@@ -4,6 +4,6 @@ Depends: mobilesubstrate, preferenceloader, ws.hbang.common (>= 1.14), firmware 
 Version: 1.1.6
 Architecture: iphoneos-arm
 Description: You were not the owner of this device
-Maintainer: Litten
+Maintainer: waruhachi
 Author: Litten & BigIlel
 Section: Tweaks
