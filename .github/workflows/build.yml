@@ -13,6 +13,8 @@ jobs:
             matrix:
                 project:
                     - Nita
+        outputs:
+            metadata: ${{ steps.save-metadata.outputs.metadata }}
         steps:
             - uses: actions/checkout@v4
 
@@ -36,18 +38,19 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
-                  echo "${{ matrix.project }}_MD5_ARM=$(md5 -q packages/*_iphoneos-arm.deb)" >> $GITHUB_ENV
-                  echo "${{ matrix.project }}_SHA1_ARM=$(shasum -a 1 packages/*_iphoneos-arm.deb | awk '{ print $1 }')" >> $GITHUB_ENV
-                  echo "${{ matrix.project }}_SHA256_ARM=$(shasum -a 256 packages/*_iphoneos-arm.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+                  MD5_ARM=$(md5 -q packages/*_iphoneos-arm.deb)
+                  SHA1_ARM=$(shasum -a 1 packages/*_iphoneos-arm.deb | awk '{ print $1 }')
+                  SHA256_ARM=$(shasum -a 256 packages/*_iphoneos-arm.deb | awk '{ print $1 }')
 
-                  echo "${{ matrix.project }}_MD5_ARM64=$(md5 -q packages/*_iphoneos-arm64.deb)" >> $GITHUB_ENV
-                  echo "${{ matrix.project }}_SHA1_ARM64=$(shasum -a 1 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')" >> $GITHUB_ENV
-                  echo "${{ matrix.project }}_SHA256_ARM64=$(shasum -a 256 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+                  MD5_ARM64=$(md5 -q packages/*_iphoneos-arm64.deb)
+                  SHA1_ARM64=$(shasum -a 1 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')
+                  SHA256_ARM64=$(shasum -a 256 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')
 
-                  echo "${{ matrix.project }}_MD5_ARM64E=$(md5 -q packages/*_iphoneos-arm64e.deb)" >> $GITHUB_ENV
-                  echo "${{ matrix.project }}_SHA1_ARM64E=$(shasum -a 1 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')" >> $GITHUB_ENV
-                  echo "${{ matrix.project }}_SHA256_ARM64E=$(shasum -a 256 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')" >> $GITHUB_ENV
+                  MD5_ARM64E=$(md5 -q packages/*_iphoneos-arm64e.deb)
+                  SHA1_ARM64E=$(shasum -a 1 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')
+                  SHA256_ARM64E=$(shasum -a 256 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')
 
+                  echo "{metadata}={${{ matrix.project }}|$MD5_ARM,$SHA1_ARM,$SHA256_ARM,$MD5_ARM64,$SHA1_ARM64,$SHA256_ARM64,$MD5_ARM64E,$SHA1_ARM64E,$SHA256_ARM64E}" >> $GITHUB_OUTPUT
     release:
         needs: build
         runs-on: macos-latest
@@ -58,35 +61,37 @@ jobs:
               env:
                   PROJECTS: 'Nita'
               run: |
-                  for PROJECT in $PROJECTS; do
-                  MD5_ARM=$(eval echo "\$${PROJECT}_MD5_ARM")
-                  SHA1_ARM=$(eval echo "\$${PROJECT}_SHA1_ARM")
-                  SHA256_ARM=$(eval echo "\$${PROJECT}_SHA256_ARM")
+                  for OUTPUT in "${{ needs.build.outputs.metadata }}"; do
+                    PROJECT=$(echo "$OUTPUT" | cut -d'|' -f1)
+                    METADATA=$(echo "$OUTPUT" | cut -d'|' -f2)
+                    MD5_ARM=$(echo "$METADATA" | cut -d',' -f1)
+                    SHA1_ARM=$(echo "$METADATA" | cut -d',' -f2)
+                    SHA256_ARM=$(echo "$METADATA" | cut -d',' -f3)
 
-                  MD5_ARM64=$(eval echo "\$${PROJECT}_MD5_ARM64")
-                  SHA1_ARM64=$(eval echo "\$${PROJECT}_SHA1_ARM64")
-                  SHA256_ARM64=$(eval echo "\$${PROJECT}_SHA256_ARM64")
+                    MD5_ARM64=$(echo "$METADATA" | cut -d',' -f4)
+                    SHA1_ARM64=$(echo "$METADATA" | cut -d',' -f5)
+                    SHA256_ARM64=$(echo "$METADATA" | cut -d',' -f6)
 
-                  MD5_ARM64E=$(eval echo "\$${PROJECT}_MD5_ARM64E")
-                  SHA1_ARM64E=$(eval echo "\$${PROJECT}_SHA1_ARM64E")
-                  SHA256_ARM64E=$(eval echo "\$${PROJECT}_SHA256_ARM64E")
+                    MD5_ARM64E=$(echo "$METADATA" | cut -d',' -f7)
+                    SHA1_ARM64E=$(echo "$METADATA" | cut -d',' -f8)
+                    SHA256_ARM64E=$(echo "$METADATA" | cut -d',' -f9)
 
-                  echo "### $PROJECT" >> release_body.md
-                  echo "iphoneos-arm:" >> release_body.md
-                  echo "  MD5: $MD5_ARM" >> release_body.md
-                  echo "  SHA1: $SHA1_ARM" >> release_body.md
-                  echo "  SHA256: $SHA256_ARM" >> release_body.md
-                  echo "" >> release_body.md
-                  echo "iphoneos-arm64:" >> release_body.md
-                  echo "  MD5: $MD5_ARM64" >> release_body.md
-                  echo "  SHA1: $SHA1_ARM64" >> release_body.md
-                  echo "  SHA256: $SHA256_ARM64" >> release_body.md
-                  echo "" >> release_body.md
-                  echo "iphoneos-arm64e:" >> release_body.md
-                  echo "  MD5: $MD5_ARM64E" >> release_body.md
-                  echo "  SHA1: $SHA1_ARM64E" >> release_body.md
-                  echo "  SHA256: $SHA256_ARM64E" >> release_body.md
-                  echo "" >> release_body.md
+                    echo "### $PROJECT" >> release_body.md
+                    echo "iphoneos-arm:" >> release_body.md
+                    echo "  MD5: $MD5_ARM" >> release_body.md
+                    echo "  SHA1: $SHA1_ARM" >> release_body.md
+                    echo "  SHA256: $SHA256_ARM" >> release_body.md
+                    echo "" >> release_body.md
+                    echo "iphoneos-arm64:" >> release_body.md
+                    echo "  MD5: $MD5_ARM64" >> release_body.md
+                    echo "  SHA1: $SHA1_ARM64" >> release_body.md
+                    echo "  SHA256: $SHA256_ARM64" >> release_body.md
+                    echo "" >> release_body.md
+                    echo "iphoneos-arm64e:" >> release_body.md
+                    echo "  MD5: $MD5_ARM64E" >> release_body.md
+                    echo "  SHA1: $SHA1_ARM64E" >> release_body.md
+                    echo "  SHA256: $SHA256_ARM64E" >> release_body.md
+                    echo "" >> release_body.md
                   done
 
             - name: Create GitHub Release
