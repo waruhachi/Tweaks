@@ -53,6 +53,18 @@ jobs:
                   echo "${{ matrix.project }}" > $GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
                   echo "$MD5_ARM,$SHA1_ARM,$SHA256_ARM,$MD5_ARM64,$SHA1_ARM64,$SHA256_ARM64,$MD5_ARM64E,$SHA1_ARM64E,$SHA256_ARM64E" >> $GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
 
+            - name: Create Blank GitHub Release
+              uses: softprops/action-gh-release@v2
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: release
+                  name: Release
+                  body: ''
+                  draft: false
+                  prerelease: false
+                  make_latest: true
+
             - name: Generate Release Notes
               id: release-notes
               shell: bash
