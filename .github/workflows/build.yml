@@ -9,15 +9,24 @@ on:
 jobs:
     theos:
         runs-on: macos-latest
+        outputs:
+            THEOS: ${{ steps.theos.outputs.THEOS }}
         steps:
             - uses: actions/checkout@v4
 
-            - name: Set up Theos
+            - name: Install Theos
               uses: waruhachi/theos-action@v2.2.0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   theos-src: 'roothide/theos'
+
+            - name: Share Theos
+              id: theos
+              shell: bash
+              run: |
+                  echo "THEOS=~/theos" >> "$GITHUB_ENV"
+                  echo "THEOS=~/theos" >> "$GITHUB_OUTPUT"
 
     release:
         needs: theos
@@ -31,7 +40,7 @@ jobs:
                   [ -f release_body.md ] && rm release_body.md || touch release_body.md
 
     tweaks:
-        needs: release
+        needs: [theos, release]
         runs-on: macos-latest
         strategy:
             matrix:
@@ -44,7 +53,10 @@ jobs:
             - name: Build Package
               shell: bash
               working-directory: ${{ matrix.project }}
+              env:
+                  THEOS: ${{ needs.theos.outputs.THEOS }}
               run: |
+                  export THEOS=$THEOS
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
