@@ -2,8 +2,6 @@
 
 // hooks below are little 12's code put into a single little tweak
 
-%group AppareilPhoto
-
 %hook CAMCaptureCapabilities
 
 - (BOOL)isCTMSupported {
@@ -33,11 +31,3 @@
 }
 
 %end
-
-%end
-
-%ctor {
-
-	%init(AppareilPhoto);
-
-}

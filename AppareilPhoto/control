@@ -1,9 +1,9 @@
 Package: love.litten.appareilphoto
 Name: Appareil Photo
 Depends: mobilesubstrate, firmware (>= 13.0)
-Version: 0.9
+Version: 1.0
 Architecture: iphoneos-arm
 Description: New camera layout for older phones
-Maintainer: alexandra
+Maintainer: waruhachi
 Author: alexandra
-Section: unreleased
+Section: Tweaks
