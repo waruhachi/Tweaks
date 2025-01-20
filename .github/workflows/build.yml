@@ -20,6 +20,7 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   theos-src: 'roothide/theos'
+                  theos-dir: ${HOME}/theos
 
             - name: Share Theos
               id: theos
