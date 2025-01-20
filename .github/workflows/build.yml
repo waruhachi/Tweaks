@@ -8,7 +8,7 @@ on:
 
 jobs:
     cleanup:
-        runs-on: ubuntu-latest
+        runs-on: macos-latest
         steps:
             - name: Cleaning up existing releases and tags
               env:
@@ -16,8 +16,9 @@ jobs:
               run: |
                   TAG_NAME="release"
 
-                  RELEASE_ID=$(gh api repos/${{ github.repository }}/releases | jq -r --arg TAG_NAME "$TAG_NAME" '.[] | select(.tag_name == $TAG_NAME) | .id')
+                  git remote add origin https://github.com/${{ github.repository }}.git
 
+                  RELEASE_ID=$(gh api repos/${{ github.repository }}/releases | jq -r --arg TAG_NAME "$TAG_NAME" '.[] | select(.tag_name == $TAG_NAME) | .id')
                   if [ -n "$RELEASE_ID" ]; then
                       echo "Deleting release with ID: $RELEASE_ID"
                       gh api --method DELETE repos/${{ github.repository }}/releases/$RELEASE_ID
