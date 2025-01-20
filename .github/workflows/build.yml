@@ -20,14 +20,22 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   theos-src: 'roothide/theos'
-                  theos-dir: ${HOME}/theos
+
+            - name: Archive Theos
+              run: |
+                  tar -czf theos.tar.gz ~/theos
+
+            - name: Upload Theos
+              uses: actions/upload-artifact@v4
+              with:
+                  name: theos
+                  path: theos.tar.gz
 
             - name: Share Theos
               id: theos
               shell: bash
               run: |
-                  ls ${HOME}/theos
-                  echo "THEOS_DIR=${HOME}/theos" >> "$GITHUB_OUTPUT"
+                  echo "THEOS_DIR=~/theos" >> "$GITHUB_OUTPUT"
 
     tweaks:
         needs: theos
@@ -39,6 +47,15 @@ jobs:
                     - Nita
         steps:
             - uses: actions/checkout@v4
+
+            - name: Download and Extract Theos
+              uses: actions/download-artifact@v4
+              with:
+                  name: theos
+
+            - name: Extract Theos
+              run: |
+                  tar -xzf theos.tar.gz -C ~
 
             - name: Build Package
               shell: bash
