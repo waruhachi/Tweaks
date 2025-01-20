@@ -18,8 +18,6 @@ jobs:
               run: |
                   TAG_NAME="release"
 
-                  git remote add origin https://github.com/${{ github.repository }}.git
-
                   RELEASE_ID=$(gh api repos/${{ github.repository }}/releases | jq -r --arg TAG_NAME "$TAG_NAME" '.[] | select(.tag_name == $TAG_NAME) | .id')
                   if [ -n "$RELEASE_ID" ]; then
                       echo "Deleting release with ID: $RELEASE_ID"
