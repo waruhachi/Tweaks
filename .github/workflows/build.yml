@@ -25,7 +25,6 @@ jobs:
               id: theos
               shell: bash
               run: |
-                  echo "THEOS=~/theos" >> "$GITHUB_ENV"
                   echo "THEOS=~/theos" >> "$GITHUB_OUTPUT"
 
     release:
@@ -56,6 +55,7 @@ jobs:
               env:
                   THEOS: ${{ needs.theos.outputs.THEOS }}
               run: |
+                  echo $THEOS
                   export THEOS=$THEOS
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
