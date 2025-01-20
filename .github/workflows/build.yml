@@ -55,8 +55,8 @@ jobs:
               env:
                   THEOS: ${{ needs.theos.outputs.THEOS }}
               run: |
-                  echo $THEOS
                   export THEOS=$THEOS
+                  ls $THEOS
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
