@@ -26,21 +26,11 @@ jobs:
               id: theos
               shell: bash
               run: |
+                  ls ${HOME}/theos
                   echo "THEOS_DIR=${HOME}/theos" >> "$GITHUB_OUTPUT"
 
-    release:
-        needs: theos
-        runs-on: macos-latest
-        steps:
-            - uses: actions/checkout@v4
-
-            - name: Clean release files
-              shell: bash
-              run: |
-                  [ -f release_body.md ] && rm release_body.md || touch release_body.md
-
     tweaks:
-        needs: [theos, release]
+        needs: theos
         runs-on: macos-latest
         strategy:
             matrix:
