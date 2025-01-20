@@ -23,7 +23,7 @@ jobs:
 
             - name: Archive Theos
               run: |
-                  tar -czf theos.tar.gz ~/theos
+                  tar -czf theos.tar.gz -C ~/ theos
 
             - name: Upload Theos
               uses: actions/upload-artifact@v4
@@ -55,7 +55,9 @@ jobs:
 
             - name: Extract Theos
               run: |
+                  mkdir -p ~/theos
                   tar -xzf theos.tar.gz -C ~
+                  ls -la ~/
 
             - name: Build Package
               shell: bash
@@ -64,7 +66,6 @@ jobs:
                   THEOS: ${{ needs.theos.outputs.THEOS_DIR }}
               run: |
                   export THEOS=$THEOS
-                  tree ~/
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
