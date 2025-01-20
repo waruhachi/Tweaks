@@ -7,38 +7,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    theos:
-        runs-on: macos-latest
-        outputs:
-            THEOS_DIR: ${{ steps.theos.outputs.THEOS_DIR }}
-        steps:
-            - uses: actions/checkout@v4
-
-            - name: Install Theos
-              uses: waruhachi/theos-action@v2.2.0
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  theos-src: 'roothide/theos'
-
-            - name: Archive Theos
-              run: |
-                  tar -czf theos.tar.gz -C ~/ theos
-
-            - name: Upload Theos
-              uses: actions/upload-artifact@v4
-              with:
-                  name: theos
-                  path: theos.tar.gz
-
-            - name: Share Theos
-              id: theos
-              shell: bash
-              run: |
-                  echo "THEOS_DIR=~/theos" >> "$GITHUB_OUTPUT"
-
-    tweaks:
-        needs: theos
+    build:
         runs-on: macos-latest
         strategy:
             matrix:
@@ -48,42 +17,27 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - name: Download and Extract Theos
-              uses: actions/download-artifact@v4
+            - name: Set up Theos
+              uses: waruhachi/theos-action@v2.2.0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  name: theos
-
-            - name: Extract Theos
-              run: |
-                  mkdir -p ~/theos
-                  tar -xzf theos.tar.gz -C ~
-
-            - name: Install dependencies
-              shell: bash
-              run: |
-                  brew list xz >/dev/null 2>&1 || brew install xz
-                  brew list make >/dev/null 2>&1 || brew install make
-                  brew list ldid >/dev/null 2>&1 || brew install ldid
-                  echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH
-                  echo PATH=\"$(brew --prefix make)/libexec/gnubin:\$PATH\" >> ~/.bash_profile
+                  theos-src: 'roothide/theos'
 
             - name: Build Package
               shell: bash
               working-directory: ${{ matrix.project }}
-              env:
-                  THEOS: ${{ needs.theos.outputs.THEOS_DIR }}
               run: |
-                  export THEOS=$THEOS
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
-
             - name: Save Metadata
               id: metadata
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
                   mkdir -p $GITHUB_WORKSPACE/${{ matrix.project }}
+
                   MD5_ARM=$(md5 -q packages/*_iphoneos-arm.deb)
                   SHA1_ARM=$(shasum -a 1 packages/*_iphoneos-arm.deb | awk '{ print $1 }')
                   SHA256_ARM=$(shasum -a 256 packages/*_iphoneos-arm.deb | awk '{ print $1 }')
@@ -98,7 +52,6 @@ jobs:
 
                   echo "${{ matrix.project }}" > $GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
                   echo "$MD5_ARM,$SHA1_ARM,$SHA256_ARM,$MD5_ARM64,$SHA1_ARM64,$SHA256_ARM64,$MD5_ARM64E,$SHA1_ARM64E,$SHA256_ARM64E" >> $GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
-
             - name: Generate Release Notes
               id: release-notes
               shell: bash
@@ -106,14 +59,13 @@ jobs:
                   FILE=$GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
                   PROJECT=$(head -n 1 "$FILE")
                   METADATA=$(tail -n 1 "$FILE")
+
                   MD5_ARM=$(echo "$METADATA" | cut -d',' -f1)
                   SHA1_ARM=$(echo "$METADATA" | cut -d',' -f2)
                   SHA256_ARM=$(echo "$METADATA" | cut -d',' -f3)
-
                   MD5_ARM64=$(echo "$METADATA" | cut -d',' -f4)
                   SHA1_ARM64=$(echo "$METADATA" | cut -d',' -f5)
                   SHA256_ARM64=$(echo "$METADATA" | cut -d',' -f6)
-
                   MD5_ARM64E=$(echo "$METADATA" | cut -d',' -f7)
                   SHA1_ARM64E=$(echo "$METADATA" | cut -d',' -f8)
                   SHA256_ARM64E=$(echo "$METADATA" | cut -d',' -f9)
