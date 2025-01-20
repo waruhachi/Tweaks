@@ -19,8 +19,19 @@ jobs:
               with:
                   theos-src: 'roothide/theos'
 
-    tweaks:
+    release:
         needs: theos
+        runs-on: macos-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Clean release files
+              shell: bash
+              run: |
+                  rm release_body.md
+
+    tweaks:
+        needs: release
         runs-on: macos-latest
         strategy:
             matrix:
@@ -29,12 +40,6 @@ jobs:
                     - Nita
         steps:
             - uses: actions/checkout@v4
-
-            - name: Clean release files
-              shell: bash
-              working-directory: ${{ matrix.project }}
-              run: |
-                  rm release_body.md
 
             - name: Build Package
               shell: bash
