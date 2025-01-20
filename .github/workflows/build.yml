@@ -10,7 +10,7 @@ jobs:
     theos:
         runs-on: macos-latest
         outputs:
-            THEOS: ${{ steps.theos.outputs.THEOS }}
+            THEOS_DIR: ${{ steps.theos.outputs.THEOS_DIR }}
         steps:
             - uses: actions/checkout@v4
 
@@ -25,7 +25,7 @@ jobs:
               id: theos
               shell: bash
               run: |
-                  echo "THEOS=~/theos" >> "$GITHUB_OUTPUT"
+                  echo "THEOS_DIR=${HOME}/theos" >> "$GITHUB_OUTPUT"
 
     release:
         needs: theos
@@ -53,7 +53,7 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               env:
-                  THEOS: ${{ needs.theos.outputs.THEOS }}
+                  THEOS: ${{ needs.theos.outputs.THEOS_DIR }}
               run: |
                   export THEOS=$THEOS
                   ls $THEOS
