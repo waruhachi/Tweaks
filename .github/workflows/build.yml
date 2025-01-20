@@ -96,7 +96,7 @@ jobs:
                   tag_name: release
                   name: Release
                   body_path: release_body.md
-                  files: ./packages/**/*.deb
+                  files: ${{ matrix.project }}/packages/**/*.deb
                   draft: false
                   prerelease: false
                   make_latest: true
