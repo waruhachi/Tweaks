@@ -1,16 +1,16 @@
-#import "ALKContributorsSubPrefsListController.h"
+#import "AmongLockContributorsSubPrefsListController.h"
 
 UIBlurEffect* blur;
 UIVisualEffectView* blurView;
 
-@implementation ALKContributorsSubPrefsListController
+@implementation AmongLockContributorsSubPrefsListController
 
 - (instancetype)init {
 
     self = [super init];
 
     if (self) {
-        ALKAppearanceSettings* appearanceSettings = [[ALKAppearanceSettings alloc] init];
+        HBAppearanceSettings* appearanceSettings = [[HBAppearanceSettings alloc] init];
         self.hb_appearanceSettings = appearanceSettings;
     }
 
@@ -44,7 +44,7 @@ UIVisualEffectView* blurView;
 
 - (void)loadFromSpecifier:(PSSpecifier *)specifier {
 
-    NSString *sub = [specifier propertyForKey:@"ALKSub"];
+    NSString *sub = [specifier propertyForKey:@"AmongLockSub"];
     NSString *title = [specifier name];
 
     _specifiers = [[self loadSpecifiersFromPlistName:sub target:self] retain];

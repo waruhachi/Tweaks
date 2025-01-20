@@ -1,7 +1,8 @@
+#import <roothide.h>
+#import <sys/utsname.h>
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioServices.h>
-#import <sys/utsname.h>
 #import <Cephei/HBPreferences.h>
 
 HBPreferences* preferences;
@@ -62,6 +63,10 @@ BOOL hideFaceIDAnimationSwitch = YES;
 BOOL tapToDismissEjectionSwitch = YES;
 BOOL changeFrameWhenRotatingSwitch = YES;
 
+@interface NSObject (Undocumented)
+- (id)safeValueForKey:(NSString *)key;
+@end
+
 @interface CSPasscodeViewController : UIViewController
 - (void)ejectionVideoFinishedPlaying;
 - (void)layoutPlayerLayer:(NSNotification *)notification;
@@ -72,6 +77,12 @@ BOOL changeFrameWhenRotatingSwitch = YES;
 @end
 
 @interface MTMaterialView : UIView
+@end
+
+@interface CSPasscodeBackgroundView : UIView
+@property (retain, nonatomic) UIView *plusDView;
+@property (retain, nonatomic) MTMaterialView *materialView;
+@property (retain, nonatomic) UIView *lightenSourceOverView;
 @end
 
 @interface SBUISimpleFixedDigitPasscodeEntryField : UIView
@@ -123,6 +134,12 @@ BOOL changeFrameWhenRotatingSwitch = YES;
 @end
 
 @interface SBUIButton : UIButton
+@end
+
+@interface SBUIPasscodeLockNumberPad : UIView
+@property (readonly, nonatomic) SBUIButton *cancelButton;
+@property (readonly, nonatomic) SBUIButton *backspaceButton;
+@property (readonly, nonatomic) SBUIButton *emergencyCallButton;
 @end
 
 @interface XENHWidgetLayerContainerView : UIView

@@ -2,8 +2,6 @@
 
 BOOL enabled;
 
-%group AmongLock
-
 %hook CSPasscodeViewController
 
 - (void)viewDidLoad { // add video players
@@ -12,7 +10,7 @@ BOOL enabled;
 
 	// add background video if use as wallpaper is disabled
 	if (enableBackgroundVideoSwitch && !useAsWallpaperSwitch) {
-		NSString* backgroundFilePath = [NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/background.mp4"];
+		NSString* backgroundFilePath = [NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPreferences.bundle/video/background.mp4"];
 		NSURL* backgroundUrl = [NSURL fileURLWithPath:backgroundFilePath];
 
 		if (!backgroundPlayerItem) backgroundPlayerItem = [AVPlayerItem playerItemWithURL:backgroundUrl];
@@ -36,11 +34,11 @@ BOOL enabled;
 	if (enableEjectionVideoSwitch) {
 		NSString* ejectionFilePath;
 		if (isiPhone)
-			ejectionFilePath = [NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/ejectioniphone.mp4"];
+			ejectionFilePath = [NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPreferences.bundle/video/ejectioniphone.mp4"];
 		else if (isiPod)
-			ejectionFilePath = [NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/ejectionipod.mp4"];
+			ejectionFilePath = [NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPreferences.bundle/video/ejectionipod.mp4"];
 		else if (isiPad)
-			ejectionFilePath = [NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/ejectionipad.mp4"];
+			ejectionFilePath = [NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPreferences.bundle/video/ejectionipad.mp4"];
 		NSURL* ejectionUrl = [NSURL fileURLWithPath:ejectionFilePath];
 
 		if (!ejectionPlayerItem) ejectionPlayerItem = [AVPlayerItem playerItemWithURL:ejectionUrl];
@@ -97,7 +95,7 @@ BOOL enabled;
 	if (passcodeAppearSoundSwitch) {
 		SystemSoundID sound = 0;
 		AudioServicesDisposeSystemSoundID(sound);
-		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/passcodeAppeared.mp3"]), &sound);
+		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:@"/Library/PreferenceBundles/AmongLockPreferences.bundle/audios/passcodeAppeared.mp3"]), &sound);
 		AudioServicesPlaySystemSound((SystemSoundID)sound);
 	}
 
@@ -149,7 +147,7 @@ BOOL enabled;
 	%orig;
 
 	if (!enableBackgroundVideoSwitch && !useAsWallpaperSwitch) return;
-	NSString* backgroundFilePath = [NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/background.mp4"];
+	NSString* backgroundFilePath = [NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPreferences.bundle/video/background.mp4"];
 	NSURL* backgroundUrl = [NSURL fileURLWithPath:backgroundFilePath];
 
 	if (!backgroundPlayerItem) backgroundPlayerItem = [AVPlayerItem playerItemWithURL:backgroundUrl];
@@ -212,9 +210,12 @@ BOOL enabled;
 	%orig;
 
 	if (enableBackgroundVideoSwitch && !useAsWallpaperSwitch) return;
-	MTMaterialView* blurView = MSHookIvar<MTMaterialView *>(self, "_materialView");
-	UIView* dimView1 = MSHookIvar<UIView *>(self, "_lightenSourceOverView");
-	UIView* dimView2 = MSHookIvar<UIView *>(self, "_plusDView");
+	// MTMaterialView* blurView = MSHookIvar<MTMaterialView *>(self, "_materialView");
+	MTMaterialView* blurView = [self safeValueForKey:@"_materialView"];
+	// UIView* dimView1 = MSHookIvar<UIView *>(self, "_lightenSourceOverView");
+	UIView* dimView1 = [self safeValueForKey:@"_lightenSourceOverView"];
+	// UIView* dimView2 = MSHookIvar<UIView *>(self, "_plusDView");
+	UIView* dimView2 = [self safeValueForKey:@"_plusDView"];
 
 	[blurView setHidden:YES];
 	[dimView1 setHidden:YES];
@@ -233,11 +234,12 @@ BOOL enabled;
 	if (!enableBulbsSwitch) return;
 	[self setClipsToBounds:NO];
 
-	NSMutableArray* indicators = MSHookIvar<NSMutableArray *>(self, "_characterIndicators");
+	// NSMutableArray* indicators = MSHookIvar<NSMutableArray *>(self, "_characterIndicators");
+	NSMutableArray* indicators = [self safeValueForKey:@"_characterIndicators"];
 	for (UIView* indicatorSubview in indicators) {
 		UIImageView* bulb = [[UIImageView alloc] initWithFrame:[indicatorSubview bounds]];
 		bulb.bounds = CGRectInset([bulb frame], 2.5, -8.5);
-		[bulb setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/bulbOff.png"]];
+		[bulb setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/bulbOff.png")]];
 		[indicatorSubview addSubview:bulb];
 	}
 
@@ -269,9 +271,9 @@ BOOL enabled;
             for (UIImageView* imageView in [view subviews]) {
                 if ([imageView isKindOfClass:%c(UIImageView)]) {
 					if (i < [arg1 length])
-                        [imageView setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/bulbOn.png"]];
+                        [imageView setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/bulbOn.png")]];
                     else
-                        [imageView setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/bulbOff.png"]];
+                        [imageView setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/bulbOff.png")]];
 				}
             }
         }
@@ -304,7 +306,7 @@ BOOL enabled;
 	if (!passcodeBackground) {
 		passcodeBackground = [[UIImageView alloc] initWithFrame:[self bounds]];
 		passcodeBackground.bounds = CGRectInset(passcodeBackground.frame, -35, -35);
-		[passcodeBackground setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/passcodeBackground.png"]];
+		[passcodeBackground setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/passcodeBackground.png")]];
 	}
 
 	if (![passcodeBackground isDescendantOfView:self]) [self insertSubview:passcodeBackground atIndex:0];
@@ -324,7 +326,7 @@ BOOL enabled;
 	if (!themePasscodeSwitch) return;
 	passcodeButton = [[UIImageView alloc] initWithFrame:[self bounds]];
 	passcodeButton.bounds = CGRectInset(passcodeButton.frame, 12, 7);
-	[passcodeButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/passcodeButtonOff.png"]];
+	[passcodeButton setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/passcodeButtonOff.png")]];
 
 	if (![passcodeButton isDescendantOfView:self]) [self addSubview:passcodeButton];
 
@@ -342,7 +344,7 @@ BOOL enabled;
 	if (!themePasscodeSwitch) return;
 	passcodeButton = [[UIImageView alloc] initWithFrame:[self bounds]];
 	passcodeButton.bounds = CGRectInset(passcodeButton.frame, 12, 7);
-	[passcodeButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/passcodeButtonOn.png"]];
+	[passcodeButton setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/passcodeButtonOn.png")]];
 
 	if (![passcodeButton isDescendantOfView:self]) [self addSubview:passcodeButton];
 
@@ -356,14 +358,14 @@ BOOL enabled;
 	
 	passcodeButton = [[UIImageView alloc] initWithFrame:[self bounds]];
 	passcodeButton.bounds = CGRectInset(passcodeButton.frame, 12, 7);
-	[passcodeButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/passcodeButtonFailed.png"]];
+	[passcodeButton setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/passcodeButtonFailed.png")]];
 
 	if (![passcodeButton isDescendantOfView:self]) [self addSubview:passcodeButton];
 
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
 		passcodeButton = [[UIImageView alloc] initWithFrame:[self bounds]];
 		passcodeButton.bounds = CGRectInset(passcodeButton.frame, 12, 7);
-		[passcodeButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/passcodeButtonOn.png"]];
+		[passcodeButton setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/passcodeButtonOn.png")]];
 
 		if (![passcodeButton isDescendantOfView:self]) [self addSubview:passcodeButton];
 	});
@@ -371,7 +373,7 @@ BOOL enabled;
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.6 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
 		passcodeButton = [[UIImageView alloc] initWithFrame:[self bounds]];
 		passcodeButton.bounds = CGRectInset(passcodeButton.frame, 12, 7);
-		[passcodeButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/passcodeButtonFailed.png"]];
+		[passcodeButton setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/passcodeButtonFailed.png")]];
 
 		if (![passcodeButton isDescendantOfView:self]) [self addSubview:passcodeButton];
 	});
@@ -379,7 +381,7 @@ BOOL enabled;
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.9 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
 		passcodeButton = [[UIImageView alloc] initWithFrame:[self bounds]];
 		passcodeButton.bounds = CGRectInset(passcodeButton.frame, 12, 7);
-		[passcodeButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/passcodeButtonOn.png"]];
+		[passcodeButton setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/passcodeButtonOn.png")]];
 
 		if (![passcodeButton isDescendantOfView:self]) [self addSubview:passcodeButton];
 	});
@@ -387,7 +389,7 @@ BOOL enabled;
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
 		passcodeButton = [[UIImageView alloc] initWithFrame:[self bounds]];
 		passcodeButton.bounds = CGRectInset(passcodeButton.frame, 12, 7);
-		[passcodeButton setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/passcodeButtonOff.png"]];
+		[passcodeButton setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AmongLockPreferences.bundle/images/passcodeButtonOff.png")]];
 
 		if (![passcodeButton isDescendantOfView:self]) [self addSubview:passcodeButton];
 	});
@@ -421,14 +423,17 @@ BOOL enabled;
 	%orig;
 
 	if (hideEmergencyButtonSwitch) {
-		SBUIButton* emergencyCallButton = MSHookIvar<SBUIButton *>(self, "_emergencyCallButton");
+		// SBUIButton* emergencyCallButton = MSHookIvar<SBUIButton *>(self, "_emergencyCallButton");
+		SBUIButton* emergencyCallButton = [self safeValueForKey:@"_emergencyCallButton"];
 		if (hideEmergencyButtonSwitch)
 			[emergencyCallButton removeFromSuperview];
 	}
 
 	if (hideCancelButtonSwitch) {
-		SBUIButton* backspaceButton = MSHookIvar<SBUIButton *>(self, "_backspaceButton");
-		SBUIButton* cancelButton = MSHookIvar<SBUIButton *>(self, "_cancelButton");
+		// SBUIButton* backspaceButton = MSHookIvar<SBUIButton *>(self, "_backspaceButton");
+		SBUIButton* backspaceButton = [self safeValueForKey:@"_backspaceButton"];
+		// SBUIButton* cancelButton = MSHookIvar<SBUIButton *>(self, "_cancelButton");
+		SBUIButton* cancelButton = [self safeValueForKey:@"_cancelButton"];
 		if (hideCancelButtonSwitch) {
 			[backspaceButton removeFromSuperview];
 			[cancelButton removeFromSuperview];
@@ -461,7 +466,7 @@ BOOL enabled;
 		if (wrongPasscodeSoundSwitch) {
 			SystemSoundID sound = 0;
 			AudioServicesDisposeSystemSoundID(sound);
-			AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/wrongPasscode.mp3"]), &sound);
+			AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:@"/Library/PreferenceBundles/AmongLockPreferences.bundle/audios/wrongPasscode.mp3"]), &sound);
 			AudioServicesPlaySystemSound((SystemSoundID)sound);
 		}	
 	} else {
@@ -482,7 +487,7 @@ BOOL enabled;
 		if (passcodeDisappearSoundSwitch) {
 			SystemSoundID sound = 0;
 			AudioServicesDisposeSystemSoundID(sound);
-			AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/passcodeDisappeared.mp3"]), &sound);
+			AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:@"/Library/PreferenceBundles/AmongLockPreferences.bundle/audios/passcodeDisappeared.mp3"]), &sound);
 			AudioServicesPlaySystemSound((SystemSoundID)sound);
 		}
 	}
@@ -559,7 +564,7 @@ BOOL enabled;
 	if (!passcodeButtonSoundSwitch) return;
 	SystemSoundID sound = 0;
 	AudioServicesDisposeSystemSoundID(sound);
-	AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPrefs.bundle/button%d.mp3", arc4random_uniform(4)]]), &sound);
+	AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/PreferenceBundles/AmongLockPreferences.bundle/audios/button%d.mp3", arc4random_uniform(4)]]), &sound);
 	AudioServicesPlaySystemSound((SystemSoundID)sound);
 
 }
@@ -765,8 +770,6 @@ BOOL enabled;
 
 %end
 
-%end
-
 %ctor {
 
 	preferences = [[HBPreferences alloc] initWithIdentifier:@"love.litten.amonglockpreferences"];
@@ -814,7 +817,7 @@ BOOL enabled;
 		isiPad = YES;
 
 	if (enabled) {
-		%init(AmongLock);
+		%init();
 	}
 
 }

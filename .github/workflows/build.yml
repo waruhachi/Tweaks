@@ -12,6 +12,7 @@ jobs:
         strategy:
             matrix:
                 project:
+                    - AmongLock
                     - Nita
         steps:
             - uses: actions/checkout@v4

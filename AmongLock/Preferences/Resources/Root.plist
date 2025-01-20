@@ -4,20 +4,30 @@
 <dict>
 	<key>items</key>
 	<array>
-	
+
 		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>DuoTwitterCell</string>
-			<key>firstLabel</key>
+			<key>leftUsername</key>
 			<string>🌸 Litten</string>
-			<key>firstAccount</key>
-			<string>schneelittchen</string>
-			<key>secondLabel</key>
+			<key>leftHandle</key>
+			<string>@schneelittchen</string>
+			<key>leftProfilePicture</key>
+			<string>duo/schneelittchen.png</string>
+			<key>leftOpenURL</key>
+			<string>https://twitter.com/schneelittchen</string>
+			<key>rightUsername</key>
 			<string>BigBrianIlel</string>
-			<key>secondAccount</key>
-			<string>BigIlel</string>
+			<key>rightHandle</key>
+			<string>@BigIlel</string>
+			<key>rightProfilePicture</key>
+			<string>duo/BigIlel.png</string>
+			<key>rightOpenURL</key>
+			<string>https://twitter.com/BigIlel</string>
 			<key>height</key>
-			<real>57</real>
+			<real>70</real>
 		</dict>
 
 		<dict>
@@ -314,9 +324,9 @@
  			<key>label</key>
  			<string>Contributors</string>
  			<key>detail</key>
- 			<string>ALKContributorsSubPrefsListController</string>
- 			<key>ALKSub</key>
- 			<string>contributorsSub</string>
+ 			<string>AmongLockContributorsSubPrefsListController</string>
+ 			<key>AmongLockSub</key>
+ 			<string>sub/Credits</string>
  		</dict>
 
 		<dict>
@@ -333,9 +343,9 @@
 			<key>subtitle</key>
 			<string>Replace your carrier with a weather emoji</string>
 			<key>icon</key>
-			<string>Nita.png</string>
+			<string>featured/Nita.png</string>
 			<key>url</key>
-			<string>https://repo.litten.love/depictions/nta/</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/Nita</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>
@@ -345,9 +355,9 @@
 			<key>subtitle</key>
 			<string>Make your wallpaper your song's artwork</string>
 			<key>icon</key>
-			<string>Violet.png</string>
+			<string>featured/Violet.png</string>
 			<key>url</key>
-			<string>https://repo.litten.love/depictions/vio/</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/Violet</string>
 		</dict>
 
 		<dict>
@@ -362,31 +372,11 @@
 			<key>cellClass</key>
 			<string>HBLinkTableCell</string>
 			<key>label</key>
-			<string>Discord</string>
-			<key>subtitle</key>
-			<string>Chat with us 👾</string>
-			<key>url</key>
-			<string>https://discord.com/invite/fPHN8KG</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>HBLinkTableCell</string>
-			<key>label</key>
 			<string>Source Code</string>
 			<key>subtitle</key>
 			<string>GitHub 👻</string>
 			<key>url</key>
-			<string>https://github.com/schneelittchen/AmongLock</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>HBLinkTableCell</string>
-			<key>label</key>
-			<string>Donate To Litten</string>
-			<key>subtitle</key>
-			<string>Appreciated 💝</string>
-			<key>url</key>
-			<string>https://paypal.me/Litteeen</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/AmongLock</string>
 		</dict>
 
 		<dict>
