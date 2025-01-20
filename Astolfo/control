@@ -1,12 +1,9 @@
 Package: love.litten.astolfo
 Name: Astolfo 👒
 Depends: mobilesubstrate, preferenceloader, ws.hbang.common (>= 1.14), firmware (>= 13.0), com.mrgcgamer.libgcuniversal
-Version: 1.2.1
+Version: 1.2.2
 Architecture: iphoneos-arm
 Description: Astolfo siri
-Maintainer: Litten
+Maintainer: waruhachi
 Author: Litten
 Section: Tweaks
-Depiction: https://repo.litten.love/depictions/Astolfo/index.html
-SileoDepiction: https://repo.litten.love/depictions/Astolfo/index.json
-Icon: https://repo.litten.love/depictions/Astolfo/assets/icon.png

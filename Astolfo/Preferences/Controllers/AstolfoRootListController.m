@@ -1,12 +1,12 @@
-#include "AFORootListController.h"
+#include "AstolfoRootListController.h"
 
-@implementation AFORootListController
+@implementation AstolfoRootListController
 
 - (void)viewDidLoad {
 
     [super viewDidLoad];
 
-    self.appearanceSettings = [AFOAppearanceSettings new];
+    self.appearanceSettings = [HBAppearanceSettings new];
     self.hb_appearanceSettings = [self appearanceSettings];
 
 
@@ -26,8 +26,8 @@
     self.navigationItem.titleView = [UIView new];
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     [[self titleLabel] setFont:[UIFont boldSystemFontOfSize:17]];
-    [[self titleLabel] setText:@"1.2.1"];
-    [[self titleLabel] setTextColor:[UIColor whiteColor]];
+    [[self titleLabel] setText:@"1.2.2"];
+    [[self titleLabel] setTextColor:(self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) ? [UIColor whiteColor] : [UIColor blackColor]];
     [[self titleLabel] setTextAlignment:NSTextAlignmentCenter];
     [[[self navigationItem] titleView] addSubview:[self titleLabel]];
 
@@ -42,7 +42,7 @@
 
     self.iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     [[self iconView] setContentMode:UIViewContentModeScaleAspectFit];
-    [[self iconView] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AstolfoPreferences.bundle/icon.png"]];
+    [[self iconView] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AstolfoPreferences.bundle/icon.png")]];
     [[self iconView] setAlpha:0];
     [[[self navigationItem] titleView] addSubview:[self iconView]];
 
@@ -62,7 +62,7 @@
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
     self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
     [[self headerImageView] setContentMode:UIViewContentModeScaleAspectFill];
-    [[self headerImageView] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AstolfoPreferences.bundle/Banner.png"]];
+    [[self headerImageView] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AstolfoPreferences.bundle/Banner.png")]];
     [[self headerImageView] setClipsToBounds:YES];
     [[self headerView] addSubview:[self headerImageView]];
 
@@ -106,12 +106,6 @@
         [alertController addAction:confirmAction];
 
         [self presentViewController:alertController animated:YES completion:nil];
-    } else {
-        if (![[self preferences] objectForKey:@"wasWelcomed"] || ![[[self preferences] objectForKey:@"wasWelcomed"] isEqual:@(YES)]) {
-            WelcomeViewController* controller = [WelcomeViewController new];
-            [self presentViewController:controller animated:YES completion:nil];
-            [[self preferences] setBool:YES forKey:@"wasWelcomed"];
-        }
     }
     
 }

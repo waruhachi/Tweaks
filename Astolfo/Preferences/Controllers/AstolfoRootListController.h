@@ -1,16 +1,12 @@
-#import <Preferences/PSListController.h>
+@import Cephei;
+@import CepheiPrefs;
+
+#import <roothide.h>
 #import <Preferences/PSSpecifier.h>
-#import <CepheiPrefs/HBRootListController.h>
-#import <CepheiPrefs/HBAppearanceSettings.h>
-#import <Cephei/HBPreferences.h>
-#import <Cephei/HBRespringController.h>
-#import "WelcomeViewController.h"
+#import <Preferences/PSListController.h>
 
-@interface AFOAppearanceSettings : HBAppearanceSettings
-@end
-
-@interface AFORootListController : HBRootListController
-@property(nonatomic, retain)AFOAppearanceSettings* appearanceSettings;
+@interface AstolfoRootListController : HBRootListController
+@property(nonatomic, retain)HBAppearanceSettings* appearanceSettings;
 @property(nonatomic, retain)HBPreferences* preferences;
 @property(nonatomic, retain)UISwitch* enableSwitch;
 @property(nonatomic, retain)UIBarButtonItem* item;

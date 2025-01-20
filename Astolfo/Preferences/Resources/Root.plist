@@ -6,18 +6,28 @@
 	<array>
 
 		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>DuoTwitterCell</string>
-			<key>firstLabel</key>
+			<key>leftUsername</key>
 			<string>🌸 Litten</string>
-			<key>firstAccount</key>
-			<string>schneelittchen</string>
-			<key>secondLabel</key>
+			<key>leftHandle</key>
+			<string>@schneelittchen</string>
+			<key>leftProfilePicture</key>
+			<string>duo/schneelittchen.png</string>
+			<key>leftOpenURL</key>
+			<string>https://twitter.com/schneelittchen</string>
+			<key>rightUsername</key>
 			<string>Nepeta</string>
-			<key>secondAccount</key>
-			<string>NepetaDev</string>
+			<key>rightHandle</key>
+			<string>@NepetaDev</string>
+			<key>rightProfilePicture</key>
+			<string>duo/nepeta.png</string>
+			<key>rightOpenURL</key>
+			<string>https://twitter.com/NepetaDev</string>
 			<key>height</key>
-			<real>57</real>
+			<real>70</real>
 		</dict>
 
 		<dict>
@@ -237,8 +247,8 @@
  			<key>label</key>
  			<string>Contributors</string>
  			<key>detail</key>
- 			<string>AFOContributorsSubPreferencesListController</string>
- 			<key>AFOSub</key>
+ 			<string>AstolfoContributorsSubPreferencesListController</string>
+ 			<key>AstolfoSub</key>
  			<string>sub/contributors</string>
  		</dict>
 
@@ -258,7 +268,7 @@
 			<key>icon</key>
 			<string>featured/Eneko.png</string>
 			<key>url</key>
-			<string>https://repo.litten.love/depictions/Eneko/</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/Eneko</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>
@@ -270,7 +280,7 @@
 			<key>icon</key>
 			<string>featured/Avrora.png</string>
 			<key>url</key>
-			<string>https://repo.litten.love/depictions/Avrora/</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/Avrora</string>
 		</dict>
 
 		<dict>
@@ -285,31 +295,11 @@
 			<key>cellClass</key>
 			<string>HBLinkTableCell</string>
 			<key>label</key>
-			<string>Discord</string>
-			<key>subtitle</key>
-			<string>Chat with us 👾</string>
-			<key>url</key>
-			<string>https://discord.gg/tKUPZrS7ve</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>HBLinkTableCell</string>
-			<key>label</key>
 			<string>Source code</string>
 			<key>subtitle</key>
 			<string>GitHub 👒</string>
 			<key>url</key>
-			<string>https://github.com/schneelittchen/Astolfo</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>HBLinkTableCell</string>
-			<key>label</key>
-			<string>Donate to Litten</string>
-			<key>subtitle</key>
-			<string>Appreciated 💝</string>
-			<key>url</key>
-			<string>https://paypal.me/Litteeen</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/Astolfo</string>
 		</dict>
 
 		<dict>

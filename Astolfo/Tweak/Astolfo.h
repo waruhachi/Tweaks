@@ -1,6 +1,8 @@
+#import <roothide.h>
 #import <UIKit/UIKit.h>
-#import "GcUniversal/GcImagePickerUtils.h"
 #import <Cephei/HBPreferences.h>
+
+#import "GcUniversal/GcImagePickerUtils.h"
 
 #define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 

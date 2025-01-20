@@ -36,7 +36,7 @@
 		[astolfoImageView setContentMode:UIViewContentModeScaleAspectFill];
 
 	if (!useCustomAstolfoImageSwitch)
-		[astolfoImageView setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AstolfoPreferences.bundle/astolfo.png"]];
+		[astolfoImageView setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AstolfoPreferences.bundle/astolfo.png")]];
 	else
 		[astolfoImageView setImage:[GcImagePickerUtils imageFromDefaults:@"love.litten.astolfopreferences" withKey:@"astolfoImage"]];
 		
@@ -97,7 +97,7 @@
 		[astolfoImageView setContentMode:UIViewContentModeScaleAspectFill];
 
 	if (!useCustomAstolfoImageSwitch)
-		[astolfoImageView setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/AstolfoPreferences.bundle/astolfo.png"]];
+		[astolfoImageView setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/AstolfoPreferences.bundle/astolfo.png")]];
 	else
 		[astolfoImageView setImage:[GcImagePickerUtils imageFromDefaults:@"love.litten.astolfopreferences" withKey:@"astolfoImage"]];
 		

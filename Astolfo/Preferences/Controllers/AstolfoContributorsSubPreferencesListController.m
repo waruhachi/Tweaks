@@ -1,12 +1,12 @@
-#import "AFOContributorsSubPreferencesListController.h"
+#import "AstolfoContributorsSubPreferencesListController.h"
 
-@implementation AFOContributorsSubPreferencesListController
+@implementation AstolfoContributorsSubPreferencesListController
 
 - (void)viewDidLoad {
 
     [super viewDidLoad];
 
-    self.appearanceSettings = [AFOAppearanceSettings new];
+    self.appearanceSettings = [HBAppearanceSettings new];
     self.hb_appearanceSettings = [self appearanceSettings];
 
     self.blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
@@ -36,7 +36,7 @@
 
 - (void)loadFromSpecifier:(PSSpecifier *)specifier {
 
-    NSString* sub = [specifier propertyForKey:@"AFOSub"];
+    NSString* sub = [specifier propertyForKey:@"AstolfoSub"];
     NSString* title = [specifier name];
 
     _specifiers = [self loadSpecifiersFromPlistName:sub target:self];
