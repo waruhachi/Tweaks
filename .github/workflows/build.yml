@@ -57,6 +57,10 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
+                  ls "${THEOS}/lib/"
+                  ls "${THEOS}/include/"
+                  ls "${THEOS}/include/GcUniversal/"
+                  ls "${THEOS}/lib/iphone/rootless/"
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
