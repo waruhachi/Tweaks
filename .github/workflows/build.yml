@@ -57,6 +57,9 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
+                  echo "THEOS=~/theos" >> $GITHUB_ENV
+                  export THEOS=~/theos
+
                   ls "${THEOS}"
                   ls "${THEOS}/lib/"
                   ls "${THEOS}/include/"
