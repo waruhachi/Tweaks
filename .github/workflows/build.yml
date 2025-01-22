@@ -57,6 +57,7 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
+                  ls "${THEOS}"
                   ls "${THEOS}/lib/"
                   ls "${THEOS}/include/"
                   ls "${THEOS}/include/GcUniversal/"
