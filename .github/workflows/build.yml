@@ -47,7 +47,7 @@ jobs:
             - uses: actions/checkout@v4
 
             - name: Set up Theos
-              uses: waruhachi/theos-action@v2.2.1
+              uses: waruhachi/theos-action@v2.2.2
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
@@ -57,14 +57,6 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
-                  echo "THEOS=~/theos" >> $GITHUB_ENV
-                  export THEOS=~/theos
-
-                  ls "${THEOS}"
-                  ls "${THEOS}/lib/"
-                  ls "${THEOS}/include/"
-                  ls "${THEOS}/include/GcUniversal/"
-                  ls "${THEOS}/lib/iphone/rootless/"
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
