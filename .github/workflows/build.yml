@@ -52,6 +52,7 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   theos-src: 'roothide/theos'
+                  libgcuniversal-src: 'waruhachi/LibGcUniversal'
 
             - name: Build Package
               shell: bash
