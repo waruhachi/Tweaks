@@ -42,6 +42,7 @@ jobs:
                     - AmongLock
                     - AppareilPhoto
                     - Astolfo
+                    - GeoCracking
                     - Nita
         steps:
             - uses: actions/checkout@v4
