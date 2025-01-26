@@ -1,4 +1,4 @@
-TWEAK_NAME = MusicCracker
+TWEAK_NAME = SheetMusicScanner
 $(TWEAK_NAME)_FILES = $(TWEAK_NAME).x
 $(TWEAK_NAME)_CFLAGS = -fobjc-arc
 
