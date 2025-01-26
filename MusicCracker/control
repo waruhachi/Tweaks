@@ -1,0 +1,9 @@
+Package: moe.waru.musiccracker
+Name: MusicCracker
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Bypass Music Scanner paywall
+Maintainer: waruhachi
+Author: waruhachi
+Section: Tweaks

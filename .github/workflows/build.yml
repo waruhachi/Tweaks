@@ -43,6 +43,7 @@ jobs:
                     - AppareilPhoto
                     - Astolfo
                     - GeoCracking
+                    - MusicCracker
                     - Nita
         steps:
             - uses: actions/checkout@v4
