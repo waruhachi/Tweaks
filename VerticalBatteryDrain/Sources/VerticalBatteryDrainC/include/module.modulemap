@@ -1,0 +1,4 @@
+module VerticalBatteryDrainC {
+    umbrella "."
+    export *
+}
