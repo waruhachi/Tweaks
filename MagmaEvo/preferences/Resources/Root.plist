@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>						<string>PSGroupCell</string>
+			<key>headerCellClass</key>			<string>MEVOHeader</string>
+ 		</dict>
+ 		<dict>
+			<key>cell</key>                     <string>PSGroupCell</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>                          <string>PSSwitchCell</string>
+			<key>cellClass</key>                     <string>MEVOToggle</string>
+			<key>default</key>                       <true/>
+			<key>defaults</key>                      <string>com.noisyflake.magmaevo</string>
+			<key>key</key>                           <string>enabled</string>
+			<key>label</key>                         <string>Enabled</string>
+			<key>set</key>                           <string>setWithRespring:specifier:</string>
+		</dict>
+
+		<dict>
+				<key>cell</key>                     <string>PSGroupCell</string>
+				<key>label</key>                    <string>Modules</string>
+		</dict>
+
+		<dict>
+				<key>cell</key>                     <string>PSLinkCell</string>
+				<key>isController</key>             <true/>
+				<key>detail</key>                   <string>MEVOConnectivityController</string>
+				<key>icon</key>                     <string>icons/connectivity</string>
+				<key>label</key>                    <string>Connectivity</string>
+		</dict>
+		<dict>
+				<key>cell</key>                     <string>PSLinkCell</string>
+				<key>isController</key>             <true/>
+				<key>detail</key>                   <string>MEVOTogglesController</string>
+				<key>icon</key>                     <string>icons/toggles</string>
+				<key>label</key>                    <string>Launchers &amp; Toggles</string>
+		</dict>
+		<dict>
+				<key>cell</key>                     <string>PSLinkCell</string>
+				<key>isController</key>             <true/>
+				<key>detail</key>                   <string>MEVOMediaControlsController</string>
+				<key>icon</key>                     <string>icons/mediacontrols</string>
+				<key>label</key>                    <string>Media Controls</string>
+		</dict>
+		<dict>
+				<key>cell</key>                     <string>PSLinkCell</string>
+				<key>isController</key>             <true/>
+				<key>detail</key>                   <string>MEVOSlidersController</string>
+				<key>icon</key>                     <string>icons/sliders</string>
+				<key>label</key>                    <string>Sliders</string>
+		</dict>
+		<dict>
+				<key>cell</key>                     <string>PSLinkCell</string>
+				<key>isController</key>             <true/>
+				<key>detail</key>                   <string>MEVOMiscController</string>
+				<key>icon</key>                     <string>icons/misc</string>
+				<key>label</key>                    <string>Miscellaneous</string>
+		</dict>
+
+		<dict>
+				<key>cell</key>                     <string>PSGroupCell</string>
+				<key>label</key>                    <string>Settings</string>
+		</dict>
+		<dict>
+				<key>cell</key>                     <string>PSLinkCell</string>
+				<key>isController</key>             <true/>
+				<key>detail</key>                   <string>MEVOPresetsController</string>
+				<key>icon</key>                     <string>icons/presets</string>
+				<key>label</key>                    <string>Manage Presets</string>
+		</dict>
+		<dict>
+				<key>cell</key>                     <string>PSButtonCell</string>
+				<key>action</key>                   <string>resetSettings</string>
+				<key>icon</key>                     <string>icons/reset</string>
+				<key>cellClass</key>                <string>MEVOButton</string>
+				<key>label</key>                    <string>Reset All Settings</string>
+				<key>textColor</key>                <string>regular</string>
+		</dict>
+		<dict>
+			<key>cell</key>                         <string>PSGroupCell</string>
+			<key>footerText</key> 				    <string>Developed with ♥ by NoisyFlake</string>
+			<key>footerAlignment</key> 			    <string>1</string>
+		</dict>
+	</array>
+	<key>title</key>                             <string></string>
+</dict>
+</plist>

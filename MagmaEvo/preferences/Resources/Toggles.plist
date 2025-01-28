@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>                     	<string>PSGroupCell</string>
+			<key>headerCellClass</key>              <string>MEVOImage</string>
+			<key>icon</key>                         <string>images/togglesContainer.png</string>
+			<key>prysmIcon</key>                    <string>images/togglesContainer_prysm.png</string>
+		</dict>
+		<dict>
+				<key>cell</key>                     <string>PSLinkCell</string>
+				<key>cellClass</key>                <string>MEVOColorPicker</string>
+				<key>defaults</key>                 <string>com.noisyflake.magmaevo</string>
+				<key>key</key>                      <string>togglesContainerBackground</string>
+				<key>label</key>                    <string>Background Color</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>                     	<string>PSGroupCell</string>
+			<key>headerCellClass</key>              <string>MEVOImage</string>
+			<key>icon</key>                         <string>images/togglesMode.png</string>
+			<key>prysmIcon</key>                    <string>images/togglesMode_prysm.png</string>
+		</dict>
+		<dict>
+			<key>cell</key>                          <string>PSSegmentCell</string>
+			<key>cellClass</key>                     <string>MEVOSegment</string>
+			<key>default</key>                       <string>regular</string>
+			<key>defaults</key>                      <string>com.noisyflake.magmaevo</string>
+			<key>key</key>                           <string>togglesOverlayMode</string>
+			<key>validTitles</key>
+				<array>
+					<string>Default</string>
+					<string>Icon Only</string>
+					<string>Overlay Only</string>
+				</array>
+			<key>validValues</key>
+				<array>
+					<string>regular</string>
+					<string>removeOverlay</string>
+					<string>colorOverlay</string>
+				</array>
+		</dict>
+
+		<dict>
+				<key>cell</key>                     <string>PSGroupCell</string>
+		</dict>
+		<dict>
+				<key>cell</key>                     <string>PSButtonCell</string>
+				<key>action</key>                   <string>switchState</string>
+				<key>cellClass</key>                <string>MEVOStateSwitcher</string>
+				<key>key</key>                      <string>switchState</string>
+		</dict>
+
+		<!-- <dict>
+				<key>cell</key>                     <string>PSLinkCell</string>
+				<key>cellClass</key>                <string>MEVOColorPicker</string>
+				<key>defaults</key>                 <string>com.noisyflake.magmaevo</string>
+				<key>label</key>                    <string>Global Color</string>
+				<key>key</key>                      <string>togglesGlobalColor</string>
+				<key>global</key>                   <true/>
+		</dict> -->
+
+	</array>
+	<key>title</key>                             <string>Launchers &amp; Toggles</string>
+</dict>
+</plist>

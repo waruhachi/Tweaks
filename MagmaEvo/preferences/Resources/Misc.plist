@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>                     	<string>PSGroupCell</string>
+			<key>headerCellClass</key>              <string>MEVOImage</string>
+			<key>icon</key>                         <string>images/miscBackground.png</string>
+			<key>prysmIcon</key>                    <string>images/miscBackground_prysm.png</string>
+		</dict>
+		<dict>
+			<key>cell</key>                     <string>PSLinkCell</string>
+			<key>cellClass</key>                <string>MEVOColorPicker</string>
+			<key>defaults</key>                 <string>com.noisyflake.magmaevo</string>
+			<key>key</key>                      <string>miscMainBackground</string>
+			<key>label</key>                    <string>Background Color</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>                     <string>PSGroupCell</string>
+			<key>label</key>                    <string>Prysm Modules</string>
+			<key>feature</key>                  <string>prysm</string>
+		</dict>
+		<dict>
+			<key>cell</key>                     <string>PSLinkCell</string>
+			<key>isController</key>             <true/>
+			<key>detail</key>                   <string>MEVOPrysmBatteryController</string>
+			<key>label</key>                    <string>Battery Module</string>
+			<key>feature</key>                  <string>prysm</string>
+		</dict>
+		<dict>
+			<key>cell</key>                     <string>PSLinkCell</string>
+			<key>isController</key>             <true/>
+			<key>detail</key>                   <string>MEVOPrysmCalendarController</string>
+			<key>label</key>                    <string>Calendar Module</string>
+			<key>feature</key>                  <string>prysm</string>
+		</dict>
+		<dict>
+			<key>cell</key>                     <string>PSLinkCell</string>
+			<key>isController</key>             <true/>
+			<key>detail</key>                   <string>MEVOPrysmReminderController</string>
+			<key>label</key>                    <string>Reminders Module</string>
+			<key>feature</key>                  <string>prysm</string>
+		</dict>
+		<dict>
+			<key>cell</key>                     <string>PSLinkCell</string>
+			<key>isController</key>             <true/>
+			<key>detail</key>                   <string>MEVOPrysmPowerController</string>
+			<key>label</key>                    <string>Power Module</string>
+			<key>feature</key>                  <string>prysm</string>
+		</dict>
+		<dict>
+			<key>cell</key>                     <string>PSLinkCell</string>
+			<key>isController</key>             <true/>
+			<key>detail</key>                   <string>MEVOPrysmWeatherController</string>
+			<key>label</key>                    <string>Weather Module</string>
+			<key>feature</key>                  <string>prysm</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>                     	<string>PSGroupCell</string>
+			<key>headerCellClass</key>              <string>MEVOImage</string>
+			<key>icon</key>                         <string>images/miscAlignment.png</string>
+			<key>feature</key>                       <string>notPrysm</string>
+		</dict>
+		<dict>
+			<key>cell</key>                          <string>PSSegmentCell</string>
+			<key>cellClass</key>                     <string>MEVOSegment</string>
+			<key>default</key>                       <string>top</string>
+			<key>defaults</key>                      <string>com.noisyflake.magmaevo</string>
+			<key>key</key>                           <string>miscMainAlignment</string>
+			<key>feature</key>                       <string>notPrysm</string>
+			<key>validTitles</key>
+				<array>
+					<string>Default Alignment</string>
+					<string>Bottom Alignment</string>
+				</array>
+			<key>validValues</key>
+				<array>
+					<string>top</string>
+					<string>bottom</string>
+				</array>
+		</dict>
+
+		<dict>
+			<key>cell</key>                     <string>PSGroupCell</string>
+			<key>label</key>                    <string>Status Bar</string>
+			<key>feature</key>                  <string>notPrysm</string>
+		</dict>
+		<dict>
+			<key>cell</key>                     <string>PSSwitchCell</string>
+			<key>cellClass</key>                <string>MEVOToggle</string>
+			<key>default</key>                  <false/>
+			<key>defaults</key>                 <string>com.noisyflake.magmaevo</string>
+			<key>key</key>                      <string>miscStatusBarHide</string>
+			<key>label</key>                    <string>Hide in CC</string>
+			<key>feature</key>                  <string>notPrysm</string>
+		</dict>
+		<dict>
+			<key>cell</key>                     <string>PSLinkCell</string>
+			<key>cellClass</key>                <string>MEVOColorPicker</string>
+			<key>defaults</key>                 <string>com.noisyflake.magmaevo</string>
+			<key>key</key>                      <string>miscStatusBarColor</string>
+			<key>label</key>                    <string>Text Color</string>
+			<key>feature</key>                  <string>notPrysm</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>                     <string>PSGroupCell</string>
+			<key>label</key>                    <string>Third-Party Modules</string>
+			<key>feature</key>                  <string>thirdparty</string>
+		</dict>
+		<dict>
+			<key>cell</key>                     <string>PSLinkCell</string>
+			<key>isController</key>             <true/>
+			<key>detail</key>                   <string>MEVOBetterCCXIController</string>
+			<key>label</key>                    <string>BetterCCXI Weather</string>
+			<key>feature</key>                  <string>bcxiWeather</string>
+		</dict>
+		<dict>
+			<key>cell</key>                     <string>PSLinkCell</string>
+			<key>isController</key>             <true/>
+			<key>detail</key>                   <string>MEVOPowerModuleController</string>
+			<key>label</key>                    <string>Power Module</string>
+			<key>feature</key>                  <string>powerModule</string>
+		</dict>
+	</array>
+	<key>title</key>                            <string>Miscellaneous</string>
+</dict>
+</plist>
