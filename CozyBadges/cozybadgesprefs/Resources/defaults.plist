@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>enabled</key> 				    <true/>
+	<key>dockEnabled</key> 			    <true/>
+
+	<key>hideLabels</key> 			    <false/>
+	<key>dockHideLabels</key> 		    <true/>
+	<key>dockRaiseLabels</key>          <false/>
+
+	<key>regularMode</key>              <string>none</string>
+	<key>regularAutoColor</key>         <false/>
+	<key>regularColor</key>             <string>#9470bf:1.00</string>
+
+	<key>notificationMode</key>         <string>background</string>
+	<key>notificationAutoColor</key>    <true/>
+	<key>notificationColor</key>        <string>#9470bf:1.00</string>
+
+	<key>nameEnabled</key> 			    <true/>
+	<key>nameSingular</key> 		    <string></string>
+	<key>namePlural</key> 			    <string></string>
+
+	<key>labelOffset</key> 			    <real>0</real>
+	<key>labelOffsetDock</key> 		    <real>0</real>
+</dict>
+</plist>

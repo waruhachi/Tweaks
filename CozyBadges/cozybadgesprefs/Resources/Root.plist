@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>						<string>PSGroupCell</string>
+			<key>headerCellClass</key>			<string>CozyHeader</string>
+			<key>id</key>                       <string>header</string>
+ 		</dict>
+ 		<dict>
+            <key>cell</key>                     <string>PSGroupCell</string>
+        </dict>
+
+		<dict>
+			<key>cell</key>						<string>PSSwitchCell</string>
+			<key>cellClass</key>                <string>CozyToggle</string>
+			<key>default</key>					<true/>
+			<key>defaults</key>					<string>com.noisyflake.cozybadgesprefs</string>
+			<key>key</key>						<string>enabled</string>
+			<key>label</key>					<string>Enabled</string>
+			<key>refresh</key>                  <true/>
+		</dict>
+		 <dict>
+			<key>cell</key>						<string>PSSwitchCell</string>
+			<key>cellClass</key>                <string>CozyToggle</string>
+			<key>default</key>					<true/>
+			<key>defaults</key>					<string>com.noisyflake.cozybadgesprefs</string>
+			<key>key</key>						<string>dockEnabled</string>
+			<key>label</key>					<string>Enabled in Dock</string>
+			<key>depends</key>                  <string>enabled</string>
+		</dict>
+
+		<dict>
+            <key>cell</key>                     <string>PSGroupCell</string>
+            <key>label</key>                    <string>Main Options</string>
+			<key>depends</key>                  <string>enabled</string>
+        </dict>
+		<dict>
+			<key>cell</key> 					<string>PSLinkCell</string>
+			<key>cellClass</key>                <string>CozyButton</string>
+			<key>isController</key>             <true/>
+            <key>detail</key>                   <string>CozyRegularController</string>
+			<key>label</key> 					<string>Regular Labels</string>
+			<key>depends</key>                  <string>enabled</string>
+		</dict>
+		<dict>
+			<key>cell</key> 					<string>PSLinkCell</string>
+			<key>cellClass</key>                <string>CozyButton</string>
+			<key>isController</key>             <true/>
+            <key>detail</key>                   <string>CozyNotificationController</string>
+			<key>label</key> 					<string>Labels with Notification</string>
+			<key>depends</key>                  <string>enabled</string>
+		</dict>
+
+		<dict>
+            <key>cell</key>                     <string>PSGroupCell</string>
+            <key>label</key>                    <string>Label Offset</string>
+			<key>footerText</key>				<string>Move your labels up or down. The first slider controls the homescreen labels, the second one the dock labels.</string>
+			<key>depends</key>                  <string>enabled</string>
+        </dict>
+		<dict>
+			<key>cell</key>						<string>PSSliderCell</string>
+			<key>cellClass</key>                <string>CozySlider</string>
+			<key>min</key>                      <real>-30</real>
+			<key>max</key>						<real>30</real>
+			<key>showValue</key>				<true/>
+			<key>default</key>					<real>0</real>
+			<key>defaults</key>					<string>com.noisyflake.cozybadgesprefs</string>
+			<key>key</key>						<string>labelOffset</string>
+			<key>depends</key>                  <string>enabled</string>
+		</dict>
+		<dict>
+			<key>cell</key>						<string>PSSliderCell</string>
+			<key>cellClass</key>                <string>CozySlider</string>
+			<key>min</key>                      <real>-30</real>
+			<key>max</key>						<real>30</real>
+			<key>showValue</key>				<true/>
+			<key>default</key>					<real>0</real>
+			<key>defaults</key>					<string>com.noisyflake.cozybadgesprefs</string>
+			<key>key</key>						<string>labelOffsetDock</string>
+			<key>depends</key>                  <string>enabled</string>
+		</dict>
+
+		<dict>
+            <key>cell</key>                     <string>PSGroupCell</string>
+            <key>footerText</key> 				<string>Developed with ♥ by NoisyFlake</string>
+			<key>footerAlignment</key> 			<string>1</string>
+        </dict>
+
+	</array>
+	<key>title</key>
+	<string></string>
+</dict>
+</plist>
