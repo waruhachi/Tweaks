@@ -1,0 +1,9 @@
+Name: Kabegami
+Version: 1.0.0
+Description: Save the current wallpaper to the camera roll. Works on the lock screen and home screen.
+Maintainer: waruhachi
+Author: waruhachi
+Section: Tweaks
+Architecture: iphoneos-arm
+Depends: mobilesubstrate
+Package: moe.waru.kabegami

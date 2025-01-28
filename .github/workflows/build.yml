@@ -42,8 +42,9 @@ jobs:
                     - AmongLock
                     - AppareilPhoto
                     - Astolfo
-                    - SheetMusicScanner
+                    - Kabegami
                     - Nita
+                    - SheetMusicScanner
                     - VerticalBatteryDrain
         steps:
             - uses: actions/checkout@v4
