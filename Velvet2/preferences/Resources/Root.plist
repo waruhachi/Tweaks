@@ -1,0 +1,70 @@
+{
+	items = (
+		{
+			cell = PSSwitchCell;
+			cellClass = Velvet2Switch;
+			cellSubtitleText = "Requires a Respring";
+			default = 1;
+			defaults = "com.noisyflake.velvet2";
+			key = enabled;
+			label = "Enable Tweak";
+			systemIcon = "power";
+			set = "setTweakEnabled:specifier:";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Settings";
+		},
+		{
+			cell = PSLinkCell;
+			cellClass = Velvet2SubtitleLinkCell;
+			cellSubtitleText = "Apply to all notifications";
+			isController = 1;
+			detail = Velvet2SettingsController;
+			label = "Global Settings";
+			systemIcon = "gear";
+		},
+		{
+			cell = PSLinkCell;
+			cellClass = Velvet2SubtitleLinkCell;
+			cellSubtitleText = "Overwrite Global Settings";
+			isController = 1;
+			detail = Velvet2AppSelectController;
+			label = "Per-App Settings";
+			systemIcon = "ellipsis";
+		},
+		{
+			cell = PSButtonCell;
+			cellClass = Velvet2Button;
+			action = resetSettings;
+			label = "Reset Settings";
+			confirmation = {
+				title = "Reset Settings";
+				prompt = "Reset all settings to their default value.\nThis action cannot be undone.";
+				cancelTitle = "Cancel";
+			};
+			isDestructive = 1;
+			systemIcon = "gobackward";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Developer";
+		},
+		{
+			cell = PSButtonCell;
+			cellClass = Velvet2Button;
+			action = twitter;
+			label = "Follow on Twitter";
+			systemIcon = "person.crop.circle.badge.plus";
+		},
+		{
+			cell = PSButtonCell;
+			cellClass = Velvet2Button;
+			action = paypal;
+			label = "Buy me a coffee";
+			systemIcon = "gift";
+		},
+
+	);
+	title = "";
+}

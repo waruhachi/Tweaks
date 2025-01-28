@@ -1,0 +1,10 @@
+{
+	entry = {
+		bundle = Velvet2;
+		cell = PSLinkCell;
+		detail = Velvet2RootListController;
+		icon = "icon.png";
+		isController = 1;
+		label = "Velvet 2";
+	};
+}

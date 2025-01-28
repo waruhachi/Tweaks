@@ -1,0 +1,119 @@
+{
+	items = (
+		{
+			cell = PSGroupCell;
+		},
+		{
+			cell = PSSwitchCell;
+			cellClass = Velvet2Switch;
+			cellSubtitleText = "Use a custom background color";
+			default = 1;
+			defaults = "com.noisyflake.velvet2";
+			key = backgroundEnabled;
+			label = "Enable Background";
+			systemIcon = "power";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Type";
+			require = "backgroundEnabled";
+		},
+		{
+			cell = PSDefaultCell;
+			cellClass = Velvet2AppearanceCell;
+			options = (
+				{
+					text = "Icon Color";
+					value = "icon";
+					systemIcon = "wand.and.stars";
+				},
+				{
+					text = "Static Color";
+					value = "color";
+					systemIcon = "eyedropper";
+				},
+				{
+					text = "Gradient";
+					value = "gradient";
+					systemIcon = "humidity.fill";
+				},
+			);
+			defaults = "com.noisyflake.velvet2";
+			key = "backgroundType";
+			height = 130;
+			require = "backgroundEnabled";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Options";
+			require = "backgroundEnabled";
+		},
+		{
+			cell = PSSliderCell;
+			cellClass = Velvet2Slider;
+			defaults = "com.noisyflake.velvet2";
+			key = backgroundIconAlpha;
+			min = 0;
+			max = 100;
+			showValue = 1;
+			require = "backgroundEnabled&backgroundType=icon";
+			label = "Opacity";
+			systemIcon = "eye";
+		},
+		{
+			cell = PSLinkCell;
+			defaults = "com.noisyflake.velvet2";
+			cellClass = Velvet2ColorPicker;
+			key = "backgroundColor";
+			label = "Color";
+			require = "backgroundEnabled&backgroundType=color";
+			systemIcon = "drop.circle";
+		},
+		{
+			cell = PSLinkListCell;
+			cellClass = "Velvet2LinkCell";
+			defaults = "com.noisyflake.velvet2";
+			key = "backgroundGradientDirection";
+			detail = PSListItemsController;
+			label = "Gradient Direction";
+			validValues = ("cornerTop", "right", "bottom", "cornerBottom");
+			validTitles = ("\U2197", "\U2192", "\U2193", "\U2198");
+			require = "backgroundEnabled&backgroundType=gradient";
+			systemIcon = "arrow.left.arrow.right";
+		},
+		{
+			cell = PSLinkCell;
+			defaults = "com.noisyflake.velvet2";
+			cellClass = Velvet2ColorPicker;
+			key = "backgroundGradient1";
+			label = "Color 1";
+			require = "backgroundEnabled&backgroundType=gradient";
+			systemIcon = "drop.circle";
+		},
+		{
+			cell = PSLinkCell;
+			defaults = "com.noisyflake.velvet2";
+			cellClass = Velvet2ColorPicker;
+			key = "backgroundGradient2";
+			label = "Color 2";
+			require = "backgroundEnabled&backgroundType=gradient";
+			systemIcon = "drop.circle";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Misc.";
+			footerText = "This option disables the Glow feature";
+		},
+		{
+			cell = PSSwitchCell;
+			cellClass = Velvet2Switch;
+			cellSubtitleText = "Removes the background blur";
+			default = 1;
+			defaults = "com.noisyflake.velvet2";
+			key = backgroundBlurHidden;
+			label = "Hide Background Blur";
+			systemIcon = "square.dashed";
+		},
+	);
+	title = "Background";
+}
