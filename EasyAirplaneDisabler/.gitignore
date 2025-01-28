@@ -1,0 +1,8 @@
+.theos
+obj
+.DS_Store
+/*.xcodeproj
+/packages
+/releases
+/EasyAirplaneDisablerXcode
+RenameProject.sh
