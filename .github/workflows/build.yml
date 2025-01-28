@@ -44,6 +44,7 @@ jobs:
                     - Astolfo
                     - Central
                     - Cloudify
+                    - FocusDND
                     - Kabegami
                     - Nita
                     - SheetMusicScanner
