@@ -1,0 +1,10 @@
+.theos
+obj
+.DS_Store
+/*.xcodeproj
+/packages
+/releases
+.vscode
+*.code-workspace
+RenameProject.sh
+*.acorn

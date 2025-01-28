@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>isStaticText</key>
+			<true/>
+			<key>footerText</key>
+			<string>Kill apps or respring for change to take effect in already running apps.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.anthopak.pancake</string>
+			<key>label</key>
+			<string>ENABLED</string>
+			<key>key</key>
+			<string>enabled</string>
+			<key>PostNotification</key>
+			<string>com.anthopak.pancake/ReloadPrefs</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Blacklisted apps</string>
+			<key>isStaticText</key>
+			<true/>
+			<key>footerText</key>
+			<string>Disable PanCake in certain apps. Use it if you encounter gesture conflicts. Relaunch app for change to take effect.
+Some apps are already added on the list by default for your convenience.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>bundle</key>
+			<string>AppList</string>
+			<key>isController</key>
+			<string>1</string>
+			<key>label</key>
+			<string>Disable in selected apps</string>
+			<key>ALAllowsSelection</key>
+			<string>1</string>
+			<key>ALSettingsKeyPrefix</key>
+			<string></string>
+			<key>ALSettingsDefaultValue</key>
+			<string>0</string>
+			<key>ALSettingsPath</key>
+			<string>/var/mobile/Library/Preferences/com.anthopak.pancake.plist</string>
+			<key>ALSingleEnabledMode</key>
+			<false/>
+			<key>ALChangeNotification</key>
+			<string>com.anthopak.pancake/ReloadPrefs</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Haptic Feedback</string>
+			<key>isStaticText</key>
+			<true/>
+			<key>footerText</key>
+			<string>Enable haptic feedback on dismiss end. Enable/Disable requires a respring. Changing strength requires relaunching apps.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.anthopak.pancake</string>
+			<key>label</key>
+			<string>Enable haptic feedback</string>
+			<key>key</key>
+			<string>hapticFeedbackEnabled</string>
+			<key>PostNotification</key>
+			<string>com.anthopak.pancake/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>default</key>
+			<integer>0</integer>
+			<key>defaults</key>
+			<string>com.anthopak.pancake</string>
+			<key>key</key>
+			<string>hapticFeedbackStrength</string>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+			</array>
+			<key>validTitles</key>
+			<array>
+				<string>Light</string>
+				<string>Medium</string>
+				<string>Strong</string>
+			</array>
+			<key>PostNotification</key>
+			<string>com.anthopak.pancake/ReloadPrefs</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>isStaticText</key>
+			<true/>
+			<key>label</key>
+			<string>My other tweaks</string>
+			<key>footerText</key>
+			<string>Check out my other tweaks!</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Sleepizy</string>
+			<key>subtitle</key>
+			<string>Fall asleep in music! Set a timer to stop your music directly from CC</string>
+			<key>icon</key>
+    		<string>otherTweaks/sleepizy@2x.png</string>
+			<key>url</key>
+			<string>http://bit.ly/SleepizyCross</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Appaze</string>
+			<key>subtitle</key>
+			<string>Custom volume/brightness per app, from 3D Touch menu</string>
+			<key>icon</key>
+    		<string>otherTweaks/appaze@2x.png</string>
+			<key>url</key>
+			<string>http://bit.ly/AppazeCross</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>SwitchShades</string>
+			<key>subtitle</key>
+			<string>Bring color to your app switcher based on app icon</string>
+			<key>icon</key>
+    		<string>otherTweaks/switchShades@2x.png</string>
+			<key>url</key>
+			<string>http://bit.ly/SwitchShadesCross</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>VideoSwipes</string>
+			<key>subtitle</key>
+			<string>Swipe gestures for video players (native, YouTube, Facebook)</string>
+			<key>icon</key>
+    		<string>otherTweaks/videoSwipes@2x.png</string>
+			<key>url</key>
+			<string>http://bit.ly/VideoSwipesCross</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>QuickPrefs</string>
+			<key>subtitle</key>
+			<string>Quickly access tweaks prefs with Force Touch</string>
+			<key>icon</key>
+    		<string>otherTweaks/quickPrefs@2x.png</string>
+			<key>url</key>
+			<string>http://bit.ly/QuickPrefsCross</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>isStaticText</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBTwitterCell</string>
+			<key>label</key>
+			<string>AnthoPak</string>
+			<key>user</key>
+			<string>AnthoPak</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>DONATE</string>
+			<key>subtitle</key>
+			<string>SUPPORT_ME</string>
+			<key>url</key>
+			<string>https://bit.ly/AnthoPakDonate</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>GITHUB</string>
+			<key>subtitle</key>
+			<string>CHECK_THE_CODE</string>
+			<key>url</key>
+			<string>https://github.com/AnthoPakPak/PanCake</string>
+		</dict>
+
+	</array>
+	<key>title</key>
+	<string>PanCake</string>
+</dict>
+</plist>
