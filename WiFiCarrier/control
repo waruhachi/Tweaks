@@ -1,0 +1,10 @@
+Package: com.noisyflake.wificarrier
+Name: WiFiCarrier
+Depends: mobilesubstrate
+Version: 1.1.1
+Architecture: iphoneos-arm
+Description: Display the WiFi SSID as Carrier
+Depiction: https://apt.noisyflake.com/depictions/index.html?id=com.noisyflake.wificarrier
+Maintainer: NoisyFlake
+Author: NoisyFlake
+Section: Tweaks
