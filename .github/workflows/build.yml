@@ -43,6 +43,7 @@ jobs:
                     - AppareilPhoto
                     - Astolfo
                     - Central
+                    - Cloudify
                     - Kabegami
                     - Nita
                     - SheetMusicScanner
