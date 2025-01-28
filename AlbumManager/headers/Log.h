@@ -1,0 +1,1 @@
+#define NSLog(fmt, ...) NSLog((@"[AlbumManager] " fmt), ##__VA_ARGS__)

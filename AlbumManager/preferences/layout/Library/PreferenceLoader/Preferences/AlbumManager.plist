@@ -1,0 +1,10 @@
+{
+	entry = {
+		bundle = AlbumManager;
+		cell = PSLinkCell;
+		detail = AlbumManagerRootListController;
+		icon = "icon.png";
+		isController = 1;
+		label = "AlbumManager";
+	};
+}
