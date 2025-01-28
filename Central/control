@@ -1,0 +1,9 @@
+Name: Central
+Version: 1.1.3
+Description: Center the last row of icons on your home screen
+Maintainer: waruhachi
+Author: MrGcGamer & Falcon
+Section: Tweaks
+Architecture: iphoneos-arm
+Depends: mobilesubstrate, firmware (>= 13.0)
+Package: com.falcon.central
