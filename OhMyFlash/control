@@ -1,0 +1,9 @@
+Package: com.noisyflake.ohmyflash
+Name: OhMyFlash
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Turns your flashlight off after a set amount of time
+Maintainer: NoisyFlake
+Author: NoisyFlake
+Section: Tweaks
