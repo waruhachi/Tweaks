@@ -45,6 +45,7 @@ jobs:
                     - Central
                     - Cloudify
                     - FocusDND
+                    - Heartlines
                     - Kabegami
                     - Nita
                     - SheetMusicScanner

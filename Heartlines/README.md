@@ -7,7 +7,7 @@ I know there's trembling in your heartlines
 
 ## Compiling
   - [Theos](https://theos.dev/) is required to compile the project
-  - Depends on [libKitten](https://github.com/schneelittchen/libKitten), [libPDDokdo](https://github.com/s8ngyu/libpddokdo) and [libGCUniversal](https://github.com/MrGcGamer/LibGcUniversalDocumentation)
+  - Depends on [libKitten](https://github.com/schneelittchen/libKitten), [libPDDokdo](https://github.com/s8ngyu/libPDDokdo) and [libGCUniversal](https://github.com/MrGcGamer/LibGcUniversalDocumentation)
   - You may want to edit the root `Makefile` to use your Theos SDK and toolchain
 
 ## Compatibility

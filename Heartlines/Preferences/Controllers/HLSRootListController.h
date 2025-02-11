@@ -1,10 +1,11 @@
-#import <Preferences/PSListController.h>
 #import <Preferences/PSSpecifier.h>
-#import <CepheiPrefs/HBRootListController.h>
-#import <CepheiPrefs/HBAppearanceSettings.h>
+#import <Preferences/PSListController.h>
+
 #import <Cephei/HBPreferences.h>
 #import <Cephei/HBRespringController.h>
-#import "WelcomeViewController.h"
+
+#import <CepheiPrefs/HBRootListController.h>
+#import <CepheiPrefs/HBAppearanceSettings.h>
 
 @interface HLSAppearanceSettings : HBAppearanceSettings
 @end

@@ -207,7 +207,7 @@
 			<key>icon</key>
 			<string>featured/Lune.png</string>
 			<key>url</key>
-			<string>https://repo.litten.love/depictions/Lune/</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/Lune</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>
@@ -219,7 +219,7 @@
 			<key>icon</key>
 			<string>featured/Violet.png</string>
 			<key>url</key>
-			<string>https://repo.litten.love/depictions/Violet/</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/Violet</string>
 		</dict>
 
 		<dict>
@@ -234,31 +234,11 @@
 			<key>cellClass</key>
 			<string>HBLinkTableCell</string>
 			<key>label</key>
-			<string>Discord</string>
-			<key>subtitle</key>
-			<string>Chat with us 👾</string>
-			<key>url</key>
-			<string>https://discord.gg/tKUPZrS7ve</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>HBLinkTableCell</string>
-			<key>label</key>
 			<string>Source code</string>
 			<key>subtitle</key>
 			<string>GitHub 🌺</string>
 			<key>url</key>
-			<string>https://github.com/schneelittchen/Heartlines</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>HBLinkTableCell</string>
-			<key>label</key>
-			<string>Donate to Litten</string>
-			<key>subtitle</key>
-			<string>Appreciated 💝</string>
-			<key>url</key>
-			<string>https://paypal.me/Litteeen</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/Heartlines</string>
 		</dict>
 
 		<dict>

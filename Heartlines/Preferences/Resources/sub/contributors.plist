@@ -53,29 +53,17 @@
             <key>cell</key>
             <string>PSButtonCell</string>
             <key>label</key>
-            <string>@arm64e</string>
+            <string>@NightwindDev</string>
             <key>cellClass</key>
             <string>HBTwitterCell</string>
             <key>label</key>
-            <string>kritanta</string>
+            <string>Nightwind</string>
             <key>user</key>
-            <string>arm64e</string>
-        </dict>
-        <dict>
-            <key>cell</key>
-            <string>PSButtonCell</string>
-            <key>label</key>
-            <string>@MrGcGamer</string>
-            <key>cellClass</key>
-            <string>HBTwitterCell</string>
-            <key>label</key>
-            <string>MrGcGamer</string>
-            <key>user</key>
-            <string>MrGcGamer</string>
+            <string>NightwindDev</string>
         </dict>
 
 	</array>
 	<key>title</key>
-	<string>Violet</string>
+	<string>Heartlines</string>
 </dict>
 </plist>
