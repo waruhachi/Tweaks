@@ -5,7 +5,7 @@
 #import <MediaRemote/MediaRemote.h>
 #import <GcUniversal/GcColorPickerUtils.h>
 
-#import "HLSLocalization.h"
+#import "Localization/HLSLocalization.h"
 #import "../Vendor/libKitten/libKitten.h"
 #import "../Vendor/libPDDokdo/libPDDokdo.h"
 

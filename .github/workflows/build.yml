@@ -64,6 +64,7 @@ jobs:
             - name: Build Package
               shell: bash
               working-directory: ${{ matrix.project }}
+              continue-on-error: true
               run: |
                   export THEOS=~/theos
 

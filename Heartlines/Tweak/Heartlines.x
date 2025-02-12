@@ -882,22 +882,13 @@ SBFLockScreenDateView *timeDateView = nil;
 
     if (@available(iOS 16, *)) {
         SBWallpaperController *wallpaperController = [%c(SBWallpaperController) sharedInstance];
-        PBUIPosterWallpaperRemoteViewController *wallpaperRemoteController = [wallpaperController safeValueForKey:@"_rootWallpaperViewController"];
-
-        if (wallpaperRemoteController) {
-            PBUIPosterWallpaperViewController *wallpaperViewController = [wallpaperRemoteController safeValueForKey:@"_viewController"];
-            
-            if (wallpaperViewController) {
-                UIGraphicsBeginImageContext([wallpaperViewController view].frame.size);
-                CGContextRef context = UIGraphicsGetCurrentContext();
-
-                if (context) {
-                    [[wallpaperViewController view].layer renderInContext:context];
-                    lockscreenWallpaper = UIGraphicsGetImageFromCurrentImageContext();
-                }
-
-                UIGraphicsEndImageContext();
-            }
+        UIView *wallpaperView = [wallpaperController safeValueForKey:@"_wallpaperWindow"];
+        
+        if (wallpaperView) {
+            UIGraphicsBeginImageContext(wallpaperView.frame.size, NO, [UIScreen mainScreen].scale);
+            [wallpaperView.layer renderInContext:UIGraphicsGetCurrentContext()];
+            lockscreenWallpaper = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
         }
     } else {
         NSData *lockWallpaperData = [NSData dataWithContentsOfFile:@"/var/mobile/Library/SpringBoard/LockBackground.cpbitmap"];

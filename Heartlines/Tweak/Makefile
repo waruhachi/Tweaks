@@ -1,6 +1,6 @@
 TWEAK_NAME := Heartlines
 
-$(TWEAK_NAME)_FILES := $(TWEAK_NAME).x HLSLocalization.m $(wildcard ../Vendor/**/*.m)
+$(TWEAK_NAME)_FILES := $(TWEAK_NAME).x $(wildcard ../Vendor/**/*.m Localization/*.m)
 $(TWEAK_NAME)_CFLAGS := -fobjc-arc -DTHEOS_LEAN_AND_MEAN
 $(TWEAK_NAME)_FRAMEWORKS := EventKit
 $(TWEAK_NAME)_PRIVATE_FRAMEWORKS := AppSupport MediaRemote
