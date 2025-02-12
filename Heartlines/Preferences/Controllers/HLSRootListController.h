@@ -1,11 +1,8 @@
+@import Cephei;
+@import CepheiPrefs;
+
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSListController.h>
-
-#import <Cephei/HBPreferences.h>
-#import <Cephei/HBRespringController.h>
-
-#import <CepheiPrefs/HBRootListController.h>
-#import <CepheiPrefs/HBAppearanceSettings.h>
 
 @interface HLSRootListController : HBRootListController
 @property(nonatomic, retain)HBAppearanceSettings* appearanceSettings;

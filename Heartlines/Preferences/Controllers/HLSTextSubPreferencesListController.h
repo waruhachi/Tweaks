@@ -1,11 +1,9 @@
+@import Cephei;
+@import CepheiPrefs;
+
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSListController.h>
 #import <Preferences/PSListItemsController.h>
-
-#import <Cephei/HBPreferences.h>
-
-#import <CepheiPrefs/HBListController.h>
-#import <CepheiPrefs/HBAppearanceSettings.h>
 
 @interface HLSTextSubPreferencesListController : HBListController <UIFontPickerViewControllerDelegate>
 @property(nonatomic, retain)HBAppearanceSettings* appearanceSettings;

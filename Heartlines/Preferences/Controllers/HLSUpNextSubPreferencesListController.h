@@ -1,9 +1,8 @@
+@import CepheiPrefs;
+
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSListController.h>
 #import <Preferences/PSListItemsController.h>
-
-#import <CepheiPrefs/HBListController.h>
-#import <CepheiPrefs/HBAppearanceSettings.h>
 
 @interface HLSUpNextSubPreferencesListController : HBListController
 @property(nonatomic, retain)HBAppearanceSettings* appearanceSettings;
