@@ -1,3 +1,10 @@
+//
+//  AppearanceSelectionTableCell.h
+//  libappearancecell
+//
+//  Created by Conor (@conorthedev)
+//
+
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSTableCell.h>
 

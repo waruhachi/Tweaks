@@ -1,3 +1,10 @@
+//
+//  AppearanceSelectionTableCell.m
+//  libappearancecell
+//
+//  Created by Conor (@conorthedev)
+//
+
 #import "AppearanceSelectionTableCell.h"
 
 @implementation AppearanceTypeStackView
