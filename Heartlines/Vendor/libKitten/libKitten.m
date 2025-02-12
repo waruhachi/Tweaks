@@ -209,12 +209,13 @@
         }
 
         NSMutableArray* colorArray = [NSMutableArray new];
-
+        UIColor* color;
         for (NSString* key in ranges){
             NSArray* rgb = [key componentsSeparatedByString:@","];
             float r = [rgb[0] floatValue];
             float g = [rgb[1] floatValue];
             float b = [rgb[2] floatValue];
+            color = [UIColor colorWithRed:(r / 255.0f) green:(g / 255.0f) blue:(b / 255.0f) alpha:1.0f];
             [colorArray addObject:color];
         }
 
