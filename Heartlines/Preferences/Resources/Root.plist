@@ -4,20 +4,30 @@
 <dict>
 	<key>items</key>
 	<array>
-	
+
 		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>DuoTwitterCell</string>
-			<key>firstLabel</key>
+			<key>leftUsername</key>
 			<string>🌸 Litten</string>
-			<key>firstAccount</key>
-			<string>schneelittchen</string>
-			<key>secondLabel</key>
+			<key>leftHandle</key>
+			<string>@schneelittchen</string>
+			<key>leftProfilePicture</key>
+			<string>duo/schneelittchen.png</string>
+			<key>leftOpenURL</key>
+			<string>https://twitter.com/schneelittchen</string>
+			<key>rightUsername</key>
 			<string>taki</string>
-			<key>secondAccount</key>
-			<string>74k1_</string>
+			<key>rightHandle</key>
+			<string>@74k1_</string>
+			<key>rightProfilePicture</key>
+			<string>duo/taki.png</string>
+			<key>rightOpenURL</key>
+			<string>https://twitter.com/74k1_</string>
 			<key>height</key>
-			<real>57</real>
+			<real>70</real>
 		</dict>
 
 		<dict>

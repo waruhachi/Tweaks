@@ -1,10 +1,10 @@
 #import <dlfcn.h>
+#import <roothide.h>
 #import <UIKit/UIKit.h>
 #import <EventKit/EventKit.h>
 #import <Cephei/HBPreferences.h>
 #import <MediaRemote/MediaRemote.h>
 #import <GcUniversal/GcColorPickerUtils.h>
-
 #import "Localization/HLSLocalization.h"
 #import "../Vendor/libKitten/libKitten.h"
 #import "../Vendor/libPDDokdo/libPDDokdo.h"

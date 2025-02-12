@@ -891,7 +891,7 @@ SBFLockScreenDateView *timeDateView = nil;
             UIGraphicsEndImageContext();
         }
     } else {
-        NSData *lockWallpaperData = [NSData dataWithContentsOfFile:@"/var/mobile/Library/SpringBoard/LockBackground.cpbitmap"];
+        NSData *lockWallpaperData = [NSData dataWithContentsOfFile:jbroot(@"/var/mobile/Library/SpringBoard/LockBackground.cpbitmap")];
 
         if (lockWallpaperData) {
             CFDataRef lockWallpaperDataRef = (__bridge CFDataRef)lockWallpaperData;

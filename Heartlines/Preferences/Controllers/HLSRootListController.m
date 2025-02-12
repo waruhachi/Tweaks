@@ -27,7 +27,7 @@
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     [[self titleLabel] setFont:[UIFont boldSystemFontOfSize:17]];
     [[self titleLabel] setText:@"1.5.4"];
-    [[self titleLabel] setTextColor:[UIColor whiteColor]];
+    [[self titleLabel] setTextColor:(self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) ? [UIColor whiteColor] : [UIColor blackColor]];
     [[self titleLabel] setTextAlignment:NSTextAlignmentCenter];
     [[[self navigationItem] titleView] addSubview:[self titleLabel]];
 
@@ -42,7 +42,7 @@
 
     self.iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     [[self iconView] setContentMode:UIViewContentModeScaleAspectFit];
-    [[self iconView] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HeartlinesPreferences.bundle/icon.png"]];
+    [[self iconView] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/HeartlinesPreferences.bundle/icon.png")]];
     [[self iconView] setAlpha:0];
     [[[self navigationItem] titleView] addSubview:[self iconView]];
 
@@ -62,7 +62,7 @@
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
     self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
     [[self headerImageView] setContentMode:UIViewContentModeScaleAspectFill];
-    [[self headerImageView] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/HeartlinesPreferences.bundle/Banner.png"]];
+    [[self headerImageView] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/HeartlinesPreferences.bundle/Banner.png")]];
     [[self headerImageView] setClipsToBounds:YES];
     [[self headerView] addSubview:[self headerImageView]];
 
@@ -74,7 +74,7 @@
         [self.headerImageView.bottomAnchor constraintEqualToAnchor:self.headerView.bottomAnchor],
     ]];
 
-    if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/Heartlines.disabled"]) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:jbroot(@"/Library/MobileSubstrate/DynamicLibraries/Heartlines.disabled")]) {
         [[self enableSwitch] setEnabled:NO];
 
         UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Heartlines" message:@"Heartlines has detected that you have disabled it with iCleaner Pro, here are some quick actions you can perform" preferredStyle:UIAlertControllerStyleAlert];
@@ -96,7 +96,7 @@
         [alertController addAction:ignoreAction];
 
         [self presentViewController:alertController animated:YES completion:nil];
-    } else if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/DayNightSwitch.dylib"]) {
+    } else if ([[NSFileManager defaultManager] fileExistsAtPath:jbroot(@"/Library/MobileSubstrate/DynamicLibraries/DayNightSwitch.dylib")]) {
         UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"Heartlines" message:@"Heartlines has detected that you have DayNightSwitch installed, which causes issues with Heartlines's preferences\n\n To continue, please disable DayNightSwitch with iCleaner Pro or uninstall it temporarily" preferredStyle:UIAlertControllerStyleAlert];
 
         UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Okey" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
@@ -229,7 +229,7 @@
     [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         [[self blurView] setAlpha:1];
     } completion:^(BOOL finished) {
-        if (![[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/shuffle.dylib"])
+        if (![[NSFileManager defaultManager] fileExistsAtPath:jbroot(@"/Library/MobileSubstrate/DynamicLibraries/shuffle.dylib")])
             [HBRespringController respringAndReturnTo:[NSURL URLWithString:@"prefs:root=Heartlines"]];
         else
             [HBRespringController respringAndReturnTo:[NSURL URLWithString:@"prefs:root=Tweaks&path=Heartlines"]];
