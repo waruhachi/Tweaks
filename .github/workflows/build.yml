@@ -39,17 +39,17 @@ jobs:
         strategy:
             matrix:
                 project:
-                    # - AmongLock
-                    # - AppareilPhoto
-                    # - Astolfo
-                    # - Central
-                    # - Cloudify
-                    # - FocusDND
+                    - AmongLock
+                    - AppareilPhoto
+                    - Astolfo
+                    - Central
+                    - Cloudify
+                    - FocusDND
                     - Heartlines
-                    # - Kabegami
-                    # - Nita
-                    # - SheetMusicScanner
-                    # - VerticalBatteryDrain
+                    - Kabegami
+                    - Nita
+                    - SheetMusicScanner
+                    - VerticalBatteryDrain
         steps:
             - uses: actions/checkout@v4
 
