@@ -885,7 +885,7 @@ SBFLockScreenDateView *timeDateView = nil;
         UIView *wallpaperView = [wallpaperController safeValueForKey:@"_wallpaperWindow"];
         
         if (wallpaperView) {
-            UIGraphicsBeginImageContext(wallpaperView.frame.size, NO, [UIScreen mainScreen].scale);
+            UIGraphicsBeginImageContextWithOptions(wallpaperView.frame.size, NO, [UIScreen mainScreen].scale);
             [wallpaperView.layer renderInContext:UIGraphicsGetCurrentContext()];
             lockscreenWallpaper = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();

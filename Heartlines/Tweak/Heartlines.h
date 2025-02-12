@@ -137,6 +137,10 @@ BOOL magsafeCompatibilitySwitch = NO;
 @interface SBFLockScreenDateSubtitleDateView : UIView
 @end
 
+@interface SBWallpaperController : NSObject
+	+ (id)sharedInstance;
+@end
+
 @interface PBUIPosterWallpaperViewController: UIViewController
 @end
 
