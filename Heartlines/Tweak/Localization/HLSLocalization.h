@@ -1,3 +1,4 @@
+#import <roothide.h>
 #import <Foundation/Foundation.h>
 
 @interface HLSLocalization : NSObject

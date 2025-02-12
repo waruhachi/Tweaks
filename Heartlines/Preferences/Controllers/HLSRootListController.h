@@ -1,6 +1,8 @@
 @import Cephei;
 @import CepheiPrefs;
 
+#import <roothide.h>
+
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSListController.h>
 

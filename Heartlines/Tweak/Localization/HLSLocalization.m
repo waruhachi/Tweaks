@@ -1,4 +1,3 @@
-#import <roothide.h>
 #import "HLSLocalization.h"
 
 #define kBundlePath jbroot(@"/Library/PreferenceBundles/HeartlinesPreferences.bundle/localization")
