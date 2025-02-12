@@ -6,7 +6,7 @@
 
     [super viewDidLoad];
 
-    self.appearanceSettings = [HLSAppearanceSettings new];
+    self.appearanceSettings = [HBAppearanceSettings new];
     self.hb_appearanceSettings = [self appearanceSettings];
 
 

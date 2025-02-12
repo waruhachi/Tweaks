@@ -7,11 +7,8 @@
 #import <CepheiPrefs/HBRootListController.h>
 #import <CepheiPrefs/HBAppearanceSettings.h>
 
-@interface HLSAppearanceSettings : HBAppearanceSettings
-@end
-
 @interface HLSRootListController : HBRootListController
-@property(nonatomic, retain)HLSAppearanceSettings* appearanceSettings;
+@property(nonatomic, retain)HBAppearanceSettings* appearanceSettings;
 @property(nonatomic, retain)HBPreferences* preferences;
 @property(nonatomic, retain)UISwitch* enableSwitch;
 @property(nonatomic, retain)UIBarButtonItem* item;

@@ -5,11 +5,8 @@
 #import <CepheiPrefs/HBListController.h>
 #import <CepheiPrefs/HBAppearanceSettings.h>
 
-@interface HLSAppearanceSettings : HBAppearanceSettings
-@end
-
 @interface HLSMiscellaneousSubPreferencesListController : HBListController
-@property(nonatomic, retain)HLSAppearanceSettings* appearanceSettings;
+@property(nonatomic, retain)HBAppearanceSettings* appearanceSettings;
 @property(nonatomic, retain)UILabel* titleLabel;
 @property(nonatomic, retain)UIBlurEffect* blur;
 @property(nonatomic, retain)UIVisualEffectView* blurView;
