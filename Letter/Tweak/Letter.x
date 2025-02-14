@@ -1,14 +1,13 @@
 #import "Letter.h"
 
-%group Letter
-
 %hook UIKeyboard
 
 - (id)initWithFrame:(CGRect)frame {
 
 	id orig = %orig;
 
-	keyboardColor = [libKitten primaryColor:[UIImage _applicationIconImageForBundleIdentifier:[[NSBundle mainBundle] bundleIdentifier] format:1 scale:2]];
+    keyboardColor = [libKitten primaryColor:[UIImage _applicationIconImageForBundleIdentifier:[[NSBundle mainBundle] bundleIdentifier] format:1 scale:2]];
+
 	[self setBackgroundColor:keyboardColor];
 
 	return orig;
@@ -63,8 +62,6 @@
 
 %end
 
-%end
-
 %ctor {
 
 	if (![NSProcessInfo processInfo]) return;
@@ -95,6 +92,6 @@
 
 	NSBundle* bundle = [NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/TextInputUI.framework"];
     if (!bundle.loaded) [bundle load];
-	%init(Letter);
+	%init;
 
 }

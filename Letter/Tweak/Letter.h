@@ -1,5 +1,6 @@
+// #import <RemoteLog.h>
 #import <UIKit/UIKit.h>
-#import <Kitten/libKitten.h>
+#import "../Vendor/libKitten/libKitten.h"
 
 @interface UIKeyboard : UIView
 @end
