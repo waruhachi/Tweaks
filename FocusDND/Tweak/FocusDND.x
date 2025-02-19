@@ -18,6 +18,24 @@
 
 %end
 
+%hook CCUILabeledRoundButton
+
+- (void)setFrame:(CGRect)frame{
+    if([[self.superview _viewControllerForAncestor] isKindOfClass:%c(FCCCModuleViewController)]) frame = self.superview.bounds;
+    %orig(frame);
+}
+
+%end
+
+%hook CCUIRoundButton
+
+- (void)setFrame:(CGRect)frame{
+    if([[self.superview.superview _viewControllerForAncestor] isKindOfClass:%c(FCCCModuleViewController)]) frame = self.superview.superview.bounds;
+    %orig(frame);
+}
+
+%end
+
 %ctor {
 	[[NSNotificationCenter defaultCenter] addObserverForName:NSBundleDidLoadNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
 		NSString *bundlePath = ((NSBundle *)notification.object).bundlePath;
