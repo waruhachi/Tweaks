@@ -1,4 +1,5 @@
 #import "Heartlines.h"
+#include <RemoteLog.h>
 
 SBUIProudLockIconView *faceIDLock = nil;
 SBFLockScreenDateView *timeDateView = nil;
@@ -20,7 +21,7 @@ SBFLockScreenDateView *timeDateView = nil;
         %orig;
     else
         [self removeFromSuperview];
-    
+
 }
 
 - (void)setFrame:(CGRect)frame { // align and set the size of the face id lock
@@ -38,7 +39,7 @@ SBFLockScreenDateView *timeDateView = nil;
             else self.center = CGPointMake(self.center.x * 1.75, self.center.y);
         }
     }
-    
+
     if (smallerFaceIDLockSwitch) self.transform = CGAffineTransformMakeScale(0.85, 0.85);
     if (!alignFaceIDLockSwitch && smallerFaceIDLockSwitch) self.center = CGPointMake(self.center.x, self.center.y + 10);
 
@@ -89,7 +90,6 @@ SBFLockScreenDateView *timeDateView = nil;
 }
 
 %end
-
 
 %hook CSProminentDisplayView
 
@@ -147,7 +147,7 @@ SBFLockScreenDateView *timeDateView = nil;
     timeDateView = self;
 
     return orig;
-    
+
 }
 
 - (void)didMoveToWindow { // add heartlines
@@ -167,7 +167,7 @@ SBFLockScreenDateView *timeDateView = nil;
         // up next label
         if (showUpNextSwitch) {
             self.heartlinesUpNextLabel = [UILabel new];
-            
+
             if (!useCustomFontSwitch){
                 if (!useCustomUpNextFontSizeSwitch) {
                     [[self heartlinesUpNextLabel] setFont:[UIFont systemFontOfSize:19 weight:UIFontWeightSemibold]];
@@ -181,10 +181,10 @@ SBFLockScreenDateView *timeDateView = nil;
                     [[self heartlinesUpNextLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customUpNextFontSizeValue intValue]]];
                 }
             }
-                
+
             if ([[HLSLocalization stringForKey:@"UP_NEXT"] isEqual:nil]) [[self heartlinesUpNextLabel] setText:@"Up next"];
             else if (![[HLSLocalization stringForKey:@"UP_NEXT"] isEqual:nil]) [[self heartlinesUpNextLabel] setText:[NSString stringWithFormat:@"%@", [HLSLocalization stringForKey:@"UP_NEXT"]]];
-                
+
             if ([positionValue intValue] == 0) [[self heartlinesUpNextLabel] setTextAlignment:NSTextAlignmentLeft];
             else if ([positionValue intValue] == 1) [[self heartlinesUpNextLabel] setTextAlignment:NSTextAlignmentCenter];
             else if ([positionValue intValue] == 2) [[self heartlinesUpNextLabel] setTextAlignment:NSTextAlignmentRight];
@@ -193,13 +193,13 @@ SBFLockScreenDateView *timeDateView = nil;
             [[self heartlinesUpNextLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [[self heartlinesUpNextLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
             [[self heartlinesUpNextLabel].heightAnchor constraintEqualToConstant:21].active = YES;
-                
+
             if (![[self heartlinesUpNextLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesUpNextLabel]];
-                
+
             if ([positionValue intValue] == 0) [[self heartlinesUpNextLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:8].active = YES;
             else if ([positionValue intValue] == 1) [[self heartlinesUpNextLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
             else if ([positionValue intValue] == 2) [[self heartlinesUpNextLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
-                
+
             [[self heartlinesUpNextLabel].centerYAnchor constraintEqualToAnchor:self.topAnchor constant:self.frame.size.height / 8].active = YES;
         }
 
@@ -221,25 +221,25 @@ SBFLockScreenDateView *timeDateView = nil;
                     [[self heartlinesUpNextEventLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customUpNextEventFontSizeValue intValue]]];
                 }
             }
-                
+
             if ([[HLSLocalization stringForKey:@"NO_UPCOMING_EVENTS"] isEqual:nil]) [[self heartlinesUpNextEventLabel] setText:@"No upcoming events"];
             else if (![[HLSLocalization stringForKey:@"NO_UPCOMING_EVENTS"] isEqual:nil]) [[self heartlinesUpNextEventLabel] setText:[NSString stringWithFormat:@"%@", [HLSLocalization stringForKey:@"NO_UPCOMING_EVENTS"]]];
-                
+
             if ([positionValue intValue] == 0) [[self heartlinesUpNextEventLabel] setTextAlignment:NSTextAlignmentLeft];
             else if ([positionValue intValue] == 1) [[self heartlinesUpNextEventLabel] setTextAlignment:NSTextAlignmentCenter];
             else if ([positionValue intValue] == 2) [[self heartlinesUpNextEventLabel] setTextAlignment:NSTextAlignmentRight];
-                
+
 
             [[self heartlinesUpNextEventLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [[self heartlinesUpNextEventLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
             [[self heartlinesUpNextEventLabel].heightAnchor constraintEqualToConstant:16].active = YES;
-                
+
             if (![[self heartlinesUpNextEventLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesUpNextEventLabel]];
-                
+
             if ([positionValue intValue] == 0) [[self heartlinesUpNextEventLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:8].active = YES;
             else if ([positionValue intValue] == 1) [[self heartlinesUpNextEventLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
             else if ([positionValue intValue] == 2) [[self heartlinesUpNextEventLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
-                
+
             [[self heartlinesUpNextEventLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesUpNextLabel].bottomAnchor constant:12].active = YES;
         }
 
@@ -253,13 +253,13 @@ SBFLockScreenDateView *timeDateView = nil;
             [[self heartlinesInvisibleInk] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [[self heartlinesInvisibleInk].widthAnchor constraintEqualToConstant:160].active = YES;
             [[self heartlinesInvisibleInk].heightAnchor constraintEqualToConstant:21].active = YES;
-            
+
             if (![[self heartlinesInvisibleInk] isDescendantOfView:self]) [self addSubview:[self heartlinesInvisibleInk]];
-            
+
             if ([positionValue intValue] == 0) [[self heartlinesInvisibleInk].centerXAnchor constraintEqualToAnchor:self.leftAnchor constant:87.5].active = YES;
             else if ([positionValue intValue] == 1) [[self heartlinesInvisibleInk].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
             else if ([positionValue intValue] == 2) [[self heartlinesInvisibleInk].centerXAnchor constraintEqualToAnchor:self.rightAnchor constant:-75].active = YES;
-            
+
             [[self heartlinesInvisibleInk].centerYAnchor constraintEqualToAnchor:[self heartlinesUpNextLabel].bottomAnchor constant:16].active = YES;
         }
 
@@ -280,26 +280,26 @@ SBFLockScreenDateView *timeDateView = nil;
                 [[self heartlinesTimeLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customTimeFontSizeValue intValue]]];
             }
         }
-            
+
         NSDateFormatter *timeFormat = [NSDateFormatter new];
         [timeFormat setDateFormat:timeFormatValue];
         [[self heartlinesTimeLabel] setText:[timeFormat stringFromDate:[NSDate date]]];
-            
+
         if ([positionValue intValue] == 0) [[self heartlinesTimeLabel] setTextAlignment:NSTextAlignmentLeft];
         else if ([positionValue intValue] == 1) [[self heartlinesTimeLabel] setTextAlignment:NSTextAlignmentCenter];
         else if ([positionValue intValue] == 2) [[self heartlinesTimeLabel] setTextAlignment:NSTextAlignmentRight];
-            
+
 
         [[self heartlinesTimeLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
         [[self heartlinesTimeLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
         [[self heartlinesTimeLabel].heightAnchor constraintEqualToConstant:73].active = YES;
-            
+
         if (![[self heartlinesTimeLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesTimeLabel]];
-            
+
         if ([positionValue intValue] == 0) [[self heartlinesTimeLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:4].active = YES;
         else if ([positionValue intValue] == 1) [[self heartlinesTimeLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
         else if ([positionValue intValue] == 2) [[self heartlinesTimeLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-4].active = YES;
-            
+
         if (showUpNextSwitch) [[self heartlinesTimeLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesUpNextEventLabel].bottomAnchor constant:40].active = YES;
         else if (!showUpNextSwitch) [[self heartlinesTimeLabel].centerYAnchor constraintEqualToAnchor:self.topAnchor constant:self.frame.size.height / 8].active = YES;
 
@@ -320,28 +320,28 @@ SBFLockScreenDateView *timeDateView = nil;
                 [[self heartlinesDateLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customDateFontSizeValue intValue]]];
             }
         }
-            
+
         if (!isTimerRunning) {
             NSDateFormatter *dateFormat = [NSDateFormatter new];
             [dateFormat setDateFormat:dateFormatValue];
             [[self heartlinesDateLabel] setText:[[dateFormat stringFromDate:[NSDate date]] capitalizedString]];
         }
-            
+
         if ([positionValue intValue] == 0) [[self heartlinesDateLabel] setTextAlignment:NSTextAlignmentLeft];
         else if ([positionValue intValue] == 1) [[self heartlinesDateLabel] setTextAlignment:NSTextAlignmentCenter];
         else if ([positionValue intValue] == 2) [[self heartlinesDateLabel] setTextAlignment:NSTextAlignmentRight];
-            
+
 
         [[self heartlinesDateLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
         [[self heartlinesDateLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
         [[self heartlinesDateLabel].heightAnchor constraintEqualToConstant:21].active = YES;
-            
+
         if (![[self heartlinesDateLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesDateLabel]];
-            
+
         if ([positionValue intValue] == 0) [[self heartlinesDateLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:8].active = YES;
         else if ([positionValue intValue] == 1) [[self heartlinesDateLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
         else if ([positionValue intValue] == 2) [[self heartlinesDateLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
-            
+
         [[self heartlinesDateLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesTimeLabel].bottomAnchor constant:8].active = YES;
 
         self.heartlinesAlternateDateLabel = [UILabel new];
@@ -397,11 +397,11 @@ SBFLockScreenDateView *timeDateView = nil;
                     [[self heartlinesWeatherReportLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customWeatherReportFontSizeValue intValue]]];
                 }
             }
-                
+
             [[PDDokdo sharedInstance] refreshWeatherData];
             if ([[HLSLocalization stringForKey:@"CURRENTLY_ITS"] isEqual:nil]) [[self heartlinesWeatherReportLabel] setText:[NSString stringWithFormat:@"Currently it's %@", [[PDDokdo sharedInstance] currentTemperature]]];
             else if (![[HLSLocalization stringForKey:@"CURRENTLY_ITS"] isEqual:nil]) [[self heartlinesWeatherReportLabel] setText:[NSString stringWithFormat:@"%@ %@", [HLSLocalization stringForKey:@"CURRENTLY_ITS"], [[PDDokdo sharedInstance] currentTemperature]]];
-                
+
             if ([positionValue intValue] == 0) [[self heartlinesWeatherReportLabel] setTextAlignment:NSTextAlignmentLeft];
             else if ([positionValue intValue] == 1) [[self heartlinesWeatherReportLabel] setTextAlignment:NSTextAlignmentCenter];
             else if ([positionValue intValue] == 2) [[self heartlinesWeatherReportLabel] setTextAlignment:NSTextAlignmentRight];
@@ -410,13 +410,13 @@ SBFLockScreenDateView *timeDateView = nil;
             [[self heartlinesWeatherReportLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [[self heartlinesWeatherReportLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
             [[self heartlinesWeatherReportLabel].heightAnchor constraintEqualToConstant:21].active = YES;
-                
+
             if (![[self heartlinesWeatherReportLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesWeatherReportLabel]];
-                
+
             if ([positionValue intValue] == 0) [[self heartlinesWeatherReportLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:8].active = YES;
             else if ([positionValue intValue] == 1) [[self heartlinesWeatherReportLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
             else if ([positionValue intValue] == 2) [[self heartlinesWeatherReportLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
-                
+
             [[self heartlinesWeatherReportLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesAlternateDateLabel].bottomAnchor constant:16].active = YES;
         }
 
@@ -438,31 +438,31 @@ SBFLockScreenDateView *timeDateView = nil;
                     [[self heartlinesWeatherConditionLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customWeatherConditionFontSizeValue intValue]]];
                 }
             }
-            
+
             [[self heartlinesWeatherConditionLabel] setText:[NSString stringWithFormat:@"%@", [[PDDokdo sharedInstance] currentConditions]]];
-            
+
             if ([positionValue intValue] == 0) [[self heartlinesWeatherConditionLabel] setTextAlignment:NSTextAlignmentLeft];
             else if ([positionValue intValue] == 1) [[self heartlinesWeatherConditionLabel] setTextAlignment:NSTextAlignmentCenter];
             else if ([positionValue intValue] == 2) [[self heartlinesWeatherConditionLabel] setTextAlignment:NSTextAlignmentRight];
-            
+
 
             [[self heartlinesWeatherConditionLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [[self heartlinesWeatherConditionLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
             [[self heartlinesWeatherConditionLabel].heightAnchor constraintEqualToConstant:21].active = YES;
-            
+
             if (![[self heartlinesWeatherConditionLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesWeatherConditionLabel]];
-            
+
             if ([positionValue intValue] == 0) [[self heartlinesWeatherConditionLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:8].active = YES;
             else if ([positionValue intValue] == 1) [[self heartlinesWeatherConditionLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
             else if ([positionValue intValue] == 2) [[self heartlinesWeatherConditionLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
-            
+
             [[self heartlinesWeatherConditionLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesWeatherReportLabel].bottomAnchor constant:8].active = YES;
         }
     } else if ([styleValue intValue] == 1) {
         // weather condition label
         if (showWeatherSwitch) {
             self.heartlinesWeatherConditionLabel = [UILabel new];
-            
+
             if (!useCustomFontSwitch){
                 if (!useCustomWeatherConditionFontSizeSwitch) {
                     [[self heartlinesWeatherConditionLabel] setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightSemibold]];
@@ -476,32 +476,32 @@ SBFLockScreenDateView *timeDateView = nil;
                     [[self heartlinesWeatherConditionLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customWeatherConditionFontSizeValue intValue]]];
                 }
             }
-            
+
             [[PDDokdo sharedInstance] refreshWeatherData];
             [[self heartlinesWeatherConditionLabel] setText:[NSString stringWithFormat:@"%@, %@",[[PDDokdo sharedInstance] currentConditions], [[PDDokdo sharedInstance] currentTemperature]]];
 
             if ([positionValue intValue] == 0) [[self heartlinesWeatherConditionLabel] setTextAlignment:NSTextAlignmentLeft];
             else if ([positionValue intValue] == 1) [[self heartlinesWeatherConditionLabel] setTextAlignment:NSTextAlignmentCenter];
             else if ([positionValue intValue] == 2) [[self heartlinesWeatherConditionLabel] setTextAlignment:NSTextAlignmentRight];
-            
-            
+
+
             [[self heartlinesWeatherConditionLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [[self heartlinesWeatherConditionLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
             [[self heartlinesWeatherConditionLabel].heightAnchor constraintEqualToConstant:21].active = YES;
-            
+
             if (![[self heartlinesWeatherConditionLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesWeatherConditionLabel]];
-            
+
             if ([positionValue intValue] == 0) [[self heartlinesWeatherConditionLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:8].active = YES;
             else if ([positionValue intValue] == 1) [[self heartlinesWeatherConditionLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
             else if ([positionValue intValue] == 2) [[self heartlinesWeatherConditionLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
-            
+
             [[self heartlinesWeatherConditionLabel].centerYAnchor constraintEqualToAnchor:self.topAnchor constant:self.frame.size.height / 8].active = YES;
         }
 
 
         // date label
         self.heartlinesDateLabel = [UILabel new];
-            
+
         if (!useCustomFontSwitch){
             if (!useCustomDateFontSizeSwitch) {
                 [[self heartlinesDateLabel] setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
@@ -515,28 +515,28 @@ SBFLockScreenDateView *timeDateView = nil;
                 [[self heartlinesDateLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customDateFontSizeValue intValue]]];
             }
         }
-            
+
         if (!isTimerRunning) {
             NSDateFormatter *dateFormat = [NSDateFormatter new];
             [dateFormat setDateFormat:dateFormatValue];
             [[self heartlinesDateLabel] setText:[[dateFormat stringFromDate:[NSDate date]] capitalizedString]];
         }
-            
+
         if ([positionValue intValue] == 0) [[self heartlinesDateLabel] setTextAlignment:NSTextAlignmentLeft];
         else if ([positionValue intValue] == 1) [[self heartlinesDateLabel] setTextAlignment:NSTextAlignmentCenter];
         else if ([positionValue intValue] == 2) [[self heartlinesDateLabel] setTextAlignment:NSTextAlignmentRight];
-            
+
 
         [[self heartlinesDateLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
         [[self heartlinesDateLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
         [[self heartlinesDateLabel].heightAnchor constraintEqualToConstant:21].active = YES;
-            
+
         if (![[self heartlinesDateLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesDateLabel]];
-            
+
         if ([positionValue intValue] == 0) [[self heartlinesDateLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:8].active = YES;
         else if ([positionValue intValue] == 1) [[self heartlinesDateLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
         else if ([positionValue intValue] == 2) [[self heartlinesDateLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
-            
+
         if (showWeatherSwitch) [[self heartlinesDateLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesWeatherConditionLabel].bottomAnchor constant:10].active = YES;
         else if (!showWeatherSwitch) [[self heartlinesDateLabel].centerYAnchor constraintEqualToAnchor:self.topAnchor constant:self.frame.size.height / 8].active = YES;
 
@@ -578,7 +578,7 @@ SBFLockScreenDateView *timeDateView = nil;
 
         // time label
         self.heartlinesTimeLabel = [UILabel new];
-            
+
         if (!useCustomFontSwitch){
             if (!useCustomTimeFontSizeSwitch) {
                 [[self heartlinesTimeLabel] setFont:[UIFont systemFontOfSize:61 weight:UIFontWeightRegular]];
@@ -592,33 +592,33 @@ SBFLockScreenDateView *timeDateView = nil;
                 [[self heartlinesTimeLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customTimeFontSizeValue intValue]]];
             }
         }
-            
+
         NSDateFormatter *timeFormat = [NSDateFormatter new];
         [timeFormat setDateFormat:timeFormatValue];
         [[self heartlinesTimeLabel] setText:[timeFormat stringFromDate:[NSDate date]]];
-            
+
         if ([positionValue intValue] == 0) [[self heartlinesTimeLabel] setTextAlignment:NSTextAlignmentLeft];
         else if ([positionValue intValue] == 1) [[self heartlinesTimeLabel] setTextAlignment:NSTextAlignmentCenter];
         else if ([positionValue intValue] == 2) [[self heartlinesTimeLabel] setTextAlignment:NSTextAlignmentRight];
-            
+
 
         [[self heartlinesTimeLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
         [[self heartlinesTimeLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
         [[self heartlinesTimeLabel].heightAnchor constraintEqualToConstant:73].active = YES;
-            
+
         if (![[self heartlinesTimeLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesTimeLabel]];
-            
+
         if ([positionValue intValue] == 0) [[self heartlinesTimeLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:4].active = YES;
         else if ([positionValue intValue] == 1) [[self heartlinesTimeLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
         else if ([positionValue intValue] == 2) [[self heartlinesTimeLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-4].active = YES;
-            
+
         [[self heartlinesTimeLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesAlternateDateLabel].bottomAnchor constant:32].active = YES;
 
 
         // up next label
         if (showUpNextSwitch) {
             self.heartlinesUpNextLabel = [UILabel new];
-            
+
             if (!useCustomFontSwitch){
                 if (!useCustomUpNextFontSizeSwitch) {
                     [[self heartlinesUpNextLabel] setFont:[UIFont systemFontOfSize:19 weight:UIFontWeightSemibold]];
@@ -632,10 +632,10 @@ SBFLockScreenDateView *timeDateView = nil;
                     [[self heartlinesUpNextLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customUpNextFontSizeValue intValue]]];
                 }
             }
-            
+
             if ([[HLSLocalization stringForKey:@"UP_NEXT"] isEqual:nil]) [[self heartlinesUpNextLabel] setText:@"Up next"];
             else if (![[HLSLocalization stringForKey:@"UP_NEXT"] isEqual:nil]) [[self heartlinesUpNextLabel] setText:[NSString stringWithFormat:@"%@", [HLSLocalization stringForKey:@"UP_NEXT"]]];
-            
+
             if ([positionValue intValue] == 0) [[self heartlinesUpNextLabel] setTextAlignment:NSTextAlignmentLeft];
             else if ([positionValue intValue] == 1) [[self heartlinesUpNextLabel] setTextAlignment:NSTextAlignmentCenter];
             else if ([positionValue intValue] == 2) [[self heartlinesUpNextLabel] setTextAlignment:NSTextAlignmentRight];
@@ -644,20 +644,20 @@ SBFLockScreenDateView *timeDateView = nil;
             [[self heartlinesUpNextLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [[self heartlinesUpNextLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
             [[self heartlinesUpNextLabel].heightAnchor constraintEqualToConstant:21].active = YES;
-            
+
             if (![[self heartlinesUpNextLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesUpNextLabel]];
-            
+
             if ([positionValue intValue] == 0) [[self heartlinesUpNextLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:8].active = YES;
             else if ([positionValue intValue] == 1) [[self heartlinesUpNextLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
             else if ([positionValue intValue] == 2) [[self heartlinesUpNextLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
-            
+
             [[self heartlinesUpNextLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesTimeLabel].bottomAnchor constant:8].active = YES;
         }
 
         // up next event label
         if (showUpNextSwitch) {
             self.heartlinesUpNextEventLabel = [UILabel new];
-            
+
             if (!useCustomFontSwitch){
                 if (!useCustomUpNextEventFontSizeSwitch) {
                     [[self heartlinesUpNextEventLabel] setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]];
@@ -671,25 +671,25 @@ SBFLockScreenDateView *timeDateView = nil;
                     [[self heartlinesUpNextEventLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customUpNextEventFontSizeValue intValue]]];
                 }
             }
-            
+
             if ([[HLSLocalization stringForKey:@"NO_UPCOMING_EVENTS"] isEqual:nil]) [[self heartlinesUpNextEventLabel] setText:@"No upcoming events"];
             else if (![[HLSLocalization stringForKey:@"NO_UPCOMING_EVENTS"] isEqual:nil]) [[self heartlinesUpNextEventLabel] setText:[NSString stringWithFormat:@"%@", [HLSLocalization stringForKey:@"NO_UPCOMING_EVENTS"]]];
-            
+
             if ([positionValue intValue] == 0) [[self heartlinesUpNextEventLabel] setTextAlignment:NSTextAlignmentLeft];
             else if ([positionValue intValue] == 1) [[self heartlinesUpNextEventLabel] setTextAlignment:NSTextAlignmentCenter];
             else if ([positionValue intValue] == 2) [[self heartlinesUpNextEventLabel] setTextAlignment:NSTextAlignmentRight];
-            
+
 
             [[self heartlinesUpNextEventLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [[self heartlinesUpNextEventLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
             [[self heartlinesUpNextEventLabel].heightAnchor constraintEqualToConstant:16].active = YES;
-            
+
             if (![[self heartlinesUpNextEventLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesUpNextEventLabel]];
-            
+
             if ([positionValue intValue] == 0) [[self heartlinesUpNextEventLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:8].active = YES;
             else if ([positionValue intValue] == 1) [[self heartlinesUpNextEventLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:0].active = YES;
             else if ([positionValue intValue] == 2) [[self heartlinesUpNextEventLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
-            
+
             [[self heartlinesUpNextEventLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesUpNextLabel].bottomAnchor constant:14].active = YES;
         }
 
@@ -710,7 +710,7 @@ SBFLockScreenDateView *timeDateView = nil;
     } else if ([styleValue intValue] == 2) {
         // time label
         self.heartlinesTimeLabel = [UILabel new];
-            
+
         if (!useCustomFontSwitch){
             if (!useCustomTimeFontSizeSwitch) {
                 [[self heartlinesTimeLabel] setFont:[UIFont systemFontOfSize:61 weight:UIFontWeightRegular]];
@@ -724,27 +724,27 @@ SBFLockScreenDateView *timeDateView = nil;
                 [[self heartlinesTimeLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customTimeFontSizeValue intValue]]];
             }
         }
-            
+
         NSDateFormatter *timeFormat = [NSDateFormatter new];
         [timeFormat setDateFormat:timeFormatValue];
         [[self heartlinesTimeLabel] setText:[timeFormat stringFromDate:[NSDate date]]];
-            
+
         [[self heartlinesTimeLabel] setTextAlignment:NSTextAlignmentLeft];
-            
+
 
         [[self heartlinesTimeLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
         [[self heartlinesTimeLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
         [[self heartlinesTimeLabel].heightAnchor constraintEqualToConstant:73].active = YES;
-            
+
         if (![[self heartlinesTimeLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesTimeLabel]];
-            
+
         [[self heartlinesTimeLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:4].active = YES;
         [[self heartlinesTimeLabel].centerYAnchor constraintEqualToAnchor:self.topAnchor constant:self.frame.size.height / 8].active = YES;
 
 
         // date label
         self.heartlinesDateLabel = [UILabel new];
-            
+
         if (!useCustomFontSwitch){
             if (!useCustomDateFontSizeSwitch) {
                 [[self heartlinesDateLabel] setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
@@ -758,22 +758,22 @@ SBFLockScreenDateView *timeDateView = nil;
                 [[self heartlinesDateLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customDateFontSizeValue intValue]]];
             }
         }
-            
+
         if (!isTimerRunning) {
             NSDateFormatter *dateFormat = [NSDateFormatter new];
             [dateFormat setDateFormat:dateFormatValue];
             [[self heartlinesDateLabel] setText:[[dateFormat stringFromDate:[NSDate date]] capitalizedString]];
         }
-            
+
         [[self heartlinesDateLabel] setTextAlignment:NSTextAlignmentLeft];
-            
+
 
         [[self heartlinesDateLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
         [[self heartlinesDateLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
         [[self heartlinesDateLabel].heightAnchor constraintEqualToConstant:21].active = YES;
-            
+
         if (![[self heartlinesDateLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesDateLabel]];
-            
+
         [[self heartlinesDateLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:8].active = YES;
         [[self heartlinesDateLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesTimeLabel].bottomAnchor constant:[self alternateDate].length != 0 ? 8 : 0].active = YES;
 
@@ -812,7 +812,7 @@ SBFLockScreenDateView *timeDateView = nil;
         // weather report label
         if (showWeatherSwitch) {
             self.heartlinesWeatherReportLabel = [UILabel new];
-            
+
             if (!useCustomFontSwitch){
                 if (!useCustomWeatherReportFontSizeSwitch) {
                     [[self heartlinesWeatherReportLabel] setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightSemibold]];
@@ -826,20 +826,20 @@ SBFLockScreenDateView *timeDateView = nil;
                     [[self heartlinesWeatherReportLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customWeatherReportFontSizeValue intValue]]];
                 }
             }
-            
+
             [[PDDokdo sharedInstance] refreshWeatherData];
             if ([[HLSLocalization stringForKey:@"ITS"] isEqual:nil]) [[self heartlinesWeatherReportLabel] setText:[NSString stringWithFormat:@"It's %@", [[PDDokdo sharedInstance] currentTemperature]]];
             else if (![[HLSLocalization stringForKey:@"ITS"] isEqual:nil]) [[self heartlinesWeatherReportLabel] setText:[NSString stringWithFormat:@"%@ %@", [HLSLocalization stringForKey:@"ITS"], [[PDDokdo sharedInstance] currentTemperature]]];
-            
+
             [[self heartlinesWeatherReportLabel] setTextAlignment:NSTextAlignmentRight];
 
 
             [[self heartlinesWeatherReportLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [[self heartlinesWeatherReportLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
             [[self heartlinesWeatherReportLabel].heightAnchor constraintEqualToConstant:21].active = YES;
-            
+
             if (![[self heartlinesWeatherReportLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesWeatherReportLabel]];
-            
+
             [[self heartlinesWeatherReportLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
             [[self heartlinesWeatherReportLabel].centerYAnchor constraintEqualToAnchor:self.topAnchor constant:self.frame.size.height / 8].active = YES;
         }
@@ -847,7 +847,7 @@ SBFLockScreenDateView *timeDateView = nil;
         // weather condition label
         if (showWeatherSwitch) {
             self.heartlinesWeatherConditionLabel = [UILabel new];
-            
+
             if (!useCustomFontSwitch){
                 if (!useCustomWeatherConditionFontSizeSwitch) {
                     [[self heartlinesWeatherConditionLabel] setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightSemibold]];
@@ -861,17 +861,17 @@ SBFLockScreenDateView *timeDateView = nil;
                     [[self heartlinesWeatherConditionLabel] setFont:[UIFont fontWithName:[NSString stringWithFormat:@"%@", [preferences objectForKey:@"customFont"]] size:[customWeatherConditionFontSizeValue intValue]]];
                 }
             }
-            
+
             [[self heartlinesWeatherConditionLabel] setText:[NSString stringWithFormat:@"%@", [[PDDokdo sharedInstance] currentConditions]]];
             [[self heartlinesWeatherConditionLabel] setTextAlignment:NSTextAlignmentRight];
 
-            
+
             [[self heartlinesWeatherConditionLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [[self heartlinesWeatherConditionLabel].widthAnchor constraintEqualToConstant:self.bounds.size.width].active = YES;
             [[self heartlinesWeatherConditionLabel].heightAnchor constraintEqualToConstant:21].active = YES;
-            
+
             if (![[self heartlinesWeatherConditionLabel] isDescendantOfView:self]) [self addSubview:[self heartlinesWeatherConditionLabel]];
-            
+
             [[self heartlinesWeatherConditionLabel].centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:-8].active = YES;
             [[self heartlinesWeatherConditionLabel].centerYAnchor constraintEqualToAnchor:[self heartlinesWeatherReportLabel].bottomAnchor constant:8].active = YES;
         }
@@ -882,8 +882,10 @@ SBFLockScreenDateView *timeDateView = nil;
 
     if (@available(iOS 16, *)) {
         SBWallpaperController *wallpaperController = [%c(SBWallpaperController) sharedInstance];
+        RLog(@"[Heartlines] (SBFLockScreenDateView) <didMoveToWindow> SBWallpaperController: %ld", [wallpaperController activeVariant]);
+        RLog(@"[Heartlines] (SBFLockScreenDateView) <didMoveToWindow> SBWallpaperController: %@", [wallpaperController _wallpaperViewForVariant:[wallpaperController activeVariant]]);
         PBUIPosterWallpaperRemoteViewController *wallpaperRemoteController = [wallpaperController safeValueForKey:@"_rootWallpaperViewController"];
-        
+
         if (wallpaperRemoteController) {
             PBUIPosterWallpaperViewController *wallpaperViewController = [wallpaperRemoteController safeValueForKey:@"_viewController"];
             if (wallpaperViewController) {
@@ -896,14 +898,6 @@ SBFLockScreenDateView *timeDateView = nil;
                 UIGraphicsEndImageContext();
             }
         }
-        // UIView *wallpaperView = [wallpaperController safeValueForKey:@"_wallpaperWindow"];
-        
-        // if (wallpaperView) {
-        //     UIGraphicsBeginImageContextWithOptions(wallpaperView.frame.size, NO, [UIScreen mainScreen].scale);
-        //     [wallpaperView.layer renderInContext:UIGraphicsGetCurrentContext()];
-        //     lockscreenWallpaper = UIGraphicsGetImageFromCurrentImageContext();
-        //     UIGraphicsEndImageContext();
-        // }
     } else {
         NSData *lockWallpaperData = [NSData dataWithContentsOfFile:jbroot(@"/var/mobile/Library/SpringBoard/LockBackground.cpbitmap")];
 
@@ -972,7 +966,7 @@ SBFLockScreenDateView *timeDateView = nil;
     else if ([dateColorValue intValue] == 3)
         [[self heartlinesDateLabel] setTextColor:[GcColorPickerUtils colorWithHex:customDateColorValue]];
 
-    
+
     if ([alternateDateColorValue intValue] == 0)
         [[self heartlinesAlternateDateLabel] setTextColor:backgroundWallpaperColor];
     else if ([alternateDateColorValue intValue] == 1)
@@ -1025,18 +1019,18 @@ SBFLockScreenDateView *timeDateView = nil;
         if ([styleValue intValue] == 0) {
             if ([[HLSLocalization stringForKey:@"CURRENTLY_ITS"] isEqual:nil]) [[self heartlinesWeatherReportLabel] setText:[NSString stringWithFormat:@"Currently it's %@", [[PDDokdo sharedInstance] currentTemperature]]];
             else if (![[HLSLocalization stringForKey:@"CURRENTLY_ITS"] isEqual:nil]) [[self heartlinesWeatherReportLabel] setText:[NSString stringWithFormat:@"%@ %@", [HLSLocalization stringForKey:@"CURRENTLY_ITS"], [[PDDokdo sharedInstance] currentTemperature]]];
-            
+
             [[self heartlinesWeatherConditionLabel] setText:[NSString stringWithFormat:@"%@", [[PDDokdo sharedInstance] currentConditions]]];
         } else if ([styleValue intValue] == 1) {
             [[self heartlinesWeatherConditionLabel] setText:[NSString stringWithFormat:@"%@, %@",[[PDDokdo sharedInstance] currentConditions], [[PDDokdo sharedInstance] currentTemperature]]];
         } else if ([styleValue intValue] == 2) {
             if ([[HLSLocalization stringForKey:@"ITS"] isEqual:nil]) [[self heartlinesWeatherReportLabel] setText:[NSString stringWithFormat:@"It's %@", [[PDDokdo sharedInstance] currentTemperature]]];
             else if (![[HLSLocalization stringForKey:@"ITS"] isEqual:nil]) [[self heartlinesWeatherReportLabel] setText:[NSString stringWithFormat:@"%@ %@", [HLSLocalization stringForKey:@"ITS"], [[PDDokdo sharedInstance] currentTemperature]]];
-            
+
             [[self heartlinesWeatherConditionLabel] setText:[NSString stringWithFormat:@"%@", [[PDDokdo sharedInstance] currentConditions]]];
         }
     }
-    
+
 }
 
 %new
@@ -1108,7 +1102,7 @@ SBFLockScreenDateView *timeDateView = nil;
                 if ([[HLSLocalization stringForKey:@"NO_UPCOMING_EVENTS"] isEqual:nil]) [[self heartlinesUpNextEventLabel] setText:@"No upcoming events"];
                 else if (![[HLSLocalization stringForKey:@"NO_UPCOMING_EVENTS"] isEqual:nil]) [[self heartlinesUpNextEventLabel] setText:[NSString stringWithFormat:@"%@", [HLSLocalization stringForKey:@"NO_UPCOMING_EVENTS"]]];
             }
-            
+
         }
     }
 
@@ -1144,7 +1138,7 @@ SBFLockScreenDateView *timeDateView = nil;
 - (void)requestHeartlinesTimeAndDateUpdate { // update heartlines
 
     [timeDateView updateHeartlinesTimeAndDate];
-    
+
 }
 
 %end
@@ -1182,7 +1176,7 @@ SBFLockScreenDateView *timeDateView = nil;
 - (void)requestHeartlinesTimeAndDateUpdate { // update heartlines
 
     [timeDateView updateHeartlinesTimeAndDate];
-    
+
 }
 
 %end
@@ -1566,7 +1560,7 @@ SBFLockScreenDateView *timeDateView = nil;
             }
         }
   	});
-    
+
 }
 
 %end
@@ -1579,7 +1573,7 @@ SBFLockScreenDateView *timeDateView = nil;
 
     if (!artworkBasedColorsSwitch) return;
     [[%c(SBMediaController) sharedInstance] setNowPlayingInfo:0];
-    
+
 }
 
 %end

@@ -138,13 +138,23 @@ BOOL magsafeCompatibilitySwitch = NO;
 @end
 
 @interface SBWallpaperController : NSObject
-	+ (id)sharedInstance;
+@property (nonatomic) NSInteger activeVariant;
+
++ (id)sharedInstance;
+- (id)_wallpaperViewForVariant:(NSInteger)arg0;
+@end
+
+@interface PBUIWallpaperViewController : UIViewController
 @end
 
 @interface PBUIPosterWallpaperViewController: UIViewController
+@property (nonatomic) NSInteger activeVariant;
+@property (readonly, nonatomic) NSInteger variant;
 @end
 
 @interface PBUIPosterWallpaperRemoteViewController: UIViewController
+@property (nonatomic) NSInteger activeVariant;
+@property (readonly, nonatomic) NSInteger variant;
 @end
 
 @interface SBFLockScreenDateView : UIView

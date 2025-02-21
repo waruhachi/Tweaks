@@ -1,9 +1,0 @@
-Package: com.p2kdev.applock
-Name: AppLock
-Version: 1.0
-Architecture: iphoneos-arm
-Description: Lock your apps!
-Maintainer: AT5HK
-Author: AT5HK
-Section: Tweaks
-Depends: mobilesubstrate (>= 0.9.5000)
