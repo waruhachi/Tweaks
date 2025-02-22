@@ -1,5 +1,4 @@
 #import "Heartlines.h"
-#include <RemoteLog.h>
 
 SBUIProudLockIconView *faceIDLock = nil;
 SBFLockScreenDateView *timeDateView = nil;
@@ -882,8 +881,6 @@ SBFLockScreenDateView *timeDateView = nil;
 
     if (@available(iOS 16, *)) {
         SBWallpaperController *wallpaperController = [%c(SBWallpaperController) sharedInstance];
-        RLog(@"[Heartlines] (SBFLockScreenDateView) <didMoveToWindow> SBWallpaperController: %ld", [wallpaperController activeVariant]);
-        RLog(@"[Heartlines] (SBFLockScreenDateView) <didMoveToWindow> SBWallpaperController: %@", [wallpaperController _wallpaperViewForVariant:[wallpaperController activeVariant]]);
         PBUIPosterWallpaperRemoteViewController *wallpaperRemoteController = [wallpaperController safeValueForKey:@"_rootWallpaperViewController"];
 
         if (wallpaperRemoteController) {
