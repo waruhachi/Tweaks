@@ -1,0 +1,9 @@
+Package: moe.waru.norecents
+Name: NoRecents
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Removes the recents tab from the Phone app.
+Maintainer: waruhachi
+Author: waruhachi
+Section: Tweaks
+Depends: mobilesubstrate (>= 0.9.5000)

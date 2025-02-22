@@ -49,6 +49,7 @@ jobs:
                     - Kabegami
                     - Letter
                     - Nita
+                    - NoRecents
                     - SheetMusicScanner
                     - VerticalBatteryDrain
         steps:
