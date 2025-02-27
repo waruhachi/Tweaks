@@ -44,6 +44,7 @@ jobs:
                     - Astolfo
                     - Central
                     - Cloudify
+                    - Diary
                     - FocusDND
                     - Heartlines
                     - Kabegami
