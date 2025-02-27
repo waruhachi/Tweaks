@@ -19,7 +19,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 
     if ([fontFamilyValue intValue] == 0) {
         // load selawik light font
-        NSData* inData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:@"/Library/PreferenceBundles/DiaryPreferences.bundle/fonts/selawkl.ttf"]];
+        NSData* inData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/fonts/selawkl.ttf")]];
         CFErrorRef error;
         CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)inData);
         CGFontRef font = CGFontCreateWithDataProvider(provider);
@@ -31,7 +31,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         CFRelease(provider);
 
         // load selawik regular font
-        NSData* inData2 = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:@"/Library/PreferenceBundles/DiaryPreferences.bundle/fonts/selawk.ttf"]];
+        NSData* inData2 = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/fonts/selawk.ttf")]];
         CFErrorRef error2;
         CGDataProviderRef provider2 = CGDataProviderCreateWithCFData((CFDataRef)inData2);
         CGFontRef font2 = CGFontCreateWithDataProvider(provider2);
@@ -43,7 +43,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         CFRelease(provider2);
     } else if ([fontFamilyValue intValue] == 1) {
         // load open sans light font
-        NSData* inData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:@"/Library/PreferenceBundles/DiaryPreferences.bundle/fonts/OpenSans-Light.ttf"]];
+        NSData* inData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/fonts/OpenSans-Light.ttf")]];
         CFErrorRef error;
         CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)inData);
         CGFontRef font = CGFontCreateWithDataProvider(provider);
@@ -55,7 +55,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         CFRelease(provider);
 
         // load open sans regular font
-        NSData* inData2 = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:@"/Library/PreferenceBundles/DiaryPreferences.bundle/fonts/OpenSans-Regular.ttf"]];
+        NSData* inData2 = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/fonts/OpenSans-Regular.ttf")]];
         CFErrorRef error2;
         CGDataProviderRef provider2 = CGDataProviderCreateWithCFData((CFDataRef)inData2);
         CGFontRef font2 = CGFontCreateWithDataProvider(provider2);
@@ -112,7 +112,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
             orig.top -= 90 - ([mediaPlayerOffsetValue intValue] + [notificationOffsetValue intValue]);
             return orig;
         }
-        
+
         if (enableHelloSwitch) {
             if (![[coverSheetView diaryHelloIconView] isHidden] && showHelloGreetingSwitch && ![[coverSheetView diaryHelloLabel] isHidden]) {
                 orig.top -= 40 - [notificationOffsetValue intValue];
@@ -201,7 +201,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 
     %orig;
 
-    if ([[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/LastLook.dylib"]) [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDiaryTimeAndDateUpdate) name:@"requestDiaryTimeAndDateUpdate" object:nil];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:jbroot(@"/Library/MobileSubstrate/DynamicLibraries/LastLook.dylib")]) [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDiaryTimeAndDateUpdate) name:@"requestDiaryTimeAndDateUpdate" object:nil];
 
 }
 
@@ -333,6 +333,19 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 
 %end
 
+%hook CSProminentDisplayView
+
+- (void)didMoveToWindow {  // remove original date label iOS 16
+
+    %orig;
+
+    if (!hideDefaultTimeAndDateSwitch) return;
+    [self removeFromSuperview];
+
+}
+
+%end
+
 %hook SBLockScreenTimerDialView
 
 - (void)didMoveToWindow { // remove timer icon
@@ -391,7 +404,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 - (void)didMoveToWindow { // remove unlock text and control center grabber
 
 	%orig;
-	
+
 	if (hideDefaultUnlockTextSwitch) [self removeFromSuperview];
 
 }
@@ -481,7 +494,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
     [[self diaryDateLabel] setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:[self diaryDateLabel]];
 
-        
+
      [self layoutTimeAndDate];
 
 }
@@ -498,7 +511,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
     if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
         // time label
         [[self diaryTimeLabel] setTextAlignment:NSTextAlignmentCenter];
-            
+
         [[self diaryTimeLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
         [NSLayoutConstraint activateConstraints:@[
             [self.diaryTimeLabel.topAnchor constraintEqualToAnchor:self.topAnchor constant:32],
@@ -540,7 +553,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
     } else {
         // time label
         [[self diaryTimeLabel] setTextAlignment:NSTextAlignmentCenter];
-            
+
         [[self diaryTimeLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
         [NSLayoutConstraint activateConstraints:@[
             [self.diaryTimeLabel.topAnchor constraintEqualToAnchor:self.topAnchor constant:32],
@@ -575,7 +588,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         if (useCustomDateLocaleSwitch) [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:customDateLocaleValue]];
         [[self diaryDateLabel] setText:[dateFormat stringFromDate:[NSDate date]]];
     }
-    
+
 }
 
 %end
@@ -677,7 +690,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
             self.diaryCalendarButton = [UIButton new];
             [[self diaryCalendarButton] addTarget:self action:@selector(fetchNextCalendarEvent) forControlEvents:UIControlEventTouchUpInside];
             [[self diaryCalendarButton] setContentMode:UIViewContentModeScaleAspectFit];
-            [[self diaryCalendarButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/events/calendar.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+            [[self diaryCalendarButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/events/calendar.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
             [[self diaryCalendarButton] setTintColor:[GcColorPickerUtils colorWithHex:upNextColorValue]];
             [self addSubview:[self diaryCalendarButton]];
 
@@ -690,13 +703,13 @@ SBFWallpaperView* lockscreenWallpaper = nil;
             ]];
         }
 
-        
+
         // reminder button
         if (showReminderButtonSwitch) {
             self.diaryReminderButton = [UIButton new];
             [[self diaryReminderButton] addTarget:self action:@selector(fetchNextReminder) forControlEvents:UIControlEventTouchUpInside];
             [[self diaryReminderButton] setContentMode:UIViewContentModeScaleAspectFit];
-            [[self diaryReminderButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/events/reminder.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+            [[self diaryReminderButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/events/reminder.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
             [[self diaryReminderButton] setTintColor:[GcColorPickerUtils colorWithHex:upNextColorValue]];
             [self addSubview:[self diaryReminderButton]];
 
@@ -724,7 +737,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
             self.diaryAlarmButton = [UIButton new];
             [[self diaryAlarmButton] addTarget:self action:@selector(fetchNextAlarm) forControlEvents:UIControlEventTouchUpInside];
             [[self diaryAlarmButton] setContentMode:UIViewContentModeScaleAspectFit];
-            [[self diaryAlarmButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/events/alarm.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+            [[self diaryAlarmButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/events/alarm.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
             [[self diaryAlarmButton] setTintColor:[GcColorPickerUtils colorWithHex:upNextColorValue]];
             [self addSubview:[self diaryAlarmButton]];
 
@@ -801,8 +814,8 @@ SBFWallpaperView* lockscreenWallpaper = nil;
             [self.diaryEventTitleLabel.bottomAnchor constraintEqualToAnchor:self.diaryEventSubtitleLabel.topAnchor],
         ]];
     }
-    
-    
+
+
     if ([overrideTimeDateStyleValue intValue] == 0) {
         // date label
         self.diaryDateLabel = [UILabel new];
@@ -812,7 +825,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         else if ([fontFamilyValue intValue] == 2) [[self diaryDateLabel] setFont:[UIFont systemFontOfSize:28 weight:UIFontWeightRegular]];
         [[self diaryDateLabel] setTextAlignment:NSTextAlignmentLeft];
 
-            
+
         // time label
         self.diaryTimeLabel = [UILabel new];
         [[self diaryTimeLabel] setTextColor:[GcColorPickerUtils colorWithHex:timeDateColorValue]];
@@ -855,12 +868,12 @@ SBFWallpaperView* lockscreenWallpaper = nil;
             [[self diaryBatteryPercentageLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [NSLayoutConstraint activateConstraints:@[
                 [self.diaryBatteryPercentageLabel.centerXAnchor constraintEqualToAnchor:self.diaryBatteryIcon.centerXAnchor],
-                [self.diaryBatteryPercentageLabel.topAnchor constraintEqualToAnchor:self.diaryBatteryIcon.topAnchor constant:-2],   
+                [self.diaryBatteryPercentageLabel.topAnchor constraintEqualToAnchor:self.diaryBatteryIcon.topAnchor constant:-2],
             ]];
         }
     }
-	
-    
+
+
     // wifi icon
     if (showWifiIconSwitch) {
         self.diaryWifiIcon = [UIImageView new];
@@ -934,7 +947,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
             [[self diaryCellularTypeLabel] setTranslatesAutoresizingMaskIntoConstraints:NO];
             [NSLayoutConstraint activateConstraints:@[
                 [self.diaryCellularTypeLabel.leadingAnchor constraintEqualToAnchor:self.diaryCellularIcon.leadingAnchor],
-                [self.diaryCellularTypeLabel.topAnchor constraintEqualToAnchor:self.diaryCellularIcon.topAnchor],   
+                [self.diaryCellularTypeLabel.topAnchor constraintEqualToAnchor:self.diaryCellularIcon.topAnchor],
             ]];
         }
     }
@@ -1025,7 +1038,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         if (useCustomDateLocaleSwitch) [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:customDateLocaleValue]];
         [[self diaryDateLabel] setText:[dateFormat stringFromDate:[NSDate date]]];
     }
-    
+
 }
 
 %new
@@ -1081,7 +1094,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
     NSDate* daysFromNow = [calendar dateByAddingComponents:daysFromNowComponents toDate:[NSDate date] options:0];
 
     NSPredicate* reminderPredicate = [store predicateForIncompleteRemindersWithDueDateStarting:todayReminders ending:daysFromNow calendars:nil];
-    
+
     [store fetchRemindersMatchingPredicate:reminderPredicate completion:^(NSArray* reminders) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([reminders count]) {
@@ -1140,12 +1153,12 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 - (void)handleSlideUpToUnlockPan:(UIPanGestureRecognizer *)recognizer { // unlock device with slide up
 
     CGPoint translation = CGPointMake(0, 0);
-    
+
     if ([recognizer state] == UIGestureRecognizerStateChanged) {
         translation = [recognizer translationInView:[self diaryView]];
         if (translation.y > 0) return;
         double substractedAlpha = fabs(translation.y / 200);
-        
+
         [UIView animateWithDuration:0.1 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             [[self diaryView] setTransform:CGAffineTransformMakeTranslation(0, translation.y)];
             if ([overrideTimeDateStyleValue intValue] == 1) {
@@ -1160,7 +1173,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
                 [[self diaryAlarmButton] setTransform:CGAffineTransformMakeTranslation(0, translation.y)];
             }
         } completion:nil];
-        
+
         [[self diaryView] setAlpha:1 - substractedAlpha];
         if (enableUpNextSwitch) {
             if (showCalendarEventButtonSwitch) [[self diaryCalendarButton] setAlpha:1 - substractedAlpha];
@@ -1323,7 +1336,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 
     if ([overrideTimeDateStyleValue intValue] == 0) [coverSheetView updateDiaryTimeAndDate];
     else if ([overrideTimeDateStyleValue intValue] == 1) [timeDateView updateDiaryTimeAndDate];
-    
+
 }
 
 %end
@@ -1353,7 +1366,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 
     if ([overrideTimeDateStyleValue intValue] == 0) [coverSheetView updateDiaryTimeAndDate];
     else if ([overrideTimeDateStyleValue intValue] == 1) [timeDateView updateDiaryTimeAndDate];
-    
+
 }
 
 %end
@@ -1472,42 +1485,42 @@ SBFWallpaperView* lockscreenWallpaper = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (![self isOnAC]) {
             if (![[NSProcessInfo processInfo] isLowPowerModeEnabled]) {
-                if (orig == 0) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging0.png"]];
-                else if (orig >= 1 && orig <= 10) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging1-10.png"]];
-                else if (orig >= 11 && orig <= 20) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging11-20.png"]];
-                else if (orig >= 21 && orig <= 30) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging21-30.png"]];
-                else if (orig >= 31 && orig <= 40) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging31-40.png"]];
-                else if (orig >= 41 && orig <= 50) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging41-50.png"]];
-                else if (orig >= 51 && orig <= 60) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging51-60.png"]];
-                else if (orig >= 61 && orig <= 70) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging61-70.png"]];
-                else if (orig >= 71 && orig <= 80) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging71-80.png"]];
-                else if (orig >= 81 && orig <= 90) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging81-90.png"]];
-                else if (orig >= 91 && orig <= 100) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging91-100.png"]];
+                if (orig == 0) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging0.png")]];
+                else if (orig >= 1 && orig <= 10) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging1-10.png")]];
+                else if (orig >= 11 && orig <= 20) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging11-20.png")]];
+                else if (orig >= 21 && orig <= 30) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging21-30.png")]];
+                else if (orig >= 31 && orig <= 40) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging31-40.png")]];
+                else if (orig >= 41 && orig <= 50) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging41-50.png")]];
+                else if (orig >= 51 && orig <= 60) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging51-60.png")]];
+                else if (orig >= 61 && orig <= 70) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging61-70.png")]];
+                else if (orig >= 71 && orig <= 80) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging71-80.png")]];
+                else if (orig >= 81 && orig <= 90) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging81-90.png")]];
+                else if (orig >= 91 && orig <= 100) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/discharging/discharging91-100.png")]];
             } else {
-                if (orig == 0) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode0.png"]];
-                else if (orig >= 1 && orig <= 10) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode1-10.png"]];
-                else if (orig >= 11 && orig <= 20) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode11-20.png"]];
-                else if (orig >= 21 && orig <= 30) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode21-30.png"]];
-                else if (orig >= 31 && orig <= 40) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode31-40.png"]];
-                else if (orig >= 41 && orig <= 50) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode41-50.png"]];
-                else if (orig >= 51 && orig <= 60) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode51-60.png"]];
-                else if (orig >= 61 && orig <= 70) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode61-70.png"]];
-                else if (orig >= 71 && orig <= 80) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode71-80.png"]];
-                else if (orig >= 81 && orig <= 90) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode81-90.png"]];
-                else if (orig >= 91 && orig <= 100) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode91-100.png"]];
+                if (orig == 0) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode0.png")]];
+                else if (orig >= 1 && orig <= 10) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode1-10.png")]];
+                else if (orig >= 11 && orig <= 20) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode11-20.png")]];
+                else if (orig >= 21 && orig <= 30) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode21-30.png")]];
+                else if (orig >= 31 && orig <= 40) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode31-40.png")]];
+                else if (orig >= 41 && orig <= 50) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode41-50.png")]];
+                else if (orig >= 51 && orig <= 60) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode51-60.png")]];
+                else if (orig >= 61 && orig <= 70) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode61-70.png")]];
+                else if (orig >= 71 && orig <= 80) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode71-80.png")]];
+                else if (orig >= 81 && orig <= 90) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode81-90.png")]];
+                else if (orig >= 91 && orig <= 100) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/low_power_mode/discharging_low_power_mode91-100.png")]];
             }
         } else {
-            if (orig == 0) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging0.png"]];
-            else if (orig >= 1 && orig <= 10) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging1-10.png"]];
-            else if (orig >= 11 && orig <= 20) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging11-20.png"]];
-            else if (orig >= 21 && orig <= 30) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging21-30.png"]];
-            else if (orig >= 31 && orig <= 40) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging31-40.png"]];
-            else if (orig >= 41 && orig <= 50) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging41-50.png"]];
-            else if (orig >= 51 && orig <= 60) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging51-60.png"]];
-            else if (orig >= 61 && orig <= 70) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging61-70.png"]];
-            else if (orig >= 71 && orig <= 80) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging71-80.png"]];
-            else if (orig >= 81 && orig <= 90) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging81-90.png"]];
-            else if (orig >= 91 && orig <= 100) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging91-100.png"]];
+            if (orig == 0) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging0.png")]];
+            else if (orig >= 1 && orig <= 10) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging1-10.png")]];
+            else if (orig >= 11 && orig <= 20) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging11-20.png")]];
+            else if (orig >= 21 && orig <= 30) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging21-30.png")]];
+            else if (orig >= 31 && orig <= 40) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging31-40.png")]];
+            else if (orig >= 41 && orig <= 50) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging41-50.png")]];
+            else if (orig >= 51 && orig <= 60) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging51-60.png")]];
+            else if (orig >= 61 && orig <= 70) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging61-70.png")]];
+            else if (orig >= 71 && orig <= 80) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging71-80.png")]];
+            else if (orig >= 81 && orig <= 90) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging81-90.png")]];
+            else if (orig >= 91 && orig <= 100) [[coverSheetView diaryBatteryIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/battery/charging/charging91-100.png")]];
         }
 
         coverSheetView.diaryBatteryIcon.image = [[[coverSheetView diaryBatteryIcon] image] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -1531,20 +1544,20 @@ SBFWallpaperView* lockscreenWallpaper = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (![[%c(SBAirplaneModeController) sharedInstance] isInAirplaneMode]) {
             if ([self isAssociated]) {
-                if (strength == 1) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi1.png"]];
-                else if (strength == 2) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi2.png"]];
-                else if (strength == 3) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi3.png"]];
+                if (strength == 1) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi1.png")]];
+                else if (strength == 2) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi2.png")]];
+                else if (strength == 3) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi3.png")]];
             } else {
-                [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi0.png"]];
+                [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi0.png")]];
             }
         } else if ([[%c(SBAirplaneModeController) sharedInstance] isInAirplaneMode] && [self isAssociated]) {
-            if (strength == 1) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi1.png"]];
-            else if (strength == 2) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi2.png"]];
-            else if (strength == 3) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi3.png"]];
+            if (strength == 1) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi1.png")]];
+            else if (strength == 2) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi2.png")]];
+            else if (strength == 3) [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/wifi3.png")]];
             [[coverSheetView diaryCellularIcon] setHidden:NO];
-            [[coverSheetView diaryCellularIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/airplane.png"]];
+            [[coverSheetView diaryCellularIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/airplane.png")]];
         } else if ([[%c(SBAirplaneModeController) sharedInstance] isInAirplaneMode] && ![self isAssociated]) {
-            [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/airplane.png"]];
+            [[coverSheetView diaryWifiIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/airplane.png")]];
             [[coverSheetView diaryCellularIcon] setHidden:YES];
         }
 
@@ -1571,10 +1584,10 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         int strength = [self numberOfActiveBars];
 
         [[coverSheetView diaryCellularIcon] setHidden:NO];
-        if (strength == 1) [[coverSheetView diaryCellularIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/cellular1.png"]];
-        else if (strength == 2) [[coverSheetView diaryCellularIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/cellular2.png"]];
-        else if (strength == 3) [[coverSheetView diaryCellularIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/cellular3.png"]];
-        else if (strength == 4) [[coverSheetView diaryCellularIcon] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/cellular4.png"]];
+        if (strength == 1) [[coverSheetView diaryCellularIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/cellular1.png")]];
+        else if (strength == 2) [[coverSheetView diaryCellularIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/cellular2.png")]];
+        else if (strength == 3) [[coverSheetView diaryCellularIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/cellular3.png")]];
+        else if (strength == 4) [[coverSheetView diaryCellularIcon] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/connectivity/cellular4.png")]];
         coverSheetView.diaryCellularIcon.image = [[[coverSheetView diaryCellularIcon] image] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         [[coverSheetView diaryCellularIcon] setTintColor:[GcColorPickerUtils colorWithHex:connectivityColorValue]];
 
@@ -1614,7 +1627,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 
     %orig;
 
-    
+
     // hello label
     if (enableHelloSwitch && showHelloGreetingSwitch && ![self diaryHelloLabel]) {
         self.diaryHelloLabel = [UILabel new];
@@ -1649,7 +1662,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 
 	if (animation == 0) {
         helloStartArray = [NSMutableArray new];
-        for (int i = 0; i < 24; i++) [helloStartArray addObject:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/Library/PreferenceBundles/DiaryPreferences.bundle/hello/start/%i.png", i]]];
+        for (int i = 0; i < 24; i++) [helloStartArray addObject:[UIImage imageWithContentsOfFile:jbroot([NSString stringWithFormat:@"/Library/PreferenceBundles/DiaryPreferences.bundle/hello/start/%i.png", i])]];
         helloStartImage = [UIImage animatedImageWithImages:helloStartArray duration:0.6];
         self.diaryHelloIconView = [[UIImageView alloc] initWithImage:helloStartImage];
 
@@ -1659,7 +1672,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         helloAuthenticatedImage = nil;
     } else if (animation == 1) {
         helloSearchingArray = [NSMutableArray new];
-        for (int i = 0; i < 116; i++) [helloSearchingArray addObject:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/Library/PreferenceBundles/DiaryPreferences.bundle/hello/searching/%i.png", i]]];
+        for (int i = 0; i < 116; i++) [helloSearchingArray addObject:[UIImage imageWithContentsOfFile:jbroot([NSString stringWithFormat:@"/Library/PreferenceBundles/DiaryPreferences.bundle/hello/searching/%i.png", i])]];
         helloSearchingImage = [UIImage animatedImageWithImages:helloSearchingArray duration:4.28];
         self.diaryHelloIconView = [[UIImageView alloc] initWithImage:helloSearchingImage];
 
@@ -1669,7 +1682,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         helloAuthenticatedImage = nil;
     } else if (animation == 2) {
         helloAuthenticatedArray = [NSMutableArray new];
-        for (int i = 0; i < 51; i++) [helloAuthenticatedArray addObject:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"/Library/PreferenceBundles/DiaryPreferences.bundle/hello/authenticated/%i.png", i]]];
+        for (int i = 0; i < 51; i++) [helloAuthenticatedArray addObject:[UIImage imageWithContentsOfFile:jbroot([NSString stringWithFormat:@"/Library/PreferenceBundles/DiaryPreferences.bundle/hello/authenticated/%i.png", i])]];
         helloAuthenticatedImage = [UIImage animatedImageWithImages:helloAuthenticatedArray duration:1.12];
         self.diaryHelloIconView = [[UIImageView alloc] initWithImage:helloAuthenticatedImage];
 
@@ -1914,7 +1927,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         // rewind button
         self.diaryRewindButton = [UIButton new];
         [[self diaryRewindButton] addTarget:self action:@selector(rewindSong) forControlEvents:UIControlEventTouchUpInside];
-        [[self diaryRewindButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/rewind.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [[self diaryRewindButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/rewind.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [[self diaryRewindButton] setTintColor:[UIColor whiteColor]];
         [[self diaryRewindButton] setAdjustsImageWhenHighlighted:NO];
         [[self diaryRewindButton] setImageEdgeInsets:UIEdgeInsetsMake(7, 7, 7, 7)];
@@ -1932,7 +1945,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         // pause button
         self.diaryPauseButton = [UIButton new];
         [[self diaryPauseButton] addTarget:self action:@selector(pausePlaySong) forControlEvents:UIControlEventTouchUpInside];
-        [[self diaryPauseButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/pause.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [[self diaryPauseButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/pause.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [[self diaryPauseButton] setTintColor:[UIColor whiteColor]];
         [[self diaryPauseButton] setAdjustsImageWhenHighlighted:NO];
         [[self diaryPauseButton] setImageEdgeInsets:UIEdgeInsetsMake(7, 7, 7, 7)];
@@ -1950,7 +1963,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         // skip button
         self.diarySkipButton = [UIButton new];
         [[self diarySkipButton] addTarget:self action:@selector(skipSong) forControlEvents:UIControlEventTouchUpInside];
-        [[self diarySkipButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/skip.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [[self diarySkipButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/skip.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [[self diarySkipButton] setTintColor:[UIColor whiteColor]];
         [[self diarySkipButton] setAdjustsImageWhenHighlighted:NO];
         [[self diarySkipButton] setImageEdgeInsets:UIEdgeInsetsMake(7, 7, 7, 7)];
@@ -2048,7 +2061,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         // rewind button
         self.diaryRewindButton = [UIButton new];
         [[self diaryRewindButton] addTarget:self action:@selector(rewindSong) forControlEvents:UIControlEventTouchUpInside];
-        [[self diaryRewindButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/rewind.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [[self diaryRewindButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/rewind.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [[self diaryRewindButton] setTintColor:[UIColor whiteColor]];
         [[self diaryRewindButton] setAdjustsImageWhenHighlighted:NO];
         [[self diaryRewindButton] setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
@@ -2066,7 +2079,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         // pause button
         self.diaryPauseButton = [UIButton new];
         [[self diaryPauseButton] addTarget:self action:@selector(pausePlaySong) forControlEvents:UIControlEventTouchUpInside];
-        [[self diaryPauseButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/pause.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [[self diaryPauseButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/pause.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [[self diaryPauseButton] setTintColor:[UIColor whiteColor]];
         [[self diaryPauseButton] setAdjustsImageWhenHighlighted:NO];
         [[self diaryPauseButton] setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
@@ -2084,7 +2097,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         // skip button
         self.diarySkipButton = [UIButton new];
         [[self diarySkipButton] addTarget:self action:@selector(skipSong) forControlEvents:UIControlEventTouchUpInside];
-        [[self diarySkipButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/skip.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [[self diarySkipButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/skip.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [[self diarySkipButton] setTintColor:[UIColor whiteColor]];
         [[self diarySkipButton] setAdjustsImageWhenHighlighted:NO];
         [[self diarySkipButton] setImageEdgeInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
@@ -2197,7 +2210,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
                     } else {
                         [[coverSheetView diaryArtworkView] setImage:artwork];
                     }
-                    if (adaptiveMediaPlayerBackgroundSwitch) [[coverSheetView diaryPlayerView] setBackgroundColor:[libKitten backgroundColor:artwork]];
+                    if (adaptiveMediaPlayerBackgroundSwitch) [[coverSheetView diaryPlayerView] setBackgroundColor:[artwork averageColor]];
                 }
                 if (dict[(__bridge NSString *)kMRMediaRemoteNowPlayingInfoTitle]) [[coverSheetView diarySongTitleLabel] setText:[NSString stringWithFormat:@"%@", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoTitle]]];
                 if (dict[(__bridge NSString *)kMRMediaRemoteNowPlayingInfoArtist])[[coverSheetView diaryArtistLabel] setText:[NSString stringWithFormat:@"%@", [dict objectForKey:(__bridge NSString*)kMRMediaRemoteNowPlayingInfoArtist]]];
@@ -2209,7 +2222,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"diaryUpdateNotificationList" object:nil];
   	});
-    
+
 }
 
 - (void)_mediaRemoteNowPlayingApplicationIsPlayingDidChange:(id)arg1 { // update play/pause button image
@@ -2217,9 +2230,9 @@ SBFWallpaperView* lockscreenWallpaper = nil;
     %orig;
 
     if ([self isPaused])
-        [[coverSheetView diaryPauseButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/play.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [[coverSheetView diaryPauseButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/play.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     else if (![self isPaused])
-        [[coverSheetView diaryPauseButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/pause.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [[coverSheetView diaryPauseButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/music_controls/pause.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
 
 }
 
@@ -2232,7 +2245,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
     %orig;
 
     [[%c(SBMediaController) sharedInstance] setNowPlayingInfo:0];
-    
+
 }
 
 %end
@@ -2263,8 +2276,8 @@ SBFWallpaperView* lockscreenWallpaper = nil;
     if (enableSpotlightSwitch && ![self diarySpotlightWallpaperView]) {
         // create an array containing the path of each image from /Library/Diary/Wallpapers/ as a string
         spotlightWallpapers = [NSMutableArray new];
-        NSArray* wallpaperDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/Library/Diary/Wallpapers/" error:nil];
-        for (int i = 0; i < [wallpaperDirectory count]; i++) [spotlightWallpapers addObject:[NSString stringWithFormat:@"/Library/Diary/Wallpapers/%@", [wallpaperDirectory objectAtIndex:i]]];
+        NSArray* wallpaperDirectory = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:jbroot(@"/Library/Diary/Wallpapers/") error:nil];
+        for (int i = 0; i < [wallpaperDirectory count]; i++) [spotlightWallpapers addObject:[NSString stringWithFormat:jbroot(@"/Library/Diary/Wallpapers/%@"), [wallpaperDirectory objectAtIndex:i]]];
 
 
         self.diarySpotlightWallpaperView = [[UIImageView alloc] initWithFrame:[self bounds]];
@@ -2291,7 +2304,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 - (void)viewWillAppear:(BOOL)animated { // update gradient frame when lock screen appears
 
 	%orig;
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"diaryRotateNotification" object:nil];
 
 }
@@ -2378,7 +2391,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 	self.userAvatar = [UIImageView new];
     UIImage* avatarImage = [GcImagePickerUtils imageFromDefaults:@"love.litten.diarypreferences" withKey:@"avatar"];
     if (avatarImage) [[self userAvatar] setImage:avatarImage];
-    else [[self userAvatar] setImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/passcode/avatarPlaceholder.png"]];
+    else [[self userAvatar] setImage:[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/passcode/avatarPlaceholder.png")]];
     [[self userAvatar] setContentMode:UIViewContentModeScaleAspectFill];
     [[self userAvatar] setClipsToBounds:YES];
     [[[self userAvatar] layer] setCornerRadius:85];
@@ -2415,7 +2428,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         // button
         self.passcodeEntryConfirmButton = [UIButton new];
         [[self passcodeEntryConfirmButton] addTarget:self action:@selector(attemptManualUnlock) forControlEvents:UIControlEventTouchUpInside];
-        [[self passcodeEntryConfirmButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/passcode/confirmButtonArrow.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [[self passcodeEntryConfirmButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/passcode/confirmButtonArrow.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [[self passcodeEntryConfirmButton] setTintColor:[UIColor whiteColor]];
         [[self passcodeEntryConfirmButton] setBackgroundColor:[[UIColor whiteColor] colorWithAlphaComponent:0.2]];
         [[self passcodeEntryConfirmButton] setImageEdgeInsets:UIEdgeInsetsMake(7, 7, 7, 7)];
@@ -2506,7 +2519,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
         // button
         self.passcodeEntryConfirmButton = [UIButton new];
         [[self passcodeEntryConfirmButton] addTarget:self action:@selector(attemptManualUnlock) forControlEvents:UIControlEventTouchUpInside];
-        [[self passcodeEntryConfirmButton] setImage:[[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/DiaryPreferences.bundle/passcode/confirmButtonArrow.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [[self passcodeEntryConfirmButton] setImage:[[UIImage imageWithContentsOfFile:jbroot(@"/Library/PreferenceBundles/DiaryPreferences.bundle/passcode/confirmButtonArrow.png")] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [[self passcodeEntryConfirmButton] setTintColor:[UIColor whiteColor]];
         [[self passcodeEntryConfirmButton] setImageEdgeInsets:UIEdgeInsetsMake(7, 7, 7, 7)];
         [[self passcodeEntryView] addSubview:[self passcodeEntryConfirmButton]];
@@ -2722,7 +2735,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
                 [[coverSheetView diarySpotlightWallpaperView] setTransform:CGAffineTransformIdentity];
             } completion:nil];
         }
-        
+
         [UIView animateWithDuration:0.25 delay:0.15 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             [[self backgroundBlurView] setAlpha:0];
         } completion:nil];
@@ -2788,7 +2801,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 
     [passcodeLeaveTimer invalidate];
     passcodeLeaveTimer = nil;
-    
+
     if (([passcodeTypeValue intValue] == 0 && [[[self passcodeEntryField] text] length] == 4) || ([passcodeTypeValue intValue] == 1 && [[[self passcodeEntryField] text] length] == 6)) {
         [[%c(SBLockScreenManager) sharedInstance] attemptUnlockWithPasscode:[NSString stringWithFormat:@"%@", [[self passcodeEntryField] text]] finishUIUnlock:1 completion:nil];
         if ([[%c(SBLockScreenManager) sharedInstance] isUILocked]) [self showIncorrectPasswordView];
@@ -2889,7 +2902,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 
     [passcodeLeaveTimer invalidate];
     passcodeLeaveTimer = nil;
-    
+
 	if (arg1) [[NSNotificationCenter defaultCenter] postNotificationName:@"diaryBiometricPasscodeAuthentication" object:nil];
 
 }
@@ -2921,7 +2934,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 - (void)didMoveToWindow { // remove default passcode entry indicator
 
 	%orig;
-	
+
 	[self removeFromSuperview];
 
 }
@@ -2933,7 +2946,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
 - (void)didMoveToWindow { // remove default passcode keypad
 
 	%orig;
-	
+
 	[self removeFromSuperview];
 
 }
@@ -2957,7 +2970,7 @@ SBFWallpaperView* lockscreenWallpaper = nil;
     if ([UIDevice currentIsIPad]) return;
 
     preferences = [[HBPreferences alloc] initWithIdentifier:@"love.litten.diarypreferences"];
-    
+
     [preferences registerBool:&enabled default:NO forKey:@"Enabled"];
     if (!enabled) return;
 

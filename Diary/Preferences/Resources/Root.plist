@@ -4,20 +4,30 @@
 <dict>
 	<key>items</key>
 	<array>
-	
+
 		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
 			<key>cellClass</key>
 			<string>DuoTwitterCell</string>
-			<key>firstLabel</key>
+			<key>leftUsername</key>
 			<string>🌸 Litten</string>
-			<key>firstAccount</key>
-			<string>schneelittchen</string>
-			<key>secondLabel</key>
+			<key>leftHandle</key>
+			<string>@schneelittchen</string>
+			<key>leftProfilePicture</key>
+			<string>duo/schneelittchen.png</string>
+			<key>leftOpenURL</key>
+			<string>https://twitter.com/schneelittchen</string>
+			<key>rightUsername</key>
 			<string>taki</string>
-			<key>secondAccount</key>
-			<string>74k1_</string>
+			<key>rightHandle</key>
+			<string>@74k1_</string>
+			<key>rightProfilePicture</key>
+			<string>duo/taki.png</string>
+			<key>rightOpenURL</key>
+			<string>https://twitter.com/74k1_</string>
 			<key>height</key>
-			<real>57</real>
+			<real>70</real>
 		</dict>
 
 		<dict>
@@ -147,7 +157,7 @@
 			<key>icon</key>
 			<string>featured/Ventana.png</string>
 			<key>url</key>
-			<string>https://repo.packix.com/package/org.coolstar.ventana-modern/</string>
+			<string>https://havoc.app/package/ventana</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>
@@ -159,7 +169,7 @@
 			<key>icon</key>
 			<string>featured/Yuna.png</string>
 			<key>url</key>
-			<string>https://repo.litten.love/depictions/Yuna/</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/Yuna</string>
 		</dict>
 
 		<dict>
@@ -174,31 +184,11 @@
 			<key>cellClass</key>
 			<string>HBLinkTableCell</string>
 			<key>label</key>
-			<string>Discord</string>
-			<key>subtitle</key>
-			<string>Chat with us 👾</string>
-			<key>url</key>
-			<string>https://discord.gg/tKUPZrS7ve</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>HBLinkTableCell</string>
-			<key>label</key>
 			<string>Source code</string>
 			<key>subtitle</key>
 			<string>GitHub 📖</string>
 			<key>url</key>
-			<string>https://github.com/schneelittchen/Diary</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>HBLinkTableCell</string>
-			<key>label</key>
-			<string>Donate to Litten</string>
-			<key>subtitle</key>
-			<string>Appreciated 💝</string>
-			<key>url</key>
-			<string>https://paypal.me/Litteeen</string>
+			<string>https://github.com/waruhachi/Tweaks/tree/main/Diary</string>
 		</dict>
 
 		<dict>

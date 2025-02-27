@@ -11,7 +11,7 @@
 			<key>label</key>
 			<string>Wallpaper</string>
 			<key>footerText</key>
-			<string>To use random wallpapers (spotlight), copy your wallpapers into /Library/Diary/Wallpapers/</string>
+			<string>PLACEHOLDER_WALLPAPER_PATH</string>
 			<key>isStaticText</key>
 			<true/>
 		</dict>

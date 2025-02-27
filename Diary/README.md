@@ -22,7 +22,7 @@ iPhone, iPad and iPod running iOS/iPadOS 13 or later
 
 ## Compiling
   - [Theos](https://theos.dev/) is required to compile the project
-  - Depends on [libKitten](https://github.com/schneelittchen/libKitten), [libPDDokdo](https://github.com/s8ngyu/libpddokdo) and [libGCUniversal](https://github.com/MrGcGamer/LibGcUniversalDocumentation)
+  - Depends on [libGCUniversal](https://github.com/MrGcGamer/LibGcUniversalDocumentation)
 
 ## License
 [MIT](https://github.com/Traurige/Diary/blob/main/LICENSE)

@@ -1,14 +1,17 @@
+#import <roothide.h>
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
 #import <EventKit/EventKit.h>
-#import "libpddokdo.h"
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-#import <MediaRemote/MediaRemote.h>
-#import "GcUniversal/GcImagePickerUtils.h"
-#import "GcUniversal/GcColorPickerUtils.h"
-#import <Kitten/libKitten.h>
-#import "../Utils/DRYLocalization.h"
 #import <Cephei/HBPreferences.h>
+#import <MediaRemote/MediaRemote.h>
+#import <GcUniversal/GcImageUtils.h>
+#import <GcUniversal/GcImagePickerUtils.h>
+#import <GcUniversal/GcColorPickerUtils.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+
+
+#import "../Localization/DRYLocalization.h"
+#import "../../Vendor/libPDDokdo/libPDDokdo.h"
 
 HBPreferences* preferences = nil;
 BOOL enabled = NO;
@@ -176,7 +179,7 @@ BOOL hideDefaultPageDotsSwitch = YES;
 @end
 
 @interface MTAlarmCache : NSObject
-@property(nonatomic, retain)MTAlarm* nextAlarm; 
+@property(nonatomic, retain)MTAlarm* nextAlarm;
 @end
 
 @interface MTAlarmManager : NSObject
@@ -224,6 +227,9 @@ BOOL hideDefaultPageDotsSwitch = YES;
 @end
 
 @interface SBFLockScreenDateSubtitleView : UIView
+@end
+
+@interface CSProminentDisplayView: UIView
 @end
 
 @interface SBLockScreenTimerDialView : UIView
