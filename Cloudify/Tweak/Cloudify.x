@@ -221,7 +221,7 @@
 
 // %end
 
-%hook PlatformGroupContainer
+// %hook PlatformGroupContainer
 
 // - (void)insertSubview:(UIView *)view atIndex:(NSInteger)index {
 //     UIColor *targetColor = [UIColor colorFromHex:@"#262626"];
@@ -260,7 +260,7 @@
 //     %orig;
 // }
 
-%end
+// %end
 
 %ctor {
 	%init(
@@ -272,7 +272,7 @@
 		PlayQueueItemTrackEntity = objc_getClass("SoundCloud.PlayQueueItemTrackEntity"),
 		GoUpsellButtonViewWrapper = objc_getClass("Payments.GoUpsellButtonViewWrapper"),
 		DisplayAdBannerFeatureProvider = objc_getClass("Ads.DisplayAdBannerFeatureProvider"),
-		AudioAdPlayerEventController = objc_getClass("SoundCloud.AudioAdPlayerEventController"),
-        // PlatformGroupContainer = objc_getClass("_TtCC7SwiftUI17HostingScrollView22PlatformGroupContainer")
+		AudioAdPlayerEventController = objc_getClass("SoundCloud.AudioAdPlayerEventController")
+        // ,PlatformGroupContainer = objc_getClass("_TtCC7SwiftUI17HostingScrollView22PlatformGroupContainer")
 	);
 }
