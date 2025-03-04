@@ -40,3 +40,6 @@
 [submodule "Liddell"]
 	path = Liddell
 	url = https://github.com/waruhachi/Liddell.git
+[submodule "ShyLabels"]
+	path = ShyLabels
+	url = https://github.com/waruhachi/ShyLabels.git
