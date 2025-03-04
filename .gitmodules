@@ -64,3 +64,6 @@
 [submodule "WindowHUD"]
 	path = WindowHUD
 	url = https://github.com/waruhachi/WindowHUD.git
+[submodule "OhMyFlash"]
+	path = OhMyFlash
+	url = https://github.com/waruhachi/OhMyFlash.git
