@@ -52,3 +52,6 @@
 [submodule "Diary"]
 	path = Diary
 	url = https://github.com/waruhachi/Diary.git
+[submodule "koi"]
+	path = koi
+	url = https://github.com/waruhachi/koi.git
