@@ -1,9 +1,0 @@
-Package: com.anthopak.easyairplanedisabler
-Name: EasyAirplaneDisabler
-Depends: mobilesubstrate, firmware (>= 11.0)
-Version: 1.1.1
-Architecture: iphoneos-arm
-Description: Turn off Airplane mode directly from alert
-Maintainer: AnthoPak <anthopakdev@gmail.com>
-Author: AnthoPak <anthopakdev@gmail.com>
-Section: Tweaks
