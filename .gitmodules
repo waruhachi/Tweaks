@@ -19,3 +19,6 @@
 [submodule "QuickPrefs"]
 	path = QuickPrefs
 	url = https://github.com/waruhachi/QuickPrefs.git
+[submodule "BatteryBuddy"]
+	path = BatteryBuddy
+	url = https://github.com/waruhachi/BatteryBuddy.git
