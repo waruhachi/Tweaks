@@ -37,3 +37,6 @@
 [submodule "Eneko"]
 	path = Eneko
 	url = https://github.com/waruhachi/Eneko.git
+[submodule "Liddell"]
+	path = Liddell
+	url = https://github.com/waruhachi/Liddell.git
