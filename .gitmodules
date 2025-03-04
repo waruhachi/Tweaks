@@ -4,3 +4,6 @@
 [submodule "Crystal-ObjC"]
 	path = Crystal-ObjC
 	url = https://github.com/waruhachi/Crystal.git
+[submodule "Kayoko"]
+	path = Kayoko
+	url = https://github.com/waruhachi/Kayoko.git
