@@ -67,3 +67,6 @@
 [submodule "OhMyFlash"]
 	path = OhMyFlash
 	url = https://github.com/waruhachi/OhMyFlash.git
+[submodule "WiFiCarrier"]
+	path = WiFiCarrier
+	url = https://github.com/waruhachi/WiFiCarrier.git
