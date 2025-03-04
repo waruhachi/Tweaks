@@ -16,3 +16,6 @@
 [submodule "CozyBadges"]
 	path = CozyBadges
 	url = https://github.com/waruhachi/CozyBadges.git
+[submodule "QuickPrefs"]
+	path = QuickPrefs
+	url = https://github.com/waruhachi/QuickPrefs.git
