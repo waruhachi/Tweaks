@@ -25,3 +25,6 @@
 [submodule "MagmaEvo"]
 	path = MagmaEvo
 	url = https://github.com/waruhachi/MagmaEvo.git
+[submodule "BetterAlarm"]
+	path = BetterAlarm
+	url = https://github.com/waruhachi/BetterAlarm.git
