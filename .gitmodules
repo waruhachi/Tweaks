@@ -7,3 +7,6 @@
 [submodule "Kayoko"]
 	path = Kayoko
 	url = https://github.com/waruhachi/Kayoko.git
+[submodule "Ve"]
+	path = Ve
+	url = https://github.com/waruhachi/Ve.git
