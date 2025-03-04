@@ -46,3 +46,6 @@
 [submodule "NotificationFaker"]
 	path = NotificationFaker
 	url = https://github.com/waruhachi/NotificationFaker.git
+[submodule "EasyAirplaneDisabler"]
+	path = EasyAirplaneDisabler
+	url = https://github.com/waruhachi/EasyAirplaneDisabler.git
