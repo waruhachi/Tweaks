@@ -49,3 +49,6 @@
 [submodule "EasyAirplaneDisabler"]
 	path = EasyAirplaneDisabler
 	url = https://github.com/waruhachi/EasyAirplaneDisabler.git
+[submodule "Diary"]
+	path = Diary
+	url = https://github.com/waruhachi/Diary.git
