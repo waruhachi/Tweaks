@@ -13,3 +13,6 @@
 [submodule "HATE-ObjC"]
 	path = HATE-ObjC
 	url = https://github.com/waruhachi/HATE.git
+[submodule "CozyBadges"]
+	path = CozyBadges
+	url = https://github.com/waruhachi/CozyBadges.git
