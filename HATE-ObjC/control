@@ -1,9 +1,0 @@
-Package: codes.aurora.hate
-Name: HATE
-Version: 1.0.1
-Architecture: iphoneos-arm
-Description: True OLED dark keyboard.
-Maintainer: Alexandra Aurora Göttlicher
-Author: Alexandra Aurora Göttlicher
-Section: Tweaks
-Depends: firmware (>= 14.0), mobilesubstrate, preferenceloader
