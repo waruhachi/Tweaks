@@ -55,3 +55,6 @@
 [submodule "koi"]
 	path = koi
 	url = https://github.com/waruhachi/koi.git
+[submodule "HiddenPhotosCC"]
+	path = HiddenPhotosCC
+	url = https://github.com/waruhachi/HiddenPhotosCC.git
