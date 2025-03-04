@@ -1,6 +1,0 @@
-{ 
-    Filter = { 
-        Executables = ( "mediaserverd" );
-        Bundles = ( "com.apple.springboard" );
-    }; 
-}
