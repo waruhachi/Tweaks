@@ -34,3 +34,6 @@
 [submodule "Velvet2"]
 	path = Velvet2
 	url = https://github.com/waruhachi/Velvet2.git
+[submodule "Eneko"]
+	path = Eneko
+	url = https://github.com/waruhachi/Eneko.git
