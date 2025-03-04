@@ -1,0 +1,3 @@
+[submodule "NoLSPowerDown"]
+	path = NoLSPowerDown
+	url = https://github.com/waruhachi/nolspowerdown.git
