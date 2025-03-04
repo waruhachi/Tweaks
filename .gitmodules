@@ -58,3 +58,6 @@
 [submodule "HiddenPhotosCC"]
 	path = HiddenPhotosCC
 	url = https://github.com/waruhachi/HiddenPhotosCC.git
+[submodule "PanCake"]
+	path = PanCake
+	url = https://github.com/waruhachi/PanCake.git
