@@ -22,3 +22,6 @@
 [submodule "BatteryBuddy"]
 	path = BatteryBuddy
 	url = https://github.com/waruhachi/BatteryBuddy.git
+[submodule "MagmaEvo"]
+	path = MagmaEvo
+	url = https://github.com/waruhachi/MagmaEvo.git
