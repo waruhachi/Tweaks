@@ -61,3 +61,6 @@
 [submodule "PanCake"]
 	path = PanCake
 	url = https://github.com/waruhachi/PanCake.git
+[submodule "WindowHUD"]
+	path = WindowHUD
+	url = https://github.com/waruhachi/WindowHUD.git
