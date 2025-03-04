@@ -43,3 +43,6 @@
 [submodule "ShyLabels"]
 	path = ShyLabels
 	url = https://github.com/waruhachi/ShyLabels.git
+[submodule "NotificationFaker"]
+	path = NotificationFaker
+	url = https://github.com/waruhachi/NotificationFaker.git
