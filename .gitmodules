@@ -28,3 +28,6 @@
 [submodule "BetterAlarm"]
 	path = BetterAlarm
 	url = https://github.com/waruhachi/BetterAlarm.git
+[submodule "AlbumManager"]
+	path = AlbumManager
+	url = https://github.com/waruhachi/AlbumManager.git
