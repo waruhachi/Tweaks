@@ -31,3 +31,6 @@
 [submodule "AlbumManager"]
 	path = AlbumManager
 	url = https://github.com/waruhachi/AlbumManager.git
+[submodule "Velvet2"]
+	path = Velvet2
+	url = https://github.com/waruhachi/Velvet2.git
