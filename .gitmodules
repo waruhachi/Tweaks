@@ -136,3 +136,6 @@
 [submodule "FocusDND"]
 	path = FocusDND
 	url = https://github.com/waruhachi/FocusDND.git
+[submodule "SCMusicPlus"]
+	path = SCMusicPlus
+	url = https://github.com/waruhachi/SCMusicPlus.git

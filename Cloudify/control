@@ -1,9 +1,0 @@
-Name: Cloudify ☁️
-Version: 1.1.0
-Description: A Better SoundCloud
-Maintainer: waruhachi
-Author: waruhachi
-Section: Tweaks
-Architecture: iphoneos-arm
-Depends: mobilesubstrate
-Package: moe.waru.cloudify
