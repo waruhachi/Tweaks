@@ -44,7 +44,7 @@ jobs:
                   git submodule update --init --recursive
 
     build:
-        needs: cleanup
+        needs: fetch
         runs-on: macos-latest
         strategy:
             matrix:
