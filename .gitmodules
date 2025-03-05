@@ -76,3 +76,6 @@
 [submodule "Avrora"]
 	path = Avrora
 	url = https://github.com/waruhachi/Avrora.git
+[submodule "Dress"]
+	path = Dress
+	url = https://github.com/waruhachi/Dress.git
