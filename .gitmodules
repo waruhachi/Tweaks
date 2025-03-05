@@ -121,3 +121,6 @@
 [submodule "Rose"]
 	path = Rose
 	url = https://github.com/waruhachi/Rose.git
+[submodule "Juin"]
+	path = Juin
+	url = https://github.com/waruhachi/Juin.git
