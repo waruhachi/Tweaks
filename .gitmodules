@@ -142,3 +142,30 @@
 [submodule "CCNoiseControl"]
 	path = CCNoiseControl
 	url = https://github.com/waruhachi/CCNoiseControl.git
+[submodule "Stardust"]
+	path = Stardust
+	url = https://github.com/waruhachi/Stardust
+[submodule "ProudLock"]
+	path = ProudLock
+	url = https://github.com/waruhachi/ProudLock
+[submodule "Playlist"]
+	path = Playlist
+	url = https://github.com/waruhachi/Playlist
+[submodule "NoLowPowerAlert"]
+	path = NoLowPowerAlert
+	url = https://github.com/waruhachi/NoLowPowerAlert
+[submodule "Neverland"]
+	path = Neverland
+	url = https://github.com/waruhachi/Neverland
+[submodule "Lou"]
+	path = Lou
+	url = https://github.com/waruhachi/Lou
+[submodule "Letter"]
+	path = Letter
+	url = https://github.com/waruhachi/Letter
+[submodule "Ember"]
+	path = Ember
+	url = https://github.com/waruhachi/Ember
+[submodule "AppareilPhoto"]
+	path = AppareilPhoto
+	url = https://github.com/waruhachi/AppareilPhoto
