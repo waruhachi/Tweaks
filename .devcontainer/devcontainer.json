@@ -1,0 +1,18 @@
+{
+    "name": "Tweaks",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/waruhachi/features/theos:latest": {},
+        "ghcr.io/waruhachi/features/swift:latest": {},
+        "ghcr.io/waruhachi/features/comet:latest": {},
+        "ghcr.io/waruhachi/features/libplist:latest": {},
+        "ghcr.io/waruhachi/features/libgcuniversal:latest": {}
+    },
+    "overrideFeatureInstallOrder": [
+        "ghcr.io/waruhachi/features/theos",
+        "ghcr.io/waruhachi/features/swift",
+        "ghcr.io/waruhachi/features/comet",
+        "ghcr.io/waruhachi/features/libplist",
+        "ghcr.io/waruhachi/features/libgcuniversal"
+    ]
+}
