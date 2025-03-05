@@ -82,3 +82,6 @@
 [submodule "Deja-Vu"]
 	path = Deja-Vu
 	url = https://github.com/waruhachi/Deja-Vu.git
+[submodule "Lisa"]
+	path = Lisa
+	url = https://github.com/waruhachi/Lisa.git
