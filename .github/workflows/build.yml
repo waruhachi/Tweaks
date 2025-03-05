@@ -153,8 +153,9 @@ jobs:
                   tag_name: release
                   name: Tweaks
                   body_path: release_body.md
-                  files: ${{ matrix.project }}/packages/**/*.deb
+                  files: ${{ matrix.project }}/packages/*.deb
                   draft: false
                   prerelease: false
                   make_latest: true
                   append_body: true
+                  preserve_order: true
