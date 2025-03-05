@@ -14,22 +14,23 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  TAG_NAME="release"
+                  gh release delete release --yes || true
+                #   TAG_NAME="release"
 
-                  RELEASE_ID=$(gh api repos/${{ github.repository }}/releases | jq -r --arg TAG_NAME "$TAG_NAME" '.[] | select(.tag_name == $TAG_NAME) | .id')
-                  if [ -n "$RELEASE_ID" ]; then
-                      echo "Deleting release with ID: $RELEASE_ID"
-                      gh api --method DELETE repos/${{ github.repository }}/releases/$RELEASE_ID
-                  else
-                      echo "No release found for tag: $TAG_NAME"
-                  fi
+                #   RELEASE_ID=$(gh api repos/${{ github.repository }}/releases | jq -r --arg TAG_NAME "$TAG_NAME" '.[] | select(.tag_name == $TAG_NAME) | .id')
+                #   if [ -n "$RELEASE_ID" ]; then
+                #       echo "Deleting release with ID: $RELEASE_ID"
+                #       gh api --method DELETE "repos/${{ github.repository }}/releases/$RELEASE_ID"
+                #   else
+                #       echo "No release found for tag: $TAG_NAME"
+                #   fi
 
-                  if git ls-remote --tags origin | grep -q "refs/tags/$TAG_NAME"; then
-                      echo "Deleting tag: $TAG_NAME"
-                      git push --delete origin $TAG_NAME
-                  else
-                      echo "No tag found: $TAG_NAME"
-                  fi
+                #   if git ls-remote --tags origin | grep -q "refs/tags/$TAG_NAME"; then
+                #       echo "Deleting tag: $TAG_NAME"
+                #       git push --delete origin $TAG_NAME
+                #   else
+                #       echo "No tag found: $TAG_NAME"
+                #   fi
 
     build:
         needs: cleanup
