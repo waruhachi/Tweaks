@@ -1,9 +1,0 @@
-Package: love.litten.nita
-Name: Nita ☀️
-Depends: mobilesubstrate, preferenceloader, ws.hbang.common (>= 1.14), firmware (>= 13.0)
-Version: 1.7
-Architecture: iphoneos-arm
-Description: Ensoleillé
-Maintainer: waruhachi
-Author: Litten
-Section: Tweaks
