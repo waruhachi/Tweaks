@@ -1,9 +1,0 @@
-Package: love.litten.letter
-Name: Letter
-Depends: mobilesubstrate, firmware (>= 13.0)
-Version: 1.0
-Architecture: iphoneos-arm
-Description: App icon color adaptive keyboard
-Maintainer: waruhachi
-Author: alexandra
-Section: unreleased
