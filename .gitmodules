@@ -88,3 +88,6 @@
 [submodule "Lobelias"]
 	path = Lobelias
 	url = https://github.com/waruhachi/Lobelias.git
+[submodule "Puck"]
+	path = Puck
+	url = https://github.com/waruhachi/Puck.git
