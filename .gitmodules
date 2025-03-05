@@ -139,3 +139,6 @@
 [submodule "SCMusicPlus"]
 	path = SCMusicPlus
 	url = https://github.com/waruhachi/SCMusicPlus.git
+[submodule "CCNoiseControl"]
+	path = CCNoiseControl
+	url = https://github.com/waruhachi/CCNoiseControl.git
