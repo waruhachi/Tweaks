@@ -11,7 +11,7 @@
 	path = Ve
 	url = https://github.com/waruhachi/Ve.git
 [submodule "HATE-ObjC"]
-	path = HATE-ObjC
+	path = HATE
 	url = https://github.com/waruhachi/HATE.git
 [submodule "CozyBadges"]
 	path = CozyBadges
