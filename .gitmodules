@@ -130,3 +130,6 @@
 [submodule "NoRecents"]
 	path = NoRecents
 	url = https://github.com/waruhachi/NoRecents.git
+[submodule "Kabegami"]
+	path = Kabegami
+	url = https://github.com/waruhachi/Kabegami.git
