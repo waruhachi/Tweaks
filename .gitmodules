@@ -70,6 +70,3 @@
 [submodule "WiFiCarrier"]
 	path = WiFiCarrier
 	url = https://github.com/waruhachi/WiFiCarrier.git
-[submodule "Ballet"]
-	path = Ballet
-	url = https://github.com/moj3ve/Ballet.git
