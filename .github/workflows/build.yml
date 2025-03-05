@@ -12,7 +12,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                path: '-'
+                submodules: true
 
             - name: Cleaning up existing releases and tags
               env:
@@ -41,7 +41,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                path: '-'
+                submodules: true
 
             - name: Fetching all submodules
               run: |
@@ -71,7 +71,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                path: '-'
+                submodules: true
 
             - name: Set up Theos
               uses: waruhachi/theos-action@v2.2.3
