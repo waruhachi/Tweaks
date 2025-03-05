@@ -33,6 +33,15 @@ jobs:
                       echo "No tag found: $TAG_NAME"
                   fi
 
+    fetch:
+        runs-on: macos-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Fetching all submodules
+              run: |
+                  git submodule update --init --recursive
+
     build:
         needs: cleanup
         runs-on: macos-latest
