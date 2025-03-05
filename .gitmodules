@@ -103,3 +103,15 @@
 [submodule "Nita"]
 	path = Nita
 	url = https://github.com/waruhachi/Nita.git
+[submodule "VerticalBatteryDrain"]
+	path = VerticalBatteryDrain
+	url = https://github.com/waruhachi/VerticalBatteryDrain.git
+[submodule "Central"]
+	path = Central
+	url = https://github.com/waruhachi/Central.git
+[submodule "Astolfo"]
+	path = Astolfo
+	url = https://github.com/waruhachi/Astolfo.git
+[submodule "Heartlines"]
+	path = Heartlines
+	url = https://github.com/waruhachi/Heartlines.git
