@@ -85,3 +85,6 @@
 [submodule "Lisa"]
 	path = Lisa
 	url = https://github.com/waruhachi/Lisa.git
+[submodule "Lobelias"]
+	path = Lobelias
+	url = https://github.com/waruhachi/Lobelias.git
