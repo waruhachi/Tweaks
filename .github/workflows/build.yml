@@ -10,10 +10,6 @@ jobs:
     cleanup:
         runs-on: macos-latest
         steps:
-            - uses: actions/checkout@v4
-              with:
-                submodules: true
-
             - name: Cleaning up existing releases and tags
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,20 +31,8 @@ jobs:
                       echo "No tag found: $TAG_NAME"
                   fi
 
-    fetch:
-        needs: cleanup
-        runs-on: macos-latest
-        steps:
-            - uses: actions/checkout@v4
-              with:
-                submodules: true
-
-            - name: Fetching all submodules
-              run: |
-                  git submodule update --init --recursive
-
     build:
-        needs: fetch
+        needs: cleanup
         runs-on: macos-latest
         strategy:
             matrix:
