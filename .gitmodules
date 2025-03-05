@@ -91,3 +91,6 @@
 [submodule "Puck"]
 	path = Puck
 	url = https://github.com/waruhachi/Puck.git
+[submodule "Violet"]
+	path = Violet
+	url = https://github.com/waruhachi/Violet.git
