@@ -97,3 +97,9 @@
 [submodule "Yuna"]
 	path = Yuna
 	url = https://github.com/waruhachi/Yuna.git
+[submodule "AmongLock"]
+	path = AmongLock
+	url = https://github.com/waruhachi/AmongLock.git
+[submodule "Nita"]
+	path = Nita
+	url = https://github.com/waruhachi/Nita.git
