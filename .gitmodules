@@ -127,3 +127,6 @@
 [submodule "SheetMusicScanner"]
 	path = SheetMusicScanner
 	url = https://github.com/waruhachi/SheetMusicScanner.git
+[submodule "NoRecents"]
+	path = NoRecents
+	url = https://github.com/waruhachi/NoRecents.git
