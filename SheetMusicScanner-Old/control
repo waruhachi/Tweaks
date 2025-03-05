@@ -1,9 +1,0 @@
-Package: moe.waru.sheetmusicscanner
-Name: SheetMusicScanner
-Depends: mobilesubstrate
-Version: 1.0.0
-Architecture: iphoneos-arm
-Description: Bypass Sheet Music Scanner paywall
-Maintainer: waruhachi
-Author: waruhachi
-Section: Tweaks
