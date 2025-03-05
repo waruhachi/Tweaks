@@ -45,7 +45,6 @@ jobs:
 
             - name: Fetching all submodules
               run: |
-                  cd Tweaks
                   git submodule update --init --recursive
 
     build:
