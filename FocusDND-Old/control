@@ -1,9 +1,0 @@
-Name: FocusDND
-Version: 1.0.0
-Description: Change the Focus module to look like the Do Not Disturb module from iOS 14.
-Maintainer: waruhachi
-Author: waruhachi
-Section: Tweaks
-Architecture: iphoneos-arm
-Depends: mobilesubstrate, firmware (>= 15.0)
-Package: moe.waru.focusdnd

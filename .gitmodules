@@ -133,3 +133,6 @@
 [submodule "Kabegami"]
 	path = Kabegami
 	url = https://github.com/waruhachi/Kabegami.git
+[submodule "FocusDND"]
+	path = FocusDND
+	url = https://github.com/waruhachi/FocusDND.git
