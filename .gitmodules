@@ -115,3 +115,6 @@
 [submodule "Heartlines"]
 	path = Heartlines
 	url = https://github.com/waruhachi/Heartlines.git
+[submodule "Lune"]
+	path = Lune
+	url = https://github.com/waruhachi/Lune.git
