@@ -1,8 +1,8 @@
 [submodule "NoLSPowerDown"]
 	path = NoLSPowerDown
 	url = https://github.com/waruhachi/nolspowerdown.git
-[submodule "Crystal-ObjC"]
-	path = Crystal-ObjC
+[submodule "Crystal"]
+	path = Crystal
 	url = https://github.com/waruhachi/Crystal.git
 [submodule "Kayoko"]
 	path = Kayoko
