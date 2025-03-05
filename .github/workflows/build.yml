@@ -11,6 +11,8 @@ jobs:
         runs-on: macos-latest
         steps:
             - uses: actions/checkout@v4
+              with:
+                path: '-'
 
             - name: Cleaning up existing releases and tags
               env:
@@ -38,9 +40,12 @@ jobs:
         runs-on: macos-latest
         steps:
             - uses: actions/checkout@v4
+              with:
+                path: '-'
 
             - name: Fetching all submodules
               run: |
+                  cd Tweaks
                   git submodule update --init --recursive
 
     build:
@@ -66,6 +71,8 @@ jobs:
                     - VerticalBatteryDrain
         steps:
             - uses: actions/checkout@v4
+              with:
+                path: '-'
 
             - name: Set up Theos
               uses: waruhachi/theos-action@v2.2.3
@@ -80,9 +87,6 @@ jobs:
               working-directory: ${{ matrix.project }}
               run: |
                   export THEOS=~/theos
-
-                  echo "[Debug] Current directory: $(pwd)"
-                  ls -l
 
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
