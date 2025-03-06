@@ -31,7 +31,6 @@ jobs:
                     - Astolfo
                     - CCNoiseControl
                     - Central
-                    - Cloudify
                     - Diary
                     - FocusDND
                     - Heartlines
@@ -39,6 +38,7 @@ jobs:
                     - Letter
                     - Nita
                     - NoRecents
+                    - SCMusicPlus
                     - SheetMusicScanner
                     - VerticalBatteryDrain
         steps:
