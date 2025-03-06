@@ -26,21 +26,22 @@ jobs:
         strategy:
             matrix:
                 project:
-                    - AmongLock
-                    - AppareilPhoto
-                    - Astolfo
-                    - CCNoiseControl
-                    - Central
-                    - Diary
-                    - FocusDND
-                    - Heartlines
-                    - Kabegami
-                    - Letter
-                    - Nita
-                    - NoRecents
-                    - SCMusicPlus
-                    - SheetMusicScanner
-                    - VerticalBatteryDrain
+                    # - AmongLock
+                    # - AppareilPhoto
+                    # - Astolfo
+                    # - CCNoiseControl
+                    # - Central
+                    # - Diary
+                    # - FocusDND
+                    # - Heartlines
+                    # - Kabegami
+                    # - Letter
+                    # - Nita
+                    # - NoRecents
+                    - PanCake
+                    # - SCMusicPlus
+                    # - SheetMusicScanner
+                    # - VerticalBatteryDrain
         steps:
             - uses: actions/checkout@v4
               with:
