@@ -53,8 +53,8 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   theos-src: 'roothide/theos'
-                  custom-sdk: true
-                  custom-sdk-src: 'xybp888/iOS-SDKs'
+                  sdks: true
+                  sdks-src: 'xybp888/iOS-SDKs'
                   libgcuniversal: true
                   libgcuniversal-src: 'waruhachi/LibGcUniversal'
                   altlist: true
