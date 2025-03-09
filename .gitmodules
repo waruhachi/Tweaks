@@ -1,171 +1,227 @@
 [submodule "NoLSPowerDown"]
 	path = NoLSPowerDown
 	url = https://github.com/waruhachi/nolspowerdown.git
+    branch = main
 [submodule "Crystal"]
 	path = Crystal
 	url = https://github.com/waruhachi/Crystal.git
+    branch = main
 [submodule "Kayoko"]
 	path = Kayoko
 	url = https://github.com/waruhachi/Kayoko.git
+    branch = main
 [submodule "Ve"]
 	path = Ve
 	url = https://github.com/waruhachi/Ve.git
+    branch = main
 [submodule "HATE"]
 	path = HATE
 	url = https://github.com/waruhachi/HATE.git
+    branch = main
 [submodule "CozyBadges"]
 	path = CozyBadges
 	url = https://github.com/waruhachi/CozyBadges.git
+    branch = main
 [submodule "QuickPrefs"]
 	path = QuickPrefs
 	url = https://github.com/waruhachi/QuickPrefs.git
+    branch = main
 [submodule "BatteryBuddy"]
 	path = BatteryBuddy
 	url = https://github.com/waruhachi/BatteryBuddy.git
+    branch = main
 [submodule "MagmaEvo"]
 	path = MagmaEvo
 	url = https://github.com/waruhachi/MagmaEvo.git
+    branch = main
 [submodule "BetterAlarm"]
 	path = BetterAlarm
 	url = https://github.com/waruhachi/BetterAlarm.git
+    branch = main
 [submodule "AlbumManager"]
 	path = AlbumManager
 	url = https://github.com/waruhachi/AlbumManager.git
+    branch = main
 [submodule "Velvet2"]
 	path = Velvet2
 	url = https://github.com/waruhachi/Velvet2.git
+    branch = main
 [submodule "Eneko"]
 	path = Eneko
 	url = https://github.com/waruhachi/Eneko.git
+    branch = main
 [submodule "Liddell"]
 	path = Liddell
 	url = https://github.com/waruhachi/Liddell.git
+    branch = main
 [submodule "ShyLabels"]
 	path = ShyLabels
 	url = https://github.com/waruhachi/ShyLabels.git
+    branch = main
 [submodule "NotificationFaker"]
 	path = NotificationFaker
 	url = https://github.com/waruhachi/NotificationFaker.git
+    branch = main
 [submodule "EasyAirplaneDisabler"]
 	path = EasyAirplaneDisabler
 	url = https://github.com/waruhachi/EasyAirplaneDisabler.git
+    branch = main
 [submodule "Diary"]
 	path = Diary
 	url = https://github.com/waruhachi/Diary.git
+    branch = main
 [submodule "Koi"]
 	path = Koi
 	url = https://github.com/waruhachi/Koi.git
+    branch = main
 [submodule "HiddenPhotosCC"]
 	path = HiddenPhotosCC
 	url = https://github.com/waruhachi/HiddenPhotosCC.git
+    branch = main
 [submodule "PanCake"]
 	path = PanCake
 	url = https://github.com/waruhachi/PanCake.git
+    branch = main
 [submodule "WindowHUD"]
 	path = WindowHUD
 	url = https://github.com/waruhachi/WindowHUD.git
+    branch = main
 [submodule "OhMyFlash"]
 	path = OhMyFlash
 	url = https://github.com/waruhachi/OhMyFlash.git
+    branch = main
 [submodule "WiFiCarrier"]
 	path = WiFiCarrier
 	url = https://github.com/waruhachi/WiFiCarrier.git
+    branch = main
 [submodule "Ballet"]
 	path = Ballet
 	url = https://github.com/waruhachi/Ballet
 [submodule "Avrora"]
 	path = Avrora
 	url = https://github.com/waruhachi/Avrora.git
+    branch = main
 [submodule "Dress"]
 	path = Dress
 	url = https://github.com/waruhachi/Dress.git
+    branch = main
 [submodule "Deja-Vu"]
 	path = Deja-Vu
 	url = https://github.com/waruhachi/Deja-Vu.git
+    branch = main
 [submodule "Lisa"]
 	path = Lisa
 	url = https://github.com/waruhachi/Lisa.git
+    branch = main
 [submodule "Lobelias"]
 	path = Lobelias
 	url = https://github.com/waruhachi/Lobelias.git
+    branch = main
 [submodule "Puck"]
 	path = Puck
 	url = https://github.com/waruhachi/Puck.git
+    branch = main
 [submodule "Violet"]
 	path = Violet
 	url = https://github.com/waruhachi/Violet.git
+    branch = main
 [submodule "Yuna"]
 	path = Yuna
 	url = https://github.com/waruhachi/Yuna.git
+    branch = main
 [submodule "AmongLock"]
 	path = AmongLock
 	url = https://github.com/waruhachi/AmongLock.git
+    branch = main
 [submodule "Nita"]
 	path = Nita
 	url = https://github.com/waruhachi/Nita.git
+    branch = main
 [submodule "VerticalBatteryDrain"]
 	path = VerticalBatteryDrain
 	url = https://github.com/waruhachi/VerticalBatteryDrain.git
+    branch = main
 [submodule "Central"]
 	path = Central
 	url = https://github.com/waruhachi/Central.git
+    branch = main
 [submodule "Astolfo"]
 	path = Astolfo
 	url = https://github.com/waruhachi/Astolfo.git
+    branch = main
 [submodule "Heartlines"]
 	path = Heartlines
 	url = https://github.com/waruhachi/Heartlines.git
+    branch = main
 [submodule "Lune"]
 	path = Lune
 	url = https://github.com/waruhachi/Lune.git
+    branch = main
 [submodule "Rose"]
 	path = Rose
 	url = https://github.com/waruhachi/Rose.git
+    branch = main
 [submodule "Juin"]
 	path = Juin
 	url = https://github.com/waruhachi/Juin.git
+    branch = main
 [submodule "SheetMusicScanner"]
 	path = SheetMusicScanner
 	url = https://github.com/waruhachi/SheetMusicScanner.git
+    branch = main
 [submodule "NoRecents"]
 	path = NoRecents
 	url = https://github.com/waruhachi/NoRecents.git
+    branch = main
 [submodule "Kabegami"]
 	path = Kabegami
 	url = https://github.com/waruhachi/Kabegami.git
+    branch = main
 [submodule "FocusDND"]
 	path = FocusDND
 	url = https://github.com/waruhachi/FocusDND.git
+    branch = main
 [submodule "SCMusicPlus"]
 	path = SCMusicPlus
 	url = https://github.com/waruhachi/SCMusicPlus.git
+    branch = main
 [submodule "CCNoiseControl"]
 	path = CCNoiseControl
 	url = https://github.com/waruhachi/CCNoiseControl.git
+    branch = main
 [submodule "Stardust"]
 	path = Stardust
-	url = https://github.com/waruhachi/Stardust
+	url = https://github.com/waruhachi/Stardust.git
+    branch = main
 [submodule "ProudLock"]
 	path = ProudLock
-	url = https://github.com/waruhachi/ProudLock
+	url = https://github.com/waruhachi/ProudLock.git
+    branch = main
 [submodule "Playlist"]
 	path = Playlist
-	url = https://github.com/waruhachi/Playlist
+	url = https://github.com/waruhachi/Playlist.git
+    branch = main
 [submodule "NoLowPowerAlert"]
 	path = NoLowPowerAlert
-	url = https://github.com/waruhachi/NoLowPowerAlert
+	url = https://github.com/waruhachi/NoLowPowerAlert.git
+    branch = main
 [submodule "Neverland"]
 	path = Neverland
-	url = https://github.com/waruhachi/Neverland
+	url = https://github.com/waruhachi/Neverland.git
+    branch = main
 [submodule "Lou"]
 	path = Lou
-	url = https://github.com/waruhachi/Lou
+	url = https://github.com/waruhachi/Lou.git
+    branch = main
 [submodule "Letter"]
 	path = Letter
-	url = https://github.com/waruhachi/Letter
+	url = https://github.com/waruhachi/Letter.git
+    branch = main
 [submodule "Ember"]
 	path = Ember
-	url = https://github.com/waruhachi/Ember
+	url = https://github.com/waruhachi/Ember.git
+    branch = main
 [submodule "AppareilPhoto"]
 	path = AppareilPhoto
-	url = https://github.com/waruhachi/AppareilPhoto
+	url = https://github.com/waruhachi/AppareilPhoto.git
+    branch = main
