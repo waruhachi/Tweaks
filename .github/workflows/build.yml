@@ -10,10 +10,6 @@ jobs:
     cleanup:
         runs-on: macos-latest
         steps:
-            - uses: actions/checkout@v4
-              with:
-                submodules: true
-
             - name: Cleaning up existing releases and tags
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
