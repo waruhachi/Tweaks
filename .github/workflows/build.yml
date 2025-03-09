@@ -48,13 +48,13 @@ jobs:
                 submodules: true
 
             - name: Set up Theos
-              uses: waruhachi/theos-action@v2.2.9
+              uses: waruhachi/theos-action@v2.3.0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   theos-src: 'roothide/theos'
                   sdks: true
-                  sdks-src: 'xybp888/iOS-SDKs'
+                  sdks-src: 'waruhachi/sdks'
                   libgcuniversal: true
                   libgcuniversal-src: 'waruhachi/LibGcUniversal'
                   altlist: true
