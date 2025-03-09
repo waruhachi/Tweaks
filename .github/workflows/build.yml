@@ -48,7 +48,8 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  theos-src: 'roothide/theos'
+                  theos-src: 'waruhachi/theos'
+                  theos-branch: 'main'
                   sdks: true
                   sdks-src: 'waruhachi/sdks'
                   libgcuniversal: true
