@@ -51,7 +51,7 @@ jobs:
                   theos-src: 'waruhachi/theos'
                   theos-branch: 'main'
                   sdks: true
-                  sdks-src: 'theos/sdks'
+                  sdks-src: 'waruhachi/sdks'
                   libgcuniversal: true
                   libgcuniversal-src: 'waruhachi/LibGcUniversal'
                   altlist: true
