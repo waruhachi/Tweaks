@@ -12,9 +12,8 @@ jobs:
         steps:
             - name: Cleaning up existing releases and tags
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  gh release delete release --yes || true
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: gh release delete release --yes || true
 
     build:
         needs: cleanup
@@ -22,46 +21,49 @@ jobs:
         strategy:
             matrix:
                 project:
-                    - AmongLock
-                    - AppareilPhoto
-                    - Astolfo
-                    - CCNoiseControl
-                    - Central
-                    - Diary
-                    - FocusDND
-                    - Heartlines
-                    - Kabegami
-                    - Letter
-                    - Nita
-                    - NoRecents
+                    # - AmongLock
+                    # - AppareilPhoto
+                    # - Astolfo
+                    # - CCNoiseControl
+                    # - Central
+                    # - Diary
+                    # - FocusDND
+                    # - Heartlines
+                    # - Kabegami
+                    # - Letter
+                    # - Nita
+                    # - NoRecents
                     - PanCake
-                    - SCMusicPlus
-                    - SheetMusicScanner
-                    - VerticalBatteryDrain
+                    # - SCMusicPlus
+                    # - SheetMusicScanner
+                    # - VerticalBatteryDrain
         steps:
             - uses: actions/checkout@v4
               with:
                 submodules: true
 
             - name: Set up Theos
-              uses: waruhachi/theos-action@v2.3.1
+              uses: waruhachi/theos-action@v2.3.4
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  theos-src: 'waruhachi/theos'
-                  theos-branch: 'main'
-                  sdks: true
-                  sdks-src: 'waruhachi/sdks'
-                  libgcuniversal: true
-                  libgcuniversal-src: 'waruhachi/LibGcUniversal'
-                  altlist: true
-                  altlist-src: 'waruhachi/AltList'
+                theos-src: 'waruhachi/theos'
+                theos-branch: 'main'
+                theos-dir: '~/theos'
+                sdks-src: 'waruhachi/sdks'
+                sdks-branch: 'main'
+                libgcuniversal: true
+                libgcuniversal-src: 'waruhachi/LibGcUniversal'
+                libgcuniversal-branch: 'main'
+                altlist: true
+                altlist-src: 'waruhachi/AltList'
+                altlist-branch: 'main'
 
             - name: Build Package
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
-                  export THEOS=~/theos
+                #   export THEOS=~/theos
 
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
