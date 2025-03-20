@@ -58,7 +58,7 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                 name: theos
-                path: ~/
+                path: "${{ github.workspace }}/theos"
 
             - uses: actions/checkout@v4
               with:
@@ -68,7 +68,7 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
-                  echo "THEOS=~/theos" >> $GITHUB_ENV
+                  echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
 
                   ls -la $THEOS
 
