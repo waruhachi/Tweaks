@@ -43,7 +43,7 @@ jobs:
                 submodules: true
 
             - name: Set up Theos
-              uses: waruhachi/theos-action@v2.4.0
+              uses: waruhachi/theos-action@v2.4.1
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
