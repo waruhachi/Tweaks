@@ -39,7 +39,7 @@ jobs:
                     # - VerticalBatteryDrain
         steps:
             - name: Set up Theos
-              uses: waruhachi/theos-action@42e0b92a8b77ae920bfd8ef5e57737a72fc35db7
+              uses: waruhachi/theos-action@d7a7d357be1fe5a80d535c59dbcff8e243a3a1ae
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
@@ -54,6 +54,12 @@ jobs:
                 altlist-src: 'waruhachi/AltList'
                 altlist-branch: 'main'
 
+            - name: Download Theos Artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: theos
+                path: ${{ github.workspace }}/theos
+
             - uses: actions/checkout@v4
               with:
                 submodules: true
@@ -62,9 +68,7 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
-                  ls -la ~/
-              
-                  echo "THEOS=/Users/runner/theos" >> $GITHUB_ENV
+                  echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
 
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
