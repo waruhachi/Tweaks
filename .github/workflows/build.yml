@@ -39,7 +39,7 @@ jobs:
                     # - VerticalBatteryDrain
         steps:
             - name: Set up Theos
-              uses: waruhachi/theos-action@9b979c1807b769f073bf720f1b0381ff8a0041f2
+              uses: waruhachi/theos-action@98bf19c4f775be30cb05bd99c8feb6ea4222f6ef
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
