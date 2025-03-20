@@ -62,8 +62,14 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
+                  cd ..
+                  ls -la
+                  
                   echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
                   echo $THEOS
+                  ls -la $THEOS
+
+                  cd ${{ matrix.project }}
 
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
