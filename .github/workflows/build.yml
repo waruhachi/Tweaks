@@ -38,12 +38,8 @@ jobs:
                     # - SheetMusicScanner
                     # - VerticalBatteryDrain
         steps:
-            - uses: actions/checkout@v4
-              with:
-                submodules: true
-
             - name: Set up Theos
-              uses: waruhachi/theos-action@v2.4.3
+              uses: waruhachi/theos-action@v2.4.4
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
@@ -57,6 +53,10 @@ jobs:
                 altlist: true
                 altlist-src: 'waruhachi/AltList'
                 altlist-branch: 'main'
+
+            - uses: actions/checkout@v4
+              with:
+                submodules: true
 
             - name: Build Package
               shell: bash
