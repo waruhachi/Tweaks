@@ -40,7 +40,7 @@ jobs:
         steps:
             - name: Set up Theos
               id: theos-setup
-              uses: waruhachi/theos-action@v4074cd5493e087f199067187fa597291bab343b8
+              uses: waruhachi/theos-action@4074cd5493e087f199067187fa597291bab343b8
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
