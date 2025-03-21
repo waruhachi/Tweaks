@@ -60,7 +60,7 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
-                  echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
+                  # echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
 
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
