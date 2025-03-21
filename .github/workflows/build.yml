@@ -21,29 +21,29 @@ jobs:
         strategy:
             matrix:
                 project:
-                    # - AmongLock
-                    # - AppareilPhoto
-                    # - Astolfo
-                    # - CCNoiseControl
-                    # - Central
-                    # - Diary
-                    # - FocusDND
-                    # - Heartlines
-                    # - Kabegami
-                    # - Letter
-                    # - Nita
-                    # - NoRecents
+                    - AmongLock
+                    - AppareilPhoto
+                    - Astolfo
+                    - CCNoiseControl
+                    - Central
+                    - Diary
+                    - FocusDND
+                    - Heartlines
+                    - Kabegami
+                    - Letter
+                    - Nita
+                    - NoRecents
                     - PanCake
-                    # - SCMusicPlus
-                    # - SheetMusicScanner
-                    # - VerticalBatteryDrain
+                    - SCMusicPlus
+                    - SheetMusicScanner
+                    - VerticalBatteryDrain
         steps:
             - uses: actions/checkout@v4
               with:
                 submodules: true
 
             - name: Set up Theos
-              uses: waruhachi/theos-action@f9d9783619f7f5929071e5de6dfdbdfff5d58f0b
+              uses: waruhachi/theos-action@v2.4.6
               with:
                 theos-src: 'waruhachi/theos'
                 theos-branch: 'main'
@@ -60,8 +60,6 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
-                  # echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
-
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
