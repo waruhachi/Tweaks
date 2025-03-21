@@ -44,8 +44,6 @@ jobs:
 
             - name: Set up Theos
               uses: waruhachi/theos-action@f9d9783619f7f5929071e5de6dfdbdfff5d58f0b
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                 theos-src: 'waruhachi/theos'
                 theos-branch: 'main'
