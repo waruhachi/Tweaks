@@ -38,6 +38,10 @@ jobs:
                     # - SheetMusicScanner
                     # - VerticalBatteryDrain
         steps:
+            - uses: actions/checkout@v4
+              with:
+                submodules: true
+
             - name: Set up Theos
               uses: waruhachi/theos-action@f9d9783619f7f5929071e5de6dfdbdfff5d58f0b
               env:
@@ -54,20 +58,13 @@ jobs:
                 altlist-src: 'waruhachi/AltList'
                 altlist-branch: 'main'
 
-            - uses: actions/checkout@v4
-              with:
-                submodules: true
-
             - name: Build Package
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
                   echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
                   
-                  ls -la
-                  cd ..
-                  ls -la
-                  
+                  ls -la "${{ github.workspace }}"
 
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
