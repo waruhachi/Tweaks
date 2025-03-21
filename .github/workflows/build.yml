@@ -39,7 +39,7 @@ jobs:
                     # - VerticalBatteryDrain
         steps:
             - name: Set up Theos
-              uses: waruhachi/theos-action@056a3930a257251929c1864a754563d1499fb7fe
+              uses: waruhachi/theos-action@f9d9783619f7f5929071e5de6dfdbdfff5d58f0b
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
@@ -62,10 +62,12 @@ jobs:
               shell: bash
               working-directory: ${{ matrix.project }}
               run: |
-                  ls -la "${{ github.workspace }}"
-                  
                   echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
-                  ls -la $THEOS
+                  
+                  ls -la
+                  cd ..
+                  ls -la
+                  
 
                   make clean package FINALPACKAGE=1
                   make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
