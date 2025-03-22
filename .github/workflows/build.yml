@@ -7,25 +7,18 @@ on:
     workflow_dispatch:
 
 jobs:
-    checkout:
+    cleanup:
         runs-on: macos-latest
         steps:
             - uses: actions/checkout@v4
-              with:
-                submodules: true
 
-    cleanup:
-        needs: checkout
-        runs-on: macos-latest
-        steps:
             - name: Cleaning up existing releases and tags
-              working-directory: ${{ github.workspace }}
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: gh release delete release --yes || true
 
     build:
-        needs: [checkout, cleanup]
+        needs: cleanup
         runs-on: macos-latest
         strategy:
             matrix:
@@ -46,6 +39,10 @@ jobs:
                     - SheetMusicScanner
                     - VerticalBatteryDrain
         steps:
+            - uses: actions/checkout@v4
+              with:
+                submodules: true
+
             - name: Set up Theos
               uses: waruhachi/theos-action@v2.4.6
               with:
