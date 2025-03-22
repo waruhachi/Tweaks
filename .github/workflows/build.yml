@@ -41,8 +41,8 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                sparse-checkout: ${{ matrix.project }}
-                # submodules: true
+                filter: ${{ matrix.project }}
+                submodules: true
 
 
             - name: Set up Theos
