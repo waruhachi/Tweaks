@@ -12,10 +12,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - name: Cleaning up existing releases and tags
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: gh release delete release --yes || true
+            # - name: Cleaning up existing releases and tags
+            #   env:
+            #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            #   run: gh release delete release --yes || true
 
     build:
         needs: cleanup
@@ -41,7 +41,9 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                submodules: true
+                sparse-checkout: ${{ matrix.project }}
+                # submodules: true
+
 
             - name: Set up Theos
               uses: waruhachi/theos-action@v2.4.6
@@ -122,17 +124,17 @@ jobs:
                   echo "  SHA256: $SHA256_ARM64E" >> release_body.md
                   echo "" >> release_body.md
 
-            - name: Create GitHub Release
-              uses: softprops/action-gh-release@v2
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  tag_name: release
-                  name: Tweaks
-                  body_path: release_body.md
-                  files: ${{ matrix.project }}/packages/*.deb
-                  draft: false
-                  prerelease: false
-                  make_latest: true
-                  append_body: true
-                  preserve_order: true
+            # - name: Create GitHub Release
+            #   uses: softprops/action-gh-release@v2
+            #   env:
+            #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            #   with:
+            #       tag_name: release
+            #       name: Tweaks
+            #       body_path: release_body.md
+            #       files: ${{ matrix.project }}/packages/*.deb
+            #       draft: false
+            #       prerelease: false
+            #       make_latest: true
+            #       append_body: true
+            #       preserve_order: true
