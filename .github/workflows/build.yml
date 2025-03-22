@@ -19,6 +19,7 @@ jobs:
         runs-on: macos-latest
         steps:
             - name: Cleaning up existing releases and tags
+              working-directory: ${{ github.workspace }}
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: gh release delete release --yes || true
