@@ -149,6 +149,7 @@ jobs:
                 name: ${{ matrix.project }}
                 body_path: release_body.md
                 files: ${{ matrix.project }}/packages/*.deb
+                token: ${{ secrets.TOKEN }}
                 repository: ${{ github.repository_owner }}/${{ matrix.project }}
                 draft: false
                 prerelease: false
