@@ -4,7 +4,8 @@ permissions:
 
 on:
     push:
-    workflow_dispatch:
+        branches:
+        - release
 
 jobs:
     cleanup:
@@ -14,7 +15,7 @@ jobs:
 
             - name: Cleaning up existing releases and tags
               env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: gh release delete release --yes || true
 
     build:
@@ -41,22 +42,22 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                submodules: true
+                  submodules: true
 
 
             - name: Set up Theos
               uses: waruhachi/theos-action@v2.4.6
               with:
-                theos-src: 'waruhachi/theos'
-                theos-branch: 'main'
-                sdks-src: 'waruhachi/sdks'
-                sdks-branch: 'main'
-                libgcuniversal: true
-                libgcuniversal-src: 'waruhachi/LibGcUniversal'
-                libgcuniversal-branch: 'main'
-                altlist: true
-                altlist-src: 'waruhachi/AltList'
-                altlist-branch: 'main'
+                  theos-src: 'waruhachi/theos'
+                  theos-branch: 'main'
+                  sdks-src: 'waruhachi/sdks'
+                  sdks-branch: 'main'
+                  libgcuniversal: true
+                  libgcuniversal-src: 'waruhachi/LibGcUniversal'
+                  libgcuniversal-branch: 'main'
+                  altlist: true
+                  altlist-src: 'waruhachi/AltList'
+                  altlist-branch: 'main'
 
             - name: Build Package
               shell: bash
