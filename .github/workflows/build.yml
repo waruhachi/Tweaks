@@ -138,3 +138,19 @@ jobs:
                   make_latest: true
                   append_body: true
                   preserve_order: true
+
+			- name: Create GitHub Release for Submodule
+			  uses: softprops/action-gh-release@v2
+			  env:
+				  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+			  with:
+				  tag_name: ${{ matrix.project }}
+				  name: ${{ matrix.project }}
+				  body_path: release_body.md
+				  files: ${{ matrix.project }}/packages/*.deb
+				  repository: ${{ github.repository_owner }}/${{ matrix.project }}
+				  draft: false
+				  prerelease: false
+				  make_latest: true
+				  append_body: true
+				  preserve_order: true
