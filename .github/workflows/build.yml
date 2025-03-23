@@ -1,22 +1,23 @@
 name: Build All Tweaks
 permissions:
-    contents: write
+	contents: write
 
 on:
     push:
-        branches:
-        - release
+		branches:
+			- release
 
 jobs:
     cleanup:
-        runs-on: macos-latest
-        steps:
-            - uses: actions/checkout@v4
+    	runs-on: macos-latest
+    	steps:
+        	- uses: actions/checkout@v4
 
             - name: Cleaning up existing releases and tags
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: gh release delete release --yes || true
+			  	GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+			  	gh release delete release --yes || true
 
     build:
         needs: cleanup
@@ -24,7 +25,7 @@ jobs:
         strategy:
             matrix:
                 project:
-                    - AmongLock
+                	- AmongLock
                     - AppareilPhoto
                     - Astolfo
                     - CCNoiseControl
@@ -42,115 +43,115 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                  submodules: true
+			  	submodules: true
 
 
             - name: Set up Theos
               uses: waruhachi/theos-action@v2.4.6
               with:
-                  theos-src: 'waruhachi/theos'
-                  theos-branch: 'main'
-                  sdks-src: 'waruhachi/sdks'
-                  sdks-branch: 'main'
-                  libgcuniversal: true
-                  libgcuniversal-src: 'waruhachi/LibGcUniversal'
-                  libgcuniversal-branch: 'main'
-                  altlist: true
-                  altlist-src: 'waruhachi/AltList'
-                  altlist-branch: 'main'
+			  	theos-src: 'waruhachi/theos'
+                theos-branch: 'main'
+                sdks-src: 'waruhachi/sdks'
+                sdks-branch: 'main'
+                libgcuniversal: true
+                libgcuniversal-src: 'waruhachi/LibGcUniversal'
+                libgcuniversal-branch: 'main'
+                altlist: true
+                altlist-src: 'waruhachi/AltList'
+                altlist-branch: 'main'
 
             - name: Build Package
-              shell: bash
               working-directory: ${{ matrix.project }}
+              shell: bash
               run: |
-                  make clean package FINALPACKAGE=1
-                  make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
-                  make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
+			  	make clean package FINALPACKAGE=1
+                make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+                make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
 
             - name: Save Metadata
               id: metadata
-              shell: bash
               working-directory: ${{ matrix.project }}
+              shell: bash
               run: |
-                  mkdir -p $GITHUB_WORKSPACE/${{ matrix.project }}
+                mkdir -p $GITHUB_WORKSPACE/${{ matrix.project }}
 
-                  MD5_ARM=$(md5 -q packages/*_iphoneos-arm.deb)
-                  SHA1_ARM=$(shasum -a 1 packages/*_iphoneos-arm.deb | awk '{ print $1 }')
-                  SHA256_ARM=$(shasum -a 256 packages/*_iphoneos-arm.deb | awk '{ print $1 }')
+                MD5_ARM=$(md5 -q packages/*_iphoneos-arm.deb)
+                SHA1_ARM=$(shasum -a 1 packages/*_iphoneos-arm.deb | awk '{ print $1 }')
+                SHA256_ARM=$(shasum -a 256 packages/*_iphoneos-arm.deb | awk '{ print $1 }')
 
-                  MD5_ARM64=$(md5 -q packages/*_iphoneos-arm64.deb)
-                  SHA1_ARM64=$(shasum -a 1 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')
-                  SHA256_ARM64=$(shasum -a 256 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')
+                MD5_ARM64=$(md5 -q packages/*_iphoneos-arm64.deb)
+                SHA1_ARM64=$(shasum -a 1 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')
+                SHA256_ARM64=$(shasum -a 256 packages/*_iphoneos-arm64.deb | awk '{ print $1 }')
 
-                  MD5_ARM64E=$(md5 -q packages/*_iphoneos-arm64e.deb)
-                  SHA1_ARM64E=$(shasum -a 1 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')
-                  SHA256_ARM64E=$(shasum -a 256 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')
+                MD5_ARM64E=$(md5 -q packages/*_iphoneos-arm64e.deb)
+                SHA1_ARM64E=$(shasum -a 1 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')
+                SHA256_ARM64E=$(shasum -a 256 packages/*_iphoneos-arm64e.deb | awk '{ print $1 }')
 
-                  echo "${{ matrix.project }}" > $GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
-                  echo "$MD5_ARM,$SHA1_ARM,$SHA256_ARM,$MD5_ARM64,$SHA1_ARM64,$SHA256_ARM64,$MD5_ARM64E,$SHA1_ARM64E,$SHA256_ARM64E" >> $GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
+                echo "${{ matrix.project }}" > $GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
+                echo "$MD5_ARM,$SHA1_ARM,$SHA256_ARM,$MD5_ARM64,$SHA1_ARM64,$SHA256_ARM64,$MD5_ARM64E,$SHA1_ARM64E,$SHA256_ARM64E" >> $GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
 
             - name: Generate Release Notes
               id: release-notes
               shell: bash
               run: |
-                  FILE=$GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
-                  PROJECT=$(head -n 1 "$FILE")
-                  METADATA=$(tail -n 1 "$FILE")
+                FILE=$GITHUB_WORKSPACE/${{ matrix.project }}/metadata.txt
+                PROJECT=$(head -n 1 "$FILE")
+                METADATA=$(tail -n 1 "$FILE")
 
-                  MD5_ARM=$(echo "$METADATA" | cut -d',' -f1)
-                  SHA1_ARM=$(echo "$METADATA" | cut -d',' -f2)
-                  SHA256_ARM=$(echo "$METADATA" | cut -d',' -f3)
-                  MD5_ARM64=$(echo "$METADATA" | cut -d',' -f4)
-                  SHA1_ARM64=$(echo "$METADATA" | cut -d',' -f5)
-                  SHA256_ARM64=$(echo "$METADATA" | cut -d',' -f6)
-                  MD5_ARM64E=$(echo "$METADATA" | cut -d',' -f7)
-                  SHA1_ARM64E=$(echo "$METADATA" | cut -d',' -f8)
-                  SHA256_ARM64E=$(echo "$METADATA" | cut -d',' -f9)
+                MD5_ARM=$(echo "$METADATA" | cut -d',' -f1)
+                SHA1_ARM=$(echo "$METADATA" | cut -d',' -f2)
+                SHA256_ARM=$(echo "$METADATA" | cut -d',' -f3)
+                MD5_ARM64=$(echo "$METADATA" | cut -d',' -f4)
+                SHA1_ARM64=$(echo "$METADATA" | cut -d',' -f5)
+                SHA256_ARM64=$(echo "$METADATA" | cut -d',' -f6)
+                MD5_ARM64E=$(echo "$METADATA" | cut -d',' -f7)
+                SHA1_ARM64E=$(echo "$METADATA" | cut -d',' -f8)
+                SHA256_ARM64E=$(echo "$METADATA" | cut -d',' -f9)
 
-                  echo "### $PROJECT" >> release_body.md
-                  echo "iphoneos-arm:" >> release_body.md
-                  echo "  MD5: $MD5_ARM" >> release_body.md
-                  echo "  SHA1: $SHA1_ARM" >> release_body.md
-                  echo "  SHA256: $SHA256_ARM" >> release_body.md
-                  echo "" >> release_body.md
-                  echo "iphoneos-arm64:" >> release_body.md
-                  echo "  MD5: $MD5_ARM64" >> release_body.md
-                  echo "  SHA1: $SHA1_ARM64" >> release_body.md
-                  echo "  SHA256: $SHA256_ARM64" >> release_body.md
-                  echo "" >> release_body.md
-                  echo "iphoneos-arm64e:" >> release_body.md
-                  echo "  MD5: $MD5_ARM64E" >> release_body.md
-                  echo "  SHA1: $SHA1_ARM64E" >> release_body.md
-                  echo "  SHA256: $SHA256_ARM64E" >> release_body.md
-                  echo "" >> release_body.md
+				echo "### $PROJECT" >> release_body.md
+				echo "iphoneos-arm:" >> release_body.md
+				echo "  MD5: $MD5_ARM" >> release_body.md
+				echo "  SHA1: $SHA1_ARM" >> release_body.md
+				echo "  SHA256: $SHA256_ARM" >> release_body.md
+				echo "" >> release_body.md
+				echo "iphoneos-arm64:" >> release_body.md
+				echo "  MD5: $MD5_ARM64" >> release_body.md
+				echo "  SHA1: $SHA1_ARM64" >> release_body.md
+				echo "  SHA256: $SHA256_ARM64" >> release_body.md
+				echo "" >> release_body.md
+				echo "iphoneos-arm64e:" >> release_body.md
+				echo "  MD5: $MD5_ARM64E" >> release_body.md
+				echo "  SHA1: $SHA1_ARM64E" >> release_body.md
+				echo "  SHA256: $SHA256_ARM64E" >> release_body.md
+				echo "" >> release_body.md
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v2
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+			  	GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  tag_name: release
-                  name: Tweaks
-                  body_path: release_body.md
-                  files: ${{ matrix.project }}/packages/*.deb
-                  draft: false
-                  prerelease: false
-                  make_latest: true
-                  append_body: true
-                  preserve_order: true
+                tag_name: release
+				name: Tweaks
+				body_path: release_body.md
+				files: ${{ matrix.project }}/packages/*.deb
+				draft: false
+				prerelease: false
+				make_latest: true
+				append_body: true
+				preserve_order: true
 
 			- name: Create GitHub Release for Submodule
 			  uses: softprops/action-gh-release@v2
 			  env:
 				  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 			  with:
-				  tag_name: ${{ matrix.project }}
-				  name: ${{ matrix.project }}
-				  body_path: release_body.md
-				  files: ${{ matrix.project }}/packages/*.deb
-				  repository: ${{ github.repository_owner }}/${{ matrix.project }}
-				  draft: false
-				  prerelease: false
-				  make_latest: true
-				  append_body: true
-				  preserve_order: true
+				tag_name: ${{ matrix.project }}
+				name: ${{ matrix.project }}
+				body_path: release_body.md
+				files: ${{ matrix.project }}/packages/*.deb
+				repository: ${{ github.repository_owner }}/${{ matrix.project }}
+				draft: false
+				prerelease: false
+				make_latest: true
+				append_body: true
+				preserve_order: true
