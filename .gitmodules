@@ -221,3 +221,7 @@
 	path = AppareilPhoto
 	url = https://github.com/waruhachi/AppareilPhoto.git
     branch = main
+[submodule "Libellum"]
+	path = Libellum
+	url = https://github.com/waruhachi/Libellum.git
+    branch = main
