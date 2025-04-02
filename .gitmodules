@@ -225,3 +225,7 @@
 	path = Libellum
 	url = https://github.com/waruhachi/Libellum.git
     branch = main
+[submodule "Frame"]
+	path = Frame
+	url = https://github.com/waruhachi/Frame.git
+    branch = main
