@@ -27,11 +27,13 @@ jobs:
                 project:
                     - AmongLock
                     - AppareilPhoto
+                    - AppStoreTroller
                     - Astolfo
                     - CCNoiseControl
                     - Central
                     - Diary
                     - FocusDND
+                    - Frame
                     - Heartlines
                     - Kabegami
                     - Letter
