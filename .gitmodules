@@ -225,3 +225,11 @@
 	path = Libellum
 	url = https://github.com/waruhachi/Libellum.git
     branch = main
+[submodule "Frame"]
+	path = Frame
+	url = https://github.com/waruhachi/Frame.git
+    branch = main
+[submodule "AppStoreTroller"]
+	path = AppStoreTroller
+	url = https://github.com/waruhachi/AppStoreTroller.git
+    branch = main
